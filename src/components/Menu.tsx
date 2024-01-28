@@ -1,6 +1,7 @@
 import { Divider, SwipeableDrawer } from "@mui/material";
 import {
   Backpack,
+  Build,
   Description,
   GitHub,
   Hiking,
@@ -56,6 +57,11 @@ export default function Menu() {
             title: "README",
             to: "/sub-contents/readme",
             icon: <Description />
+          },
+          {
+            title: "Sand Box",
+            to: "/sub-contents/sandbox",
+            icon: <Build />
           },
         ]}
         onClick={() => setMenuOpen(false)}

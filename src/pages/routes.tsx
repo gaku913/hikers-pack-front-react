@@ -7,6 +7,7 @@ import PacksEdit from "./packs/PacksEdit";
 import PacksNew from "./packs/PacksNew";
 import QRCode from "./sub/QRCode";
 import Readme from "./sub/Readme";
+import Sandbox from "./sub/Sandbox";
 
 const routes = createBrowserRouter(
   createRoutesFromElements(
@@ -24,6 +25,7 @@ const routes = createBrowserRouter(
       {/* Sub Contents */}
       <Route path="/sub-contents/qrcode" element={<QRCode />} />
       <Route path="/sub-contents/readme" element={<Readme />} />
+      <Route path="/sub-contents/sandbox" element={<Sandbox />} />
 
     </Route>
   )
