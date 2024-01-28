@@ -8,14 +8,14 @@ const Contents = styled(Paper)(({ theme }) => ({
 }));
 
 export default function QRCode() {
-  const url = window.location.href;
+  const url = new URL(window.location.href);
 
   return (
     <>
     <h1>QR Code</h1>
-    <p>{url}</p>
+    <p>{url.origin}</p>
     <Contents>
-      <QRCodeSVG value={url}/>
+      <QRCodeSVG value={url.origin}/>
     </Contents>
     </>
   )
