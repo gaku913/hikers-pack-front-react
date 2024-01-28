@@ -48,7 +48,7 @@ export default function Menu() {
           if (menu.type !== "sub") { return }
           const Icon = menu.icon;
           return (
-            <MenuItem key={id}>
+            <MenuItem key={id} dense>
               <ListItemIcon><Icon /></ListItemIcon>
               <ListItemText>{menu.title}</ListItemText>
             </MenuItem>
