@@ -9,11 +9,23 @@ const fetchData = async () => {
 export default function Sandbox() {
   const { data, isLoading, isError } = useQuery("hello", fetchData);
 
+  let result;
   if (isLoading) {
-    return <p>Loading ...</p>
+    result = "Loading ..."
   }
-  if (isError) {
-    return <p>Error</p>
+  else if (isError) {
+    result = "Error"
   }
-  return <p>{JSON.stringify(data)}</p>
+  else {
+    result = JSON.stringify(data)
+  }
+
+  return (
+    <>
+    <p>
+      {import.meta.env.VITE_API_BASE_URL}
+    </p>
+    <p>{result}</p>
+    </>
+  )
 }
