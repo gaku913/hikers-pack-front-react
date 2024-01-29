@@ -4,8 +4,10 @@ import { RouterProvider } from "react-router-dom"
 import routes from "./pages/routes"
 import { useEffect } from "react"
 import axiosSetup from "./lib/axios"
+import { QueryClient, QueryClientProvider } from "react-query"
 
 export default function App() {
+  const client = new QueryClient();
 
   // Initialization
   useEffect(() => {
@@ -16,7 +18,9 @@ export default function App() {
     <>
     <CssBaseline />
     <Container sx={{ overflowWrap: 'break-word' }}>
-      <RouterProvider router={routes} />
+      <QueryClientProvider client={client}>
+        <RouterProvider router={routes} />
+      </QueryClientProvider>
     </Container>
     </>
   )
