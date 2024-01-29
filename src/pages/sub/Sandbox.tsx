@@ -2,7 +2,7 @@ import axios from "axios";
 import { useQuery } from "react-query";
 
 const fetchData = async () => {
-	const { data } = await axios.get("/hello");
+	const { data } = await axios.get("hello");
   return data;
 };
 

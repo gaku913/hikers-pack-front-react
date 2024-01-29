@@ -5,6 +5,12 @@ export default function axiosSetup(): void {
   const baseUrl = import.meta.env.VITE_API_BASE_URL || "";
   axios.defaults.baseURL = baseUrl.replace(/\/?$/, "/");
 
+  // Limit response to JSON
+  axios.interceptors.response.use(response => {
+    return response.headers['content-type'].includes('application/json') ?
+      response : Promise.reject(response);
+  }, error => Promise.reject(error));
+
   // Development Only
   if (import.meta.env.MODE === "development") {
     // Logging Request
