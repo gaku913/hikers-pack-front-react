@@ -12,7 +12,7 @@ export default function axiosSetup(): void {
       const { method, baseURL, url, data } = request;
 
       console.log("axios -> :", request)
-      console.log(`      # ${method}:${baseURL}${url} ${data}`)
+      console.log(`      # ${method}: ${baseURL}${url} data: ${data}`)
       return request
     })
 
@@ -21,7 +21,7 @@ export default function axiosSetup(): void {
       const { statusText, status, data, request: { responseURL } } = response;
 
       console.log("axios <- :", response)
-      console.log(`      # ${status}:${statusText} ${responseURL} ${data}`)
+      console.log(`      # ${status}:${statusText} ${responseURL} data: ${data}`)
       return response
     })
   }
