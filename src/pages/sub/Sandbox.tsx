@@ -23,7 +23,7 @@ export default function Sandbox() {
   return (
     <>
     <p>
-      {import.meta.env.VITE_API_BASE_URL}
+      base url: {import.meta.env.VITE_API_BASE_URL}
     </p>
     <p>{result}</p>
     </>
