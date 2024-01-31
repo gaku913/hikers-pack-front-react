@@ -1,4 +1,4 @@
-import { Divider, SwipeableDrawer } from "@mui/material";
+import { SwipeableDrawer, IconButton } from "@mui/material";
 import {
   Backpack,
   Build,
@@ -7,23 +7,35 @@ import {
   Hiking,
   QrCode,
 } from "@mui/icons-material";
-import { useContext } from "react";
-import { MenuContext } from "./Header";
+import MenuIcon from '@mui/icons-material/Menu';
+import { useState } from "react";
 import MenuListBuilder from "./MenuListBuilder";
 
 export default function Menu() {
-  const {menuOpen, setMenuOpen} = useContext(MenuContext);
+  const [open, setOpen] = useState(false);
+  const handleToggle = () => {
+    setOpen(!open);
+  };
 
   return (
-    <SwipeableDrawer
-      anchor="left"
-      open={menuOpen}
-      onClose={() => setMenuOpen(false)}
-      onOpen={() => setMenuOpen(true)}
+    <>
+    <IconButton
+      color="inherit"
+      onClick={handleToggle}
     >
-      {/* Main Menu */}
+      <MenuIcon/>
+    </IconButton>
+
+    <SwipeableDrawer
+      anchor="bottom"
+      open={open}
+      onClose={handleToggle}
+      onOpen={handleToggle}
+    >
       <MenuListBuilder
+        onClick={handleToggle}
         menus={[
+          // Main Menu
           {
             title: "このアプリについて",
             to: "/about",
@@ -34,15 +46,9 @@ export default function Menu() {
             to: "/",
             icon: <Backpack />,
           },
-        ]}
-        onClick={() => setMenuOpen(false)}
-      />
 
-      <Divider />
-
-      {/* Sub Menu */}
-      <MenuListBuilder
-        menus={[
+          // Sub Menu
+          "divider",
           {
             title: "QRコード",
             to: "/sub-contents/qrcode",
@@ -64,10 +70,9 @@ export default function Menu() {
             icon: <Build />
           },
         ]}
-        onClick={() => setMenuOpen(false)}
-        dense={true}
       />
 
     </SwipeableDrawer>
+    </>
   )
 }

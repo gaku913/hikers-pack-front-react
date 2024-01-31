@@ -1,13 +1,19 @@
-import { ListItemIcon, ListItemText, MenuItem, MenuList } from "@mui/material";
+import { 
+  Divider, 
+  ListItemIcon, 
+  ListItemText, 
+  MenuItem, 
+  MenuList
+} from "@mui/material";
 import { ReactNode } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 type MenuListBuilderProps = {
-  menus: {
+  menus: ({
     title: string,
     to: string,
     icon: ReactNode,
-  }[],
+  } | string)[],
   onClick: () => void,
   dense?: boolean,
 }
@@ -21,6 +27,7 @@ export default function MenuListBuilder({
   return (
     <MenuList>
     {menus.map((menu, id) => {
+      if ( typeof menu === "string" ) { return <Divider/> }
       return (
         <MenuItem
           key={id}
