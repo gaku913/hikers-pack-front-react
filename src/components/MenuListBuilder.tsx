@@ -27,7 +27,7 @@ export default function MenuListBuilder({
   return (
     <MenuList>
     {menus.map((menu, id) => {
-      if ( typeof menu === "string" ) { return <Divider/> }
+      if ( typeof menu === "string" ) { return <Divider key={id}/> }
       return (
         <MenuItem
           key={id}
