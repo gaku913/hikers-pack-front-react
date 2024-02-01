@@ -1,5 +1,6 @@
 import LoginButton from "@/components/LoginButton";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from "vitest";
 
 describe("LoginButton", () => {
@@ -7,7 +8,6 @@ describe("LoginButton", () => {
   it("has text Login", () => {
     render(<LoginButton/>);
     expect(screen.getByText("Login")).toBeTruthy();
-    screen.debug()
   });
 
   it("has button role", () => {
@@ -15,17 +15,17 @@ describe("LoginButton", () => {
     expect(screen.getByRole("button").textContent).toBe("Login");
   });
 
-  it("calls onClick() when button is clicked", () => {
-    const onClickMock = vi.fn(() => {});
+  it("calls function when button is clicked", async () => {
+    const mockFunction = vi.fn();
+    render(<LoginButton onClick={mockFunction}/>);
+    const target = screen.getByRole("button");
+    const ev = userEvent.setup();
 
-    render(<LoginButton onClick={onClickMock}/>);
-    const button = screen.getByRole("button");
-
-    expect(onClickMock).toHaveBeenCalledTimes(0);
-    fireEvent.click(button);
-    expect(onClickMock).toHaveBeenCalledTimes(1);
-    fireEvent.click(button);
-    expect(onClickMock).toHaveBeenCalledTimes(2);
+    expect(mockFunction).toHaveBeenCalledTimes(0);
+    await ev.click(target);
+    expect(mockFunction).toHaveBeenCalledTimes(1);
+    await ev.click(target);
+    expect(mockFunction).toHaveBeenCalledTimes(2);
 
   });
 
