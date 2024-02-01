@@ -5,7 +5,7 @@ import { describe, expect, it, vi } from "vitest";
 
 describe("LoginButton", () => {
 
-  it("has text Login", () => {
+  it("has text: Login", () => {
     render(<LoginButton/>);
     expect(screen.getByText("Login")).toBeTruthy();
   });
@@ -15,16 +15,16 @@ describe("LoginButton", () => {
     expect(screen.getByRole("button").textContent).toBe("Login");
   });
 
-  it("calls function when button is clicked", async () => {
+  it("call function when click button", async () => {
     const mockFunction = vi.fn();
     render(<LoginButton onClick={mockFunction}/>);
-    const target = screen.getByRole("button");
-    const ev = userEvent.setup();
+    const button = screen.getByRole("button");
+    const user = userEvent.setup();
 
     expect(mockFunction).toHaveBeenCalledTimes(0);
-    await ev.click(target);
+    await user.click(button);
     expect(mockFunction).toHaveBeenCalledTimes(1);
-    await ev.click(target);
+    await user.click(button);
     expect(mockFunction).toHaveBeenCalledTimes(2);
 
   });
