@@ -11,17 +11,16 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { useState } from "react";
 import MenuListBuilder from "./MenuListBuilder";
 
-export default function Menu() {
+export default function NavMenu() {
   const [open, setOpen] = useState(false);
-  const handleToggle = () => {
-    setOpen(!open);
-  };
+  const handleClose = () => setOpen(false);
+  const handleOpen = () => setOpen(true);
 
   return (
     <>
     <IconButton
       color="inherit"
-      onClick={handleToggle}
+      onClick={handleOpen}
     >
       <MenuIcon/>
     </IconButton>
@@ -29,11 +28,11 @@ export default function Menu() {
     <SwipeableDrawer
       anchor="bottom"
       open={open}
-      onClose={handleToggle}
-      onOpen={handleToggle}
+      onClose={handleClose}
+      onOpen={handleOpen}
     >
       <MenuListBuilder
-        onClick={handleToggle}
+        onClick={handleClose}
         menus={[
           // Main Menu
           {
@@ -71,7 +70,6 @@ export default function Menu() {
           },
         ]}
       />
-
     </SwipeableDrawer>
     </>
   )

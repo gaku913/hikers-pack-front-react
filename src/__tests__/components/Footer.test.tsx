@@ -8,9 +8,9 @@ vi.mock("@/components/AccountMenu", () => ({
   }
 }));
 
-vi.mock("@/components/Menu", () => ({
+vi.mock("@/components/NavMenu", () => ({
   default: () => {
-    return <div>Menu</div>
+    return <div>NavMenu</div>
   }
 }));
 
