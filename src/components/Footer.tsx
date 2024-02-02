@@ -1,6 +1,6 @@
 import { AppBar, Toolbar } from "@mui/material";
-import Menu from "./Menu";
-import AccountMenu from "./AccountMenu";
+import Menu from "@/components/Menu";
+import AccountMenu from "@/components/AccountMenu";
 
 export default function Footer() {
 
