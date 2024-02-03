@@ -6,6 +6,25 @@ import MenuListBuilder from "@/components/MenuListBuilder";
 import { Home, Settings } from "@mui/icons-material";
 import { BrowserRouter } from "react-router-dom";
 
+function menuItemTest({menuItem, titleText, href, iconID }: {
+  menuItem: HTMLElement
+  titleText: string
+  href: string
+  iconID: string
+}) {
+  // title
+  const title = menuItem.querySelector("span")
+  expect(title).toHaveTextContent(titleText)
+
+  // link
+  expect(menuItem).toHaveAttribute("href", href)
+
+  // icon
+  const icon = menuItem.querySelector(`[data-testid="${iconID}"]`)
+  expect(icon).not.toBeNull
+}
+
+// Test Code
 describe("MenuListBuilder", () => {
   it("render given menus", async () => {
     const mockFunction = vi.fn();
@@ -84,21 +103,3 @@ describe("MenuListBuilder", () => {
       .not.toBeNull();
   });
 });
-
-function menuItemTest({menuItem, titleText, href, iconID }: {
-  menuItem: HTMLElement
-  titleText: string
-  href: string
-  iconID: string
-}) {
-  // title
-  const title = menuItem.querySelector("span")
-  expect(title).toHaveTextContent(titleText)
-
-  // link
-  expect(menuItem).toHaveAttribute("href", href)
-
-  // icon
-  const icon = menuItem.querySelector(`[data-testid="${iconID}"]`)
-  expect(icon).not.toBeNull
-}
