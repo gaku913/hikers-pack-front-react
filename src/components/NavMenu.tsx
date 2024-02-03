@@ -26,7 +26,7 @@ export default function NavMenu() {
     </IconButton>
 
     <SwipeableDrawer
-      anchor="bottom"
+      anchor="left"
       open={open}
       onClose={handleClose}
       onOpen={handleOpen}

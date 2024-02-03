@@ -2,17 +2,17 @@ import { AppBar, Toolbar } from "@mui/material";
 import NavMenu from "@/components/NavMenu";
 import AccountMenu from "@/components/AccountMenu";
 
-export default function Footer() {
+export default function Header() {
 
   return (
     <>
-    <Toolbar />
-    <AppBar sx={{ top: 'auto', bottom: 0 }}>
+    <AppBar>
       <Toolbar sx={{ justifyContent: "space-between" }}>
         <NavMenu />
         <AccountMenu />
       </Toolbar>
     </AppBar>
+    <Toolbar />
     </>
   )
 }

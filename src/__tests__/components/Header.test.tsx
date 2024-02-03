@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
-import Footer from "@/components/Footer";
+import Header from "@/components/Header";
 
 vi.mock("@/components/AccountMenu", () => ({
   default: () => {
@@ -14,8 +14,8 @@ vi.mock("@/components/NavMenu", () => ({
   }
 }));
 
-describe("Footer", () => {
+describe("Header", () => {
   it("rendered without error", () => {
-    expect(() => render(<Footer/>)).not.toThrow(Error)
+    expect(() => render(<Header/>)).not.toThrow(Error)
   });
 });
