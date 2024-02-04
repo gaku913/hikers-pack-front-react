@@ -18,7 +18,7 @@ const rows = [
 export default function PackItems() {
   return (
     <>
-      <Table size="small">
+      <Table>
         <TableHead>
           <TableRow>
             <TableCell>名前</TableCell>
