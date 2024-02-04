@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it } from "vitest";
 import "@testing-library/jest-dom/vitest";
 import QRCode from "@/pages/sub/QRCode";
+import { BrowserRouter } from "react-router-dom";
 
 describe("QRCode", () => {
 
@@ -15,7 +16,7 @@ describe("QRCode", () => {
   });
 
   it("has QR code", async () => {
-    render(<QRCode/>)
+    render(<QRCode/>, {wrapper: BrowserRouter})
 
     // it has url
     expect(screen.getByText("http://localhost:3000")).not.toBeNull();
