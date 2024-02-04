@@ -9,14 +9,14 @@ type LinkBarProps = {
 export default function LinkBar({ links }: LinkBarProps) {
   return (
     <>
-      <Box mt={2} mb={1} textAlign="right">
+      <Divider />
+      <Box mt={1} textAlign="right">
         <ButtonGroup variant="text" size="small">
           {links.map((link, id) => {
             return <Button key={id}>{link.label}</Button>
           })}
         </ButtonGroup>
       </Box>
-      <Divider />
     </>
   );
 }
