@@ -17,7 +17,7 @@ export default function PackCheck() {
 
   return (
     <>
-      <Table size="small">
+      <Table>
         <TableHead>
           <TableRow>
             <TableCell padding="checkbox">

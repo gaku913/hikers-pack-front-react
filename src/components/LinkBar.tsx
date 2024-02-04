@@ -10,8 +10,8 @@ export default function LinkBar({ links }: LinkBarProps) {
   return (
     <>
       <Divider />
-      <Box mt={1} textAlign="right">
-        <ButtonGroup variant="text" size="small">
+      <Box mt={1} textAlign="center">
+        <ButtonGroup variant="text">
           {links.map((link, id) => {
             return <Button key={id}>{link.label}</Button>
           })}

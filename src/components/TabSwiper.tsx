@@ -15,6 +15,7 @@ function TabPanel({ children, value, index }: TabPanelProps) {
       hidden={value !== index}
       id={`full-width-tabpanel-${index}`}
       aria-labelledby={`full-width-tab-${index}`}
+      style={{ minHeight: "100vh" }}
     >
       {value === index && (<>{children}</>)}
     </div>
