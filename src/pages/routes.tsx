@@ -2,7 +2,7 @@ import { Route, createBrowserRouter, createRoutesFromElements } from "react-rout
 import About from "./About";
 import RouterTop from "./RouterTop";
 import PacksIndex from "./packs/PacksIndex";
-import PacksShow from "./packs/PacksShow";
+import PacksShow from "./packs/show/PacksShow";
 import PacksEdit from "./packs/PacksEdit";
 import PacksNew from "./packs/PacksNew";
 import QRCode from "./sub/QRCode";
