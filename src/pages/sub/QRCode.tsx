@@ -1,3 +1,4 @@
+import AppFrame from "@/components/AppFrame";
 import { Paper, styled } from "@mui/material";
 import { QRCodeSVG } from "qrcode.react";
 
@@ -11,12 +12,12 @@ export default function QRCode() {
   const url = new URL(window.location.href);
 
   return (
-    <>
-    <h1>QR Code</h1>
-    <p>{url.origin}</p>
-    <Contents>
-      <QRCodeSVG value={url.origin}/>
-    </Contents>
-    </>
-  )
+    <AppFrame>
+      <h1>QR Code</h1>
+      <p>{url.origin}</p>
+      <Contents>
+        <QRCodeSVG value={url.origin}/>
+      </Contents>
+    </AppFrame>
+  );
 }

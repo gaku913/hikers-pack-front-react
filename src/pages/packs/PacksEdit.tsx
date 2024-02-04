@@ -1,7 +1,9 @@
+import AppFrame from "@/components/AppFrame";
+
 export default function PacksEdit() {
   return (
-    <>
-    <h1>Edit</h1>
-    </>
+    <AppFrame>
+      <h1>Edit</h1>
+    </AppFrame>
   )
 }

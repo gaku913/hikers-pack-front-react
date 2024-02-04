@@ -5,6 +5,8 @@ import PackSummary from "./PackSummary";
 import PackCheck from "./PackCheck";
 import PackItems from "./PackItems";
 import { ReactNode } from "react";
+import AppFrame from "@/components/AppFrame";
+import Header from "@/components/Header";
 
 export type tabItems = {
   label: string,
@@ -30,18 +32,23 @@ export default function PacksShow() {
   const {value, onSwiper, onSlideChange, handleChange} = useTabSwiper();
 
   return (
-    <>
-      <TabBar
-        value={value}
-        tabItems={tabItems}
-        handleChange={handleChange}
-      />
+    <AppFrame
+      header={
+        <Header>
+          <TabBar
+            value={value}
+            tabItems={tabItems}
+            handleChange={handleChange}
+          />
+        </Header>
+      }
+    >
       <TabSwiper
         value={value}
         tabItems={tabItems}
         onSwiper={onSwiper}
         onSlideChange={onSlideChange}
       />
-    </>
+    </AppFrame>
   )
 }

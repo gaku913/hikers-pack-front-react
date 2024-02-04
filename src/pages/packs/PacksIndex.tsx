@@ -1,11 +1,12 @@
 import { AppBar, Button, List, ListItemButton, ListItemText, Toolbar } from "@mui/material";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { Link } from "react-router-dom";
+import AppFrame from "@/components/AppFrame";
 
 export default function PacksIndex() {
 
   return (
-    <>
+    <AppFrame>
       <List>
         <ListItemButton
           component={Link}
@@ -49,6 +50,6 @@ export default function PacksIndex() {
           </Button>
         </Toolbar>
       </AppBar>
-    </>
+    </AppFrame>
   )
 }

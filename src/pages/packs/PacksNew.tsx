@@ -1,7 +1,9 @@
+import AppFrame from "@/components/AppFrame"
+
 export default function PacksNew() {
   return (
-    <>
-    <h1>New</h1>
-    </>
-  )
+    <AppFrame>
+      <h1>New</h1>
+    </AppFrame>
+  );
 }
