@@ -19,7 +19,7 @@ const tabItems = [
     contents: <PackSummary />,
   },
   {
-    label: "一覧",
+    label: "持ち物",
     contents: <PackItems />,
   },
   {
