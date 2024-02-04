@@ -1,4 +1,4 @@
-import { Container, CssBaseline } from "@mui/material"
+import { CssBaseline } from "@mui/material"
 import { RouterProvider } from "react-router-dom"
 import routes from "./pages/routes"
 import axiosSetup from "./lib/axios"
@@ -12,11 +12,9 @@ export default function App() {
   return (
     <>
     <CssBaseline />
-    <Container sx={{ overflowWrap: 'break-word' }}>
-      <QueryClientProvider client={client}>
-        <RouterProvider router={routes} />
-      </QueryClientProvider>
-    </Container>
+    <QueryClientProvider client={client}>
+      <RouterProvider router={routes} />
+    </QueryClientProvider>
     </>
   )
 }

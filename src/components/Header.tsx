@@ -1,18 +1,20 @@
-import { AppBar, Toolbar } from "@mui/material";
+import { AppBar, Divider, Toolbar } from "@mui/material";
 import NavMenu from "@/components/NavMenu";
 import AccountMenu from "@/components/AccountMenu";
 
-export default function Header() {
+type HeaderProps = React.PropsWithChildren;
 
+export default function Header({ children }: HeaderProps) {
   return (
     <>
-    <AppBar>
+    <AppBar position="sticky">
       <Toolbar sx={{ justifyContent: "space-between" }}>
         <NavMenu />
         <AccountMenu />
       </Toolbar>
+      {children == null ? null : <Divider />}
+      {children}
     </AppBar>
-    <Toolbar />
     </>
   )
 }
