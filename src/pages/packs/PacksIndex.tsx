@@ -1,12 +1,24 @@
-import { AppBar, Button, List, ListItemButton, ListItemText, Toolbar } from "@mui/material";
+import { Button, List, ListItemButton, ListItemText } from "@mui/material";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { Link } from "react-router-dom";
 import AppFrame from "@/components/AppFrame";
+import Footer from "@/components/Footer";
 
 export default function PacksIndex() {
 
   return (
-    <AppFrame>
+    <AppFrame
+      footer={
+        <Footer>
+          <Button
+            variant="outlined"
+            size="medium"
+          >
+            新しい持ち物リストを追加する
+          </Button>
+        </Footer>
+      }
+    >
       <List>
         <ListItemButton
           component={Link}
@@ -34,22 +46,6 @@ export default function PacksIndex() {
         </ListItemButton>
       </List>
 
-      <Toolbar variant="dense"/>
-      <AppBar color="inherit" sx={{ top: "auto", bottom: 0 }}>
-        <Toolbar
-          sx={{
-            displayPrint: "flex",
-            justifyContent: "center"
-          }}
-          >
-          <Button
-            variant="outlined"
-            size="medium"
-          >
-            新しい持ち物リストを追加する
-          </Button>
-        </Toolbar>
-      </AppBar>
     </AppFrame>
   )
 }
