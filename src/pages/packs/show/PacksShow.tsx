@@ -7,6 +7,8 @@ import PackItems from "./PackItems";
 import { ReactNode } from "react";
 import AppFrame from "@/components/AppFrame";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import { Button } from "@mui/material";
 
 export type tabItems = {
   label: string,
@@ -41,6 +43,17 @@ export default function PacksShow() {
             handleChange={handleChange}
           />
         </Header>
+      }
+      footer={
+        value === 1 && // 持ち物タブでフッターを表示する
+        <Footer>
+          <Button
+            variant="outlined"
+            size="medium"
+          >
+            新しい持ち物を追加する
+          </Button>
+        </Footer>
       }
     >
       <TabSwiper
