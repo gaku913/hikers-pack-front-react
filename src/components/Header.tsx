@@ -7,7 +7,7 @@ type HeaderProps = React.PropsWithChildren;
 export default function Header({ children }: HeaderProps) {
   return (
     <>
-    <AppBar position="sticky">
+    <AppBar position="sticky" color="default">
       <Toolbar sx={{ justifyContent: "space-between" }}>
         <NavMenu />
         <AccountMenu />
