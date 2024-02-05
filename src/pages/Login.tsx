@@ -6,18 +6,18 @@ import { TextField, Typography } from "@mui/material";
 export default function Login() {
   return (
     <AppFrame>
-      <h1>Login</h1>
+      <h1>ログイン</h1>
       <AuthForm
         leftButton={{ label: "キャンセル" }}
         rightButton={{ label: "送信" }}
       >
         <TextField
           required
-          label="email"
+          label="メールアドレス"
         />
         <TextField
           required
-          label="password"
+          label="パスワード"
           type="password"
         />
       </AuthForm>
