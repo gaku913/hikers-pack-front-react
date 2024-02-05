@@ -1,6 +1,18 @@
+import LinkBar from "@/components/LinkBar";
+
 export default function PackSummary() {
   return (
     <>
+      <LinkBar
+        links={[
+          {
+            label: "編集"
+          },
+          {
+            label: "削除"
+          },
+        ]}
+      />
       <h1>南八ヶ岳縦走</h1>
       <h2>日程</h2>
       <p>2023年8月14日</p>

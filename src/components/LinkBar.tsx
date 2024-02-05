@@ -15,7 +15,6 @@ export default function LinkBar({ links }: LinkBarProps) {
         mt: 1,
         top: 0,
         position: "sticky",
-        zIndex: "speedDial"
       }}
     >
       <Box

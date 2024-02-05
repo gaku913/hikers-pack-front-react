@@ -34,7 +34,7 @@ export default function PackCheck() {
 
   return (
     <>
-      <Table>
+      <Table stickyHeader>
         <TableHead>
           <TableRow>
             <TableCell padding="checkbox">

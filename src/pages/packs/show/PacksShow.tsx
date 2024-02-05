@@ -9,7 +9,6 @@ import AppFrame from "@/components/AppFrame";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@mui/material";
-import LinkBar from "@/components/LinkBar";
 
 export type tabItems = {
   label: string,
@@ -57,18 +56,6 @@ export default function PacksShow() {
         </Footer>
       }
     >
-      { value === 0 && // 概要タブで表示
-        <LinkBar
-          links={[
-            {
-              label: "編集"
-            },
-            {
-              label: "削除"
-            },
-          ]}
-        />
-      }
       <TabSwiper
         value={value}
         tabItems={tabItems}

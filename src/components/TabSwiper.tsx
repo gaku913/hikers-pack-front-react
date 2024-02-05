@@ -37,6 +37,7 @@ export default function TabSwiper(
       simulateTouch={false}
       onSwiper={onSwiper}
       onSlideChange={onSlideChange}
+      style={{ overflow: "clip" }}
     >
       {tabItems.map((tabItem, id) => {
         return (

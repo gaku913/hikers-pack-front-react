@@ -29,7 +29,7 @@ const rows = [
 export default function PackItems() {
   return (
     <>
-      <Table>
+      <Table stickyHeader>
         <TableHead>
           <TableRow>
             <TableCell>名前</TableCell>
