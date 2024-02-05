@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useQuery } from "react-query";
 import AppFrame from "@/components/AppFrame";
-import { Box, Button, Modal, Paper, Typography } from "@mui/material";
+import { Box, Button, Modal, Typography } from "@mui/material";
 import { useState } from "react";
 
 const fetchData = async () => {
