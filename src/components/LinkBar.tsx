@@ -1,4 +1,4 @@
-import { Box, Button, ButtonGroup, Divider } from "@mui/material"
+import { Box, Button, ButtonGroup, Divider, Paper } from "@mui/material"
 
 type LinkBarProps = {
   links: {
@@ -8,8 +8,22 @@ type LinkBarProps = {
 
 export default function LinkBar({ links }: LinkBarProps) {
   return (
-    <>
-      <Box mt={2} mb={1} justifyContent="space-between" display="flex">
+    <Paper
+      elevation={0}
+      square
+      sx={{
+        mt: 1,
+        top: 0,
+        position: "sticky",
+        zIndex: "speedDial"
+      }}
+    >
+      <Box
+        pt={1}
+        pb={1}
+        justifyContent="space-between"
+        display="flex"
+      >
         <ButtonGroup variant="text" size="large">
           <Button>一覧に戻る</Button>
         </ButtonGroup>
@@ -20,6 +34,6 @@ export default function LinkBar({ links }: LinkBarProps) {
         </ButtonGroup>
       </Box>
       <Divider />
-    </>
+    </Paper>
   );
 }

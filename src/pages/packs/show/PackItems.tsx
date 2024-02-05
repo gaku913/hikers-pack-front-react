@@ -13,6 +13,17 @@ const rows = [
   createData("ウィンドブレーカー", 135),
   createData("レインウェア上", 208),
   createData("レインウェア下", 222),
+  createData("レインウェア下", 222),
+  createData("レインウェア下", 222),
+  createData("レインウェア下", 222),
+  createData("レインウェア下", 222),
+  createData("レインウェア下", 222),
+  createData("レインウェア下", 222),
+  createData("レインウェア下", 222),
+  createData("レインウェア下", 222),
+  createData("レインウェア下", 222),
+  createData("レインウェア下", 222),
+  createData("レインウェア下", 222),
 ];
 
 export default function PackItems() {

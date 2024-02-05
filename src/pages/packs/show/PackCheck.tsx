@@ -13,6 +13,23 @@ export default function PackCheck() {
     createData("ウィンドブレーカー", 135),
     createData("レインウェア上", 208),
     createData("レインウェア下", 222),
+    createData("レインウェア下", 222),
+    createData("レインウェア下", 222),
+    createData("レインウェア下", 222),
+    createData("レインウェア下", 222),
+    createData("レインウェア下", 222),
+    createData("レインウェア下", 222),
+    createData("レインウェア下", 222),
+    createData("レインウェア下", 222),
+    createData("レインウェア下", 222),
+    createData("レインウェア下", 222),
+    createData("レインウェア下", 222),
+    createData("レインウェア下", 222),
+    createData("レインウェア下", 222),
+    createData("レインウェア下", 222),
+    createData("レインウェア下", 222),
+    createData("レインウェア下", 222),
+    createData("レインウェア下", 222),
   ];
 
   return (
