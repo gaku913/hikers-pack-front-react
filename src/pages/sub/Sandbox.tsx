@@ -1,40 +1,25 @@
 import axios from "axios";
 import { useQuery } from "react-query";
 import AppFrame from "@/components/AppFrame";
-import { Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import { Box, Button, Modal, Paper, Typography } from "@mui/material";
+import { useState } from "react";
 
 const fetchData = async () => {
 	const { data } = await axios.get("hello");
   return data;
 };
 
-function createData(
-  name: string,
-  weight: number,
-) {
-  return { name, weight };
-}
-
-const rows = [
-  createData("バックパック20L", 427),
-  createData("ウィンドブレーカー", 135),
-  createData("レインウェア上", 208),
-  createData("レインウェア下", 222),
-  createData("レインウェア下", 222),
-  createData("レインウェア下", 222),
-  createData("レインウェア下", 222),
-  createData("レインウェア下", 222),
-  createData("レインウェア下", 222),
-  createData("レインウェア下", 222),
-  createData("レインウェア下", 222),
-  createData("レインウェア下", 222),
-  createData("レインウェア下", 222),
-  createData("レインウェア下", 222),
-  createData("レインウェア下", 222),
-];
-
-
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 
 export default function Sandbox() {
   const { data, isLoading, isError } = useQuery("hello", fetchData);
@@ -50,6 +35,10 @@ export default function Sandbox() {
     result = JSON.stringify(data)
   }
 
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   return (
     <AppFrame>
       <h2>API Connection</h2>
@@ -58,25 +47,22 @@ export default function Sandbox() {
       </p>
       <p>{result}</p>
 
-      <h2>Table</h2>
-      <Table stickyHeader>
-        <TableHead>
-          <TableRow>
-            <TableCell>名前</TableCell>
-            <TableCell>重量(g)</TableCell>
-            <TableCell />
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row, id) => (
-            <TableRow key={id} hover>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>{row.weight}</TableCell>
-              <TableCell align="right"><ChevronRightIcon /></TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+      <h2>Modal</h2>
+      <Button onClick={handleOpen}>Open modal</Button>
+      <Modal
+        open={open}
+        onClose={handleClose}
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Text in a modal
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+          </Typography>
+        </Box>
+      </Modal>
+
     </AppFrame>
   );
 }
