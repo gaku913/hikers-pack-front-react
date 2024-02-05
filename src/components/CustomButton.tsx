@@ -1,19 +1,22 @@
 import { Button } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 
-type CustomButtonProp = React.PropsWithChildren<{
+export type CustomButtonProps = {
   to?: string
-}>;
+  label?: string
+  onClick?: () => void
+};
 
-export default function CustomButton({ children, to }: CustomButtonProp) {
+export default function CustomButton(props: CustomButtonProps) {
   return (
     <Button
       component={RouterLink}
-      to={to || ""}
+      to={props.to || ""}
+      onClick={props.onClick}
       variant="text"
       size="large"
     >
-      {children}
+      {props.label}
     </Button>
   );
 }

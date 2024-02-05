@@ -1,14 +1,9 @@
 import { Divider, Paper, Stack } from "@mui/material";
-import { default as Button } from "./CustomButton";
-
-type button = {
-  to?: string
-  label: string
-}
+import { default as Button, CustomButtonProps } from "./CustomButton";
 
 type LoginFormProps = React.PropsWithChildren<{
-  leftButton: button
-  rightButton: button
+  leftButton: CustomButtonProps
+  rightButton: CustomButtonProps
 }>
 
 export default function AuthForm(
@@ -22,8 +17,8 @@ export default function AuthForm(
         {children}
         <Divider />
         <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <Button to={leftButton.to}>{leftButton.label}</Button>
-          <Button to={rightButton.to}>{rightButton.label}</Button>
+          {Button(leftButton)}
+          {Button(rightButton)}
         </div>
       </Stack>
     </Paper>
