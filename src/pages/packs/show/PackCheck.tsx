@@ -41,7 +41,6 @@ export default function PackCheck() {
               <Checkbox />
             </TableCell>
             <TableCell>名前</TableCell>
-            <TableCell>重量(g)</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -51,7 +50,6 @@ export default function PackCheck() {
                 <Checkbox />
               </TableCell>
               <TableCell>{row.name}</TableCell>
-              <TableCell>{row.weight}</TableCell>
             </TableRow>
           ))}
         </TableBody>
