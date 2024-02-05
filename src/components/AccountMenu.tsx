@@ -26,8 +26,8 @@ export default function AccountMenu() {
       open={open}
       onClose={handleClose}
       onClick={handleClose}
-      transformOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-      anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
+      transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+      anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
     >
       <MenuListBuilder
         onClick={handleClose}
