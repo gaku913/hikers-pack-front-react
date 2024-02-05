@@ -3,6 +3,7 @@ import { useQuery } from "react-query";
 import AppFrame from "@/components/AppFrame";
 import { Box, Button, Modal, Typography } from "@mui/material";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const fetchData = async () => {
 	const { data } = await axios.get("hello");
@@ -62,6 +63,16 @@ export default function Sandbox() {
           </Typography>
         </Box>
       </Modal>
+
+      <h2>Signup/Login</h2>
+      <ul>
+        <li>
+          <Link to="/signup">Signup</Link>
+        </li>
+        <li>
+          <Link to="/login">Login</Link>
+        </li>
+      </ul>
 
     </AppFrame>
   );

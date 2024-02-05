@@ -8,6 +8,8 @@ import PacksNew from "./packs/PacksNew";
 import QRCode from "./sub/QRCode";
 import Readme from "./sub/Readme";
 import Sandbox from "./sub/Sandbox";
+import Signup from "./Signup";
+import Login from "./Login";
 
 const routes = createBrowserRouter(
   createRoutesFromElements(
@@ -15,6 +17,10 @@ const routes = createBrowserRouter(
 
       {/* About Page */}
       <Route path="/about" element={<About />} />
+
+      {/* Signup/Login */}
+      <Route path="/signup" element={<Signup />} />
+      <Route path="/login" element={<Login />} />
 
       {/* Packs Pages*/}
       <Route path="/" element={<PacksIndex />} />
