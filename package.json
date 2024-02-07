@@ -19,11 +19,14 @@
     "qrcode.react": "^3.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.50.0",
     "react-query": "^3.39.3",
     "react-router-dom": "^6.21.3",
-    "swiper": "^11.0.5"
+    "swiper": "^11.0.5",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@hookform/resolvers": "^3.3.4",
     "@testing-library/jest-dom": "^6.4.1",
     "@testing-library/react": "^14.2.0",
     "@testing-library/user-event": "^14.5.2",

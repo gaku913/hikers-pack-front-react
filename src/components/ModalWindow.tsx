@@ -1,4 +1,4 @@
-import { Modal } from "@mui/material";
+import { Modal, Paper } from "@mui/material";
 import { PropsWithChildren } from "react";
 
 type ModalWindowProps = PropsWithChildren<{
@@ -22,7 +22,12 @@ export default function ModalWindow(
           width: "80%"
         }}
       >
-        {children}
+        <Paper
+          variant="outlined"
+          sx={{ p: 2 }}
+        >
+          {children}
+        </Paper>
       </div>
     </Modal>
   );

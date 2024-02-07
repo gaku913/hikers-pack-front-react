@@ -1,6 +1,6 @@
 import TabBar from "@/components/TabBar";
 import TabSwiper from "@/components/TabSwiper";
-import useTabSwiper from "@/lib/useTabSwiper";
+import useTabSwiper from "@/hooks/useTabSwiper";
 import PackSummary from "./PackSummary";
 import PackCheck from "./PackCheck";
 import PackItems from "./PackItems";

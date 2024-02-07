@@ -1,73 +1,145 @@
 import AppFrame from "@/components/AppFrame";
-import AuthForm from "@/components/AuthForm";
-import { CustomButtonProps } from "@/components/CustomButton";
+import { ButtonProps } from "@/components/Button";
+import FormWrapper from "@/components/Form/FormWrapper";
 import ModalWindow from "@/components/ModalWindow";
-import { TextField } from "@mui/material";
+import TextField from "@/components/Form/TextField";
 import { useState } from "react";
+import { Divider } from "@mui/material";
+import FormButtonBar from "@/components/Form/FormButtonBar";
+import { userSchema, userSchemaType } from "@/validations/user/schema";
+import useForm from "@/hooks/useForm";
 
 type SignupFormProps = {
+  control: any
+  onSubmit?: () => void
   disabled?: boolean
-  leftButton: CustomButtonProps
-  rightButton: CustomButtonProps
+  leftButton: ButtonProps
+  rightButton: ButtonProps
 }
 
-function SignupForm({ disabled, leftButton, rightButton }: SignupFormProps) {
+function SignupForm({
+  control,
+  onSubmit,
+  disabled,
+  leftButton,
+  rightButton,
+}: SignupFormProps) {
+
   return (
-    <AuthForm
-      leftButton={leftButton}
-      rightButton={rightButton}
+    <FormWrapper
+      onSubmit={onSubmit || (() => {})}
     >
+
       <TextField
-        required
-        disabled={disabled}
         label="名前"
-        />
-      <TextField
+        name="name"
+        control={control}
         required
         disabled={disabled}
-        label="メールアドレス"
-        />
-      <TextField
-        required
-        disabled={disabled}
-        label="パスワード"
-        type="password"
-        />
-      <TextField
-        required
-        disabled={disabled}
-        label="パスワードの確認"
-        type="password"
       />
-    </AuthForm>
+
+      <TextField
+        label="メールアドレス"
+        name="email"
+        control={control}
+        required
+        disabled={disabled}
+      />
+
+      <TextField
+        label="パスワード"
+        name="password"
+        control={control}
+        type="password"
+        required
+        disabled={disabled}
+      />
+
+      <TextField
+        label="パスワード（確認）"
+        name="passwordConfirm"
+        control={control}
+        type="password"
+        required
+        disabled={disabled}
+      />
+
+      <Divider />
+
+      <FormButtonBar
+        left={leftButton}
+        right={rightButton}
+      />
+
+    </FormWrapper>
   );
 }
 
 export default function Signup() {
+  // Form State
+  const {
+    handleSubmit,
+    control,
+    reset,
+    trigger,
+    formState: {
+      isSubmitting,
+      isValid,
+    }
+  } = useForm(userSchema);
+
+  const onSubmit = (data: userSchemaType) => {
+    console.log("submit", data)
+    reset();
+    handleClose();
+  };
 
   // Modal State
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
+  const handleOpen = () => {
+    trigger();
+    if (isValid) {
+      setOpen(true);
+    }
+  };
   const handleClose = () => setOpen(false);
 
   return (
     <>
+      {/* 入力画面 */}
       <AppFrame>
         <h1>ユーザー登録</h1>
-
-        {/* 入力画面 */}
         <SignupForm
-          leftButton={{ label: "キャンセル", to: "/" }}
-          rightButton={{ label: "確認へ進む", onClick: handleOpen }}
+          control={control}
+          leftButton={{
+            label: "キャンセル",
+            to: "/",
+          }}
+          rightButton={{
+            label: "確認へ進む",
+            type: "button",
+            onClick: handleOpen,
+            disabled: !isValid
+          }}
         />
       </AppFrame>
 
+      {/* 確認モーダル画面 */}
       <ModalWindow open={open}>
-        {/* 確認画面 */}
+        <p>この内容で登録します。</p>
         <SignupForm
+          control={control}
+          onSubmit={handleSubmit(onSubmit)}
           disabled
-          leftButton={{ label: "戻る", onClick: handleClose }}
-          rightButton={{ label: "送信", to: "/" }}
+          leftButton={{
+            label: "戻る",
+            onClick: handleClose,
+          }}
+          rightButton={{
+            label: "送信",
+            type: "submit",
+            disabled: isSubmitting,
+          }}
         />
       </ModalWindow>
     </>

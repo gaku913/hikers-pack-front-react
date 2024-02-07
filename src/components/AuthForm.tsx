@@ -1,9 +1,9 @@
 import { Divider, Paper, Stack } from "@mui/material";
-import { default as Button, CustomButtonProps } from "./CustomButton";
+import Button, { ButtonProps } from "@/components/Button";
 
 type LoginFormProps = React.PropsWithChildren<{
-  leftButton: CustomButtonProps
-  rightButton: CustomButtonProps
+  leftButton: ButtonProps
+  rightButton: ButtonProps
 }>
 
 export default function AuthForm(
