@@ -16,12 +16,7 @@ export default function FormButtonBar({
       justifyContent="space-between"
     >
       <Button {...left} />
-      <Button
-        {...{
-          type: "submit",
-          ...right
-        }}
-      />
+      <Button {...right} />
     </Box>
   );
 }

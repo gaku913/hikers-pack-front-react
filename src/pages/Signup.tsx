@@ -8,14 +8,16 @@ import { Divider } from "@mui/material";
 import FormButtonBar from "@/components/Form/FormButtonBar";
 import { userSchema, userSchemaType } from "@/validations/user/schema";
 import useForm from "@/hooks/useForm";
+import { Control } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 type SignupFormProps = {
-  control: any
+  control: Control<userSchemaType>
   onSubmit?: () => void
   disabled?: boolean
   leftButton: ButtonProps
   rightButton: ButtonProps
-}
+};
 
 function SignupForm({
   control,
@@ -76,6 +78,9 @@ function SignupForm({
 }
 
 export default function Signup() {
+  // Router
+  const navigate = useNavigate();
+
   // Form State
   const {
     handleSubmit,
@@ -91,7 +96,7 @@ export default function Signup() {
   const onSubmit = (data: userSchemaType) => {
     console.log("submit", data)
     reset();
-    handleClose();
+    navigate("/");
   };
 
   // Modal State
@@ -117,14 +122,13 @@ export default function Signup() {
           }}
           rightButton={{
             label: "確認へ進む",
-            type: "button",
             onClick: handleOpen,
             disabled: !isValid
           }}
         />
       </AppFrame>
 
-      {/* 確認モーダル画面 */}
+      {/* 確認画面 */}
       <ModalWindow open={open}>
         <p>この内容で登録します。</p>
         <SignupForm

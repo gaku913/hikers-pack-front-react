@@ -1,12 +1,16 @@
 import MuiTextField, {
   TextFieldProps as MuiTextFieldProps
 } from "@mui/material/TextField";
-import { FieldValues, UseControllerProps, useController } from "react-hook-form";
+import {
+  FieldValues,
+  UseControllerProps,
+  useController
+} from "react-hook-form";
 
-type TextFieldProps<T extends FieldValues = FieldValues> = Pick<
-  UseControllerProps<T>,
-  'name' | 'control'
-> & MuiTextFieldProps
+type TextFieldProps<T extends FieldValues = FieldValues> = (
+  Pick<UseControllerProps<T>, "name" | "control"> &
+  MuiTextFieldProps
+);
 
 export default function TextField<T extends FieldValues>({
   name,
@@ -19,6 +23,7 @@ export default function TextField<T extends FieldValues>({
     formState: { errors },
   } = useController({ name, control })
 
+  // フォーカス時に全選択する
   const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
     e.currentTarget.select();
   }
