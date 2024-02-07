@@ -1,21 +1,26 @@
-import { AppBar, Divider, Slide, Toolbar, useScrollTrigger } from "@mui/material";
+import { AppBar, Divider, Slide, Toolbar, createTheme, useScrollTrigger } from "@mui/material";
 import NavMenu from "@/components/NavMenu";
 import AccountMenu from "@/components/AccountMenu";
 import React from "react";
 import Button from "./Button";
 
 type HideOnScrollProps = {
-  window?: () => Window;
   children: React.ReactElement
 };
 
-function HideOnScroll({ children, window }: HideOnScrollProps) {
+function HideOnScroll({ children }: HideOnScrollProps) {
+  const theme = createTheme();
   const trigger = useScrollTrigger({
-    target: window ? window() : undefined,
+    disableHysteresis: true,
   });
 
   return (
-    <Slide appear={false} direction="down" in={!trigger}>
+    <Slide
+      appear={false}
+      direction="down"
+      in={!trigger}
+      easing={{ exit: theme.transitions.easing.easeIn }}
+    >
       {children}
     </Slide>
   );
