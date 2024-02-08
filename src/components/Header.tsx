@@ -1,8 +1,9 @@
 import { AppBar, Divider, Slide, Toolbar, createTheme, useScrollTrigger } from "@mui/material";
 import NavMenu from "@/components/NavMenu";
 import AccountMenu from "@/components/AccountMenu";
-import React from "react";
+import React, { useContext } from "react";
 import Button from "./Button";
+import { LoggedInContext } from "@/authenticate/AuthContextProvider";
 
 type HideOnScrollProps = {
   children: React.ReactElement
@@ -26,7 +27,28 @@ function HideOnScroll({ children }: HideOnScrollProps) {
   );
 }
 
+function LoginButtons() {
+  return (
+    <>
+      <Button
+        label="ログイン"
+        to="/login"
+        variant="outlined"
+        size="small"
+      />
+      <Button
+        label="新規登録"
+        to="/signup"
+        variant="outlined"
+        size="small"
+        sx={{ ml: 1 }}
+      />
+    </>
+  );
+}
+
 export default function Header({ children }: React.PropsWithChildren) {
+  const isLoggedIn = useContext(LoggedInContext);
   return (
     <>
       <HideOnScroll>
@@ -34,20 +56,7 @@ export default function Header({ children }: React.PropsWithChildren) {
           <Toolbar sx={{ justifyContent: "space-between" }}>
             <NavMenu />
             <div>
-              <Button
-                label="ログイン"
-                to="/login"
-                variant="outlined"
-                size="small"
-              />
-              <Button
-                label="新規登録"
-                to="/signup"
-                variant="outlined"
-                size="small"
-                sx={{ ml: 1 }}
-              />
-              <AccountMenu />
+              { isLoggedIn ? <AccountMenu /> : <LoginButtons /> }
             </div>
           </Toolbar>
           {children && <Divider />}

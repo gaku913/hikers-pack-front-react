@@ -1,6 +1,8 @@
 import { useQuery } from "react-query";
 import AppFrame from "@/components/AppFrame";
 import { getHello } from "@/api/hello";
+import { useContext } from "react";
+import { AuthInfoContext, LoggedInContext } from "@/authenticate/AuthContextProvider";
 
 function Hello() {
   const {
@@ -14,9 +16,31 @@ function Hello() {
   );
 }
 
+function LoginSample() {
+  const isLoggedIn = useContext(LoggedInContext);
+  const [authInfo, setAuthInfo] = useContext(AuthInfoContext);
+  return (
+    <div>
+      {isLoggedIn ? `ID: ${authInfo?.userId}` : "ログインされていません"}
+      <button
+        onClick={() => {
+          setAuthInfo({ userId: "abcdefg123455" });
+        }}
+      >
+        ログイン
+      </button>
+      <button
+        onClick={() => {
+          setAuthInfo({ userId: "" });
+        }}
+      >
+        ログアウト
+      </button>
+    </div>
+  );
+}
+
 export default function Sandbox() {
-
-
   return (
     <AppFrame>
       <h2>API Connection</h2>
@@ -24,6 +48,9 @@ export default function Sandbox() {
         Base URL: {import.meta.env.VITE_API_BASE_URL}
       </p>
       <Hello />
+
+      <h2>Login Sample</h2>
+      <LoginSample />
     </AppFrame>
   );
 }
