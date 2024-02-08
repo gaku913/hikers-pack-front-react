@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import Header from "@/components/Header";
+import { BrowserRouter } from "react-router-dom";
 
 vi.mock("@/components/AccountMenu", () => ({
   default: () => {
@@ -16,11 +17,11 @@ vi.mock("@/components/NavMenu", () => ({
 
 describe("Header", () => {
   it("render child componets with separator", async () => {
-    render(
+    render((
       <Header>
         <span>child</span>
       </Header>
-    );
+    ), {wrapper: BrowserRouter});
 
     // it has child components
     expect(screen.getByText("child")).not.toBeNull();
@@ -30,7 +31,7 @@ describe("Header", () => {
   });
 
   it("does not draw separator if children is not passed", () => {
-    render(<Header />);
+    render(<Header />, {wrapper: BrowserRouter});
 
     // it does not have separator
     expect(screen.queryByRole("separator")).toBeNull();

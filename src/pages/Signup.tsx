@@ -6,7 +6,7 @@ import TextField from "@/components/Form/TextField";
 import { useState } from "react";
 import { Divider } from "@mui/material";
 import FormButtonBar from "@/components/Form/FormButtonBar";
-import { userSchema, userSchemaType } from "@/validations/user/schema";
+import { userSchema, userSchemaType } from "@/validations/userSchema";
 import useForm from "@/hooks/useForm";
 import { Control } from "react-hook-form";
 import { useNavigate } from "react-router-dom";

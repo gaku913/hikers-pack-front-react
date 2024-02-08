@@ -1,30 +1,25 @@
 import { RE_EMAIL, RE_PASSWORD } from "@/lib/regex";
 import { castToValOrNull } from "@/lib/zodUtil";
 import { z } from "zod";
-import { userErrorMap } from "./errorMap";
 
 const userSchema = z.object({
   name: castToValOrNull(z.string()),
   email: castToValOrNull(
-    z.string({ errorMap: userErrorMap })
-    .regex(RE_EMAIL)
+    z.string()
+    .regex(RE_EMAIL, { message: "不正なメールアドレスです。" })
     ),
   password: castToValOrNull(
-    z.string({ errorMap: userErrorMap })
+    z.string()
     .min(8)
-    .regex(RE_PASSWORD)
+    .regex(RE_PASSWORD, { message: "半角英数字で入力してください。" })
     ),
   passwordConfirm: castToValOrNull(z.string()),
 })
-.superRefine(({ password, passwordConfirm }, ctx) => {
-  if (password !== passwordConfirm) {
-    ctx.addIssue({
-      path: ["passwordConfirm"],
-      code: "custom",
-      message: "パスワードが一致しません。"
-    });
-  }
+.refine(({ password, passwordConfirm }) => password === passwordConfirm, {
+  path: ["passwordConfirm"],
+  message: "パスワードが一致しません。"
 });
+
 
 export type userSchemaType = z.infer<typeof userSchema>
 
