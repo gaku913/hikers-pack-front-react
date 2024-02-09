@@ -1,10 +1,6 @@
 // Doc: https://marsquai.com/745ca65e-e38b-4a8e-8d59-55421be50f7e/f83dca4c-79db-4adf-b007-697c863b82a5/329eb1b4-3aff-4bb0-89dd-e1692e0aa5dc/
 import { PropsWithChildren, createContext, useEffect, useState } from "react";
-
-// 認証情報の型
-type AuthInfo = {
-  userId: string;
-};
+import { AuthInfo, authInfoInitial } from "./authInfoInitial";
 
 // Login状態のContext
 export const LoggedInContext = createContext<boolean>(false);
@@ -12,7 +8,7 @@ export const LoggedInContext = createContext<boolean>(false);
 // 認証情報と認証情報SetのContext
 export const AuthInfoContext = createContext<
   [AuthInfo, React.Dispatch<React.SetStateAction<AuthInfo>>]
->([{ userId: "" }, () => {}]);
+>([authInfoInitial, () => {}]);
 
 
 export function AuthContextProvider({ children }: PropsWithChildren) {
@@ -23,10 +19,11 @@ export function AuthContextProvider({ children }: PropsWithChildren) {
   // authInfoのバリデーション
   useEffect(() => {
     // authInfoに正しく値がセットされているかどうかをチェック
-    if (authInfo?.userId) {
+    if (authInfo?.uid) {
       setAutoInfoToLocalStorage(authInfo);
       setLoggedIn(true);
     } else {
+      removeAutoInfoFromLocalStorage();
       setLoggedIn(false);
     }
   }, [authInfo]);
@@ -50,7 +47,7 @@ function getDefaultAuthInfo(): AuthInfo {
   if (defaultAuthInfo) {
     return JSON.parse(defaultAuthInfo) as AuthInfo;
   } else {
-    return { userId: "" };
+    return authInfoInitial;
   }
 }
 
@@ -60,4 +57,11 @@ function getDefaultAuthInfo(): AuthInfo {
 function setAutoInfoToLocalStorage(authInfo: AuthInfo): void {
   const authInfoStringfy = JSON.stringify(authInfo);
   window.localStorage.setItem("authInfo", authInfoStringfy);
+}
+
+/**
+ * 認証情報をローカルストレージから削除
+ */
+function removeAutoInfoFromLocalStorage(): void {
+  window.localStorage.removeItem("authInfo");
 }

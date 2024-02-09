@@ -3,6 +3,7 @@ import AppFrame from "@/components/AppFrame";
 import { getHello } from "@/api/hello";
 import { useContext } from "react";
 import { AuthInfoContext, LoggedInContext } from "@/authenticate/AuthContextProvider";
+import { authInfoInitial } from "@/authenticate/authInfoInitial";
 
 function Hello() {
   const {
@@ -21,17 +22,21 @@ function LoginSample() {
   const [authInfo, setAuthInfo] = useContext(AuthInfoContext);
   return (
     <div>
-      {isLoggedIn ? `ID: ${authInfo?.userId}` : "ログインされていません"}
+      {isLoggedIn ? `ID: ${authInfo?.uid}` : "ログインされていません"}
       <button
         onClick={() => {
-          setAuthInfo({ userId: "abcdefg123455" });
+          setAuthInfo({
+            uid: "sample@gmail.com",
+            client: "client-xxx",
+            accessToken: "token-xxx",
+          });
         }}
       >
         ログイン
       </button>
       <button
         onClick={() => {
-          setAuthInfo({ userId: "" });
+          setAuthInfo(authInfoInitial);
         }}
       >
         ログアウト
