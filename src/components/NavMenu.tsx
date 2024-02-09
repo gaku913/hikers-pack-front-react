@@ -1,4 +1,4 @@
-import { SwipeableDrawer, IconButton } from "@mui/material";
+import { SwipeableDrawer, IconButton, Divider } from "@mui/material";
 import {
   Backpack,
   Build,
@@ -9,7 +9,9 @@ import {
 } from "@mui/icons-material";
 import MenuIcon from '@mui/icons-material/Menu';
 import { useState } from "react";
-import MenuListBuilder from "./MenuListBuilder";
+import MenuItem from "@/components/common/MenuItem";
+import AuthGuard from "@/authenticate/AuthGuard";
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 
 export default function NavMenu() {
   const [open, setOpen] = useState(false);
@@ -31,44 +33,58 @@ export default function NavMenu() {
       onClose={handleClose}
       onOpen={handleOpen}
     >
-      <MenuListBuilder
+      <MenuItem
+        title="このアプリについて"
+        to="/about"
+        Icon={Hiking}
         onClick={handleClose}
-        menus={[
-          // Main Menu
-          {
-            title: "このアプリについて",
-            to: "/about",
-            icon: <Hiking />,
-          },
-          {
-            title: "パック一覧",
-            to: "/",
-            icon: <Backpack />,
-          },
-
-          // Sub Menu
-          "divider",
-          {
-            title: "QRコード",
-            to: "/sub-contents/qrcode",
-            icon: <QrCode />
-          },
-          {
-            title: "GitHub",
-            to: "https://github.com/gaku913/hikers-pack-root",
-            icon: <GitHub />
-          },
-          {
-            title: "README",
-            to: "/sub-contents/readme",
-            icon: <Description />
-          },
-          {
-            title: "Sand Box",
-            to: "/sub-contents/sandbox",
-            icon: <Build />
-          },
-        ]}
+      />
+      <AuthGuard permission="private">
+        <MenuItem
+          title="パック一覧"
+          to="/packs"
+          Icon={Backpack}
+          onClick={handleClose}
+        />
+        <MenuItem
+          title="テンプレート一覧"
+          to="/templates"
+          Icon={FormatListBulletedIcon}
+          onClick={handleClose}
+        />
+      </AuthGuard>
+      <AuthGuard permission="guest">
+        <MenuItem
+          title="Demo"
+          to="/demos"
+          Icon={Backpack}
+          onClick={handleClose}
+        />
+      </AuthGuard>
+      <Divider />
+      <MenuItem
+        title="QRコード"
+        to="/sub-contents/qrcode"
+        Icon={QrCode}
+        onClick={handleClose}
+      />
+      <MenuItem
+        title="GitHub"
+        to="https://github.com/gaku913/hikers-pack-root"
+        Icon={GitHub}
+        onClick={handleClose}
+      />
+      <MenuItem
+        title="README"
+        to="/sub-contents/readme"
+        Icon={Description}
+        onClick={handleClose}
+      />
+      <MenuItem
+        title="Sand Box"
+        to="/sub-contents/sandbox"
+        Icon={Build}
+        onClick={handleClose}
       />
     </SwipeableDrawer>
     </>

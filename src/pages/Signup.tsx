@@ -1,11 +1,11 @@
 import AppFrame from "@/components/AppFrame";
 import { ButtonProps } from "@/components/Button";
-import FormWrapper from "@/components/Form/FormWrapper";
+import FormWrapper from "@/components/form/FormWrapper";
 import ModalWindow from "@/components/ModalWindow";
-import TextField from "@/components/Form/TextField";
+import TextField from "@/components/form/TextField";
 import { useState } from "react";
 import { Divider } from "@mui/material";
-import FormButtonBar from "@/components/Form/FormButtonBar";
+import FormButtonBar from "@/components/form/FormButtonBar";
 import { userSchema, userSchemaType } from "@/validations/userSchema";
 import useForm from "@/hooks/useForm";
 import { Control } from "react-hook-form";

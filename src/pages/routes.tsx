@@ -10,10 +10,16 @@ import Readme from "./sub/Readme";
 import Sandbox from "./sub/Sandbox";
 import Signup from "./Signup";
 import Login from "./Login";
+import TemplatesIndex from "./templates/TemplatesIndex";
+import DemosIndex from "./demos/DemosIndex";
 
 const routes = createBrowserRouter(
   createRoutesFromElements(
     <Route element={<RouterTop />}>
+
+      {/* Top Page */}
+      {/* Todo: use redirect */}
+      <Route path="/" element={<PacksIndex />} />
 
       {/* About Page */}
       <Route path="/about" element={<About />} />
@@ -22,11 +28,18 @@ const routes = createBrowserRouter(
       <Route path="/signup" element={<Signup />} />
       <Route path="/login" element={<Login />} />
 
+      {/* Demo Pages*/}
+      <Route path="/demos" element={<DemosIndex />} />
+
+
       {/* Packs Pages*/}
-      <Route path="/" element={<PacksIndex />} />
+      <Route path="/packs" element={<PacksIndex />} />
       <Route path="/packs/:id" element={<PacksShow />} />
       <Route path="/packs/:id/new" element={<PacksNew />} />
       <Route path="/packs/:id/edit" element={<PacksEdit />} />
+
+      {/* Templates Pages*/}
+      <Route path="/templates" element={<TemplatesIndex />} />
 
       {/* Sub Contents */}
       <Route path="/sub-contents/qrcode" element={<QRCode />} />

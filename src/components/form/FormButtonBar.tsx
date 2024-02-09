@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import Button, { ButtonProps } from "@/components/Button";
+import Button, { ButtonProps } from "@/components/common/Button";
 
 type FormButtonBarProps ={
   left: ButtonProps

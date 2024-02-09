@@ -1,6 +1,6 @@
 import AppFrame from "@/components/AppFrame";
 import AuthForm from "@/components/AuthForm";
-import Link from "@/components/Link";
+import Link from "@/components/common/Link";
 import { TextField, Typography } from "@mui/material";
 import { useState } from "react";
 

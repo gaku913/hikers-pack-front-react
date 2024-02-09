@@ -1,9 +1,10 @@
-import { AppBar, Divider, Slide, Toolbar, createTheme, useScrollTrigger } from "@mui/material";
+import { AppBar, Divider, Slide, Toolbar, createTheme, useScrollTrigger
+} from "@mui/material";
 import NavMenu from "@/components/NavMenu";
 import AccountMenu from "@/components/AccountMenu";
-import React, { useContext } from "react";
-import Button from "./Button";
-import { LoggedInContext } from "@/authenticate/AuthContextProvider";
+import React from "react";
+import Button from "./common/Button";
+import AuthGuard from "@/authenticate/AuthGuard";
 
 type HideOnScrollProps = {
   children: React.ReactElement
@@ -48,7 +49,6 @@ function LoginButtons() {
 }
 
 export default function Header({ children }: React.PropsWithChildren) {
-  const isLoggedIn = useContext(LoggedInContext);
   return (
     <>
       <HideOnScroll>
@@ -56,7 +56,8 @@ export default function Header({ children }: React.PropsWithChildren) {
           <Toolbar sx={{ justifyContent: "space-between" }}>
             <NavMenu />
             <div>
-              { isLoggedIn ? <AccountMenu /> : <LoginButtons /> }
+              <AuthGuard permission="private"><AccountMenu /></AuthGuard>
+              <AuthGuard permission="guest"><LoginButtons /></AuthGuard>
             </div>
           </Toolbar>
           {children && <Divider />}

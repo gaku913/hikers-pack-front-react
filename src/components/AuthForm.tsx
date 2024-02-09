@@ -1,5 +1,5 @@
 import { Divider, Paper, Stack } from "@mui/material";
-import Button, { ButtonProps } from "@/components/Button";
+import Button, { ButtonProps } from "@/components/common/Button";
 
 type LoginFormProps = React.PropsWithChildren<{
   leftButton: ButtonProps

@@ -1,20 +1,8 @@
-import { AuthContextProvider, AuthInfoContext, LoggedInContext } from "@/authenticate/AuthContextProvider";
 import { authInfoInitial } from "@/authenticate/authInfoInitial";
+import { useAuthContext } from "@/authenticate/useAuthContext";
 import { act, renderHook } from "@testing-library/react";
-import { PropsWithChildren, useContext } from "react";
 import { beforeEach, describe, expect, it } from "vitest";
-
-// テスト用のフック
-function useAuthContextTest() {
-  const isLoggedIn = useContext(LoggedInContext);
-  const [authInfo, setAuthInfo] = useContext(AuthInfoContext);
-  return { isLoggedIn, authInfo, setAuthInfo };
-}
-
-// AuthContextProviderでラップ
-function wrapper({ children }: PropsWithChildren) {
-  return <AuthContextProvider>{children}</AuthContextProvider>
-}
+import wrapper from "./AuthContextProviderWrapper";
 
 describe("AuthContextProvider", () => {
   beforeEach(() => {
@@ -23,7 +11,7 @@ describe("AuthContextProvider", () => {
 
   // 初期値：LocalStorageにデータなし
   it("has empty initial value", () => {
-    const { result } = renderHook(() => useAuthContextTest(), { wrapper });
+    const { result } = renderHook(() => useAuthContext(), { wrapper });
     expect(result.current.isLoggedIn).toBe(false);
     expect(result.current.authInfo).toEqual(authInfoInitial);
   });
@@ -36,7 +24,7 @@ describe("AuthContextProvider", () => {
       accessToken: "token-xxx",
     };
     window.localStorage.setItem("authInfo", JSON.stringify(authInfo));
-    const { result } = renderHook(() => useAuthContextTest(), { wrapper });
+    const { result } = renderHook(() => useAuthContext(), { wrapper });
 
     expect(result.current.isLoggedIn).toBe(true);
     expect(result.current.authInfo).toEqual(authInfo);
@@ -44,7 +32,7 @@ describe("AuthContextProvider", () => {
 
   // 認証情報の取得：ログアウト ⇒ ログイン
   it("should login", () => {
-    const { result } = renderHook(() => useAuthContextTest(), { wrapper });
+    const { result } = renderHook(() => useAuthContext(), { wrapper });
     const authInfo = {
       uid: "sample@gmail.com",
       client: "client-xxx",
@@ -60,7 +48,7 @@ describe("AuthContextProvider", () => {
 
   // 認証情報の更新：ログイン ⇒ ログイン
   it("update authInfo", () => {
-    const { result } = renderHook(() => useAuthContextTest(), { wrapper });
+    const { result } = renderHook(() => useAuthContext(), { wrapper });
     const authInfo1 = {
       uid: "sample@gmail.com",
       client: "client-xxx",
@@ -82,7 +70,7 @@ describe("AuthContextProvider", () => {
 
   // 認証情報の破棄：ログイン ⇒ ログアウト
   it("should logout", () => {
-    const { result } = renderHook(() => useAuthContextTest(), { wrapper });
+    const { result } = renderHook(() => useAuthContext(), { wrapper });
     const authInfo = {
       uid: "sample@gmail.com",
       client: "client-xxx",
