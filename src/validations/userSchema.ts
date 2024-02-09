@@ -1,5 +1,5 @@
-import { RE_EMAIL, RE_PASSWORD } from "@/lib/regex";
-import { castToValOrNull } from "@/lib/zodUtil";
+import { RE_EMAIL, RE_PASSWORD } from "@/validations/regex";
+import { castToValOrNull } from "@/validations/zodUtil";
 import { z } from "zod";
 
 const userSchema = z.object({

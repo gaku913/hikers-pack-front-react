@@ -1,6 +1,6 @@
 import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from "vitest";
 import "@testing-library/jest-dom/vitest";
-import axiosSetup from "@/lib/axios";
+import axiosSetup from "@/api/axios";
 import axios from "axios";
 import { HttpResponse, http } from "msw";
 import { setupServer } from "msw/node"

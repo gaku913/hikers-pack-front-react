@@ -1,17 +1,18 @@
-import { Route, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
-import About from "./About";
+import { Route, createBrowserRouter, createRoutesFromElements
+} from "react-router-dom";
+import About from "../pages/About";
 import RouterTop from "./RouterTop";
-import PacksIndex from "./packs/PacksIndex";
-import PacksShow from "./packs/show/PacksShow";
-import PacksEdit from "./packs/PacksEdit";
-import PacksNew from "./packs/PacksNew";
-import QRCode from "./sub/QRCode";
-import Readme from "./sub/Readme";
-import Sandbox from "./sub/Sandbox";
-import Signup from "./Signup";
-import Login from "./Login";
-import TemplatesIndex from "./templates/TemplatesIndex";
-import DemosIndex from "./demos/DemosIndex";
+import PacksIndex from "../pages/packs/PacksIndex";
+import PacksShow from "../pages/packs/show/PacksShow";
+import PacksEdit from "../pages/packs/PacksEdit";
+import PacksNew from "../pages/packs/PacksNew";
+import QRCode from "../pages/sub/QRCode";
+import Readme from "../pages/sub/Readme";
+import Sandbox from "../pages/sub/Sandbox";
+import Signup from "../pages/Signup";
+import Login from "../pages/Login";
+import TemplatesIndex from "../pages/templates/TemplatesIndex";
+import DemosIndex from "../pages/demos/DemosIndex";
 
 const routes = createBrowserRouter(
   createRoutesFromElements(
