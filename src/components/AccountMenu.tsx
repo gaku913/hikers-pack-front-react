@@ -1,7 +1,7 @@
 import { AccountCircle, Logout, Person, Settings } from "@mui/icons-material";
-import { IconButton, Menu } from "@mui/material";
-import MenuListBuilder from "./MenuListBuilder";
+import { Divider, IconButton, Menu } from "@mui/material";
 import { useState } from "react";
+import MenuItem from "./common/MenuItem";
 
 export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -29,29 +29,25 @@ export default function AccountMenu() {
       transformOrigin={{ horizontal: 'right', vertical: 'top' }}
       anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
     >
-      <MenuListBuilder
-        onClick={handleClose}
+      <MenuItem
+        title="プロフィール"
+        to="/profile"
+        Icon={Person}
         dense
-        menus={[
-          {
-            title: "プロフィール",
-            to: "",
-            icon: <Person />,
-          },
-          "divider",
-          {
-            title: "設定",
-            to: "",
-            icon: <Settings/>,
-          },
-          {
-            title: "ログアウト",
-            to: "",
-            icon: <Logout/>,
-          },
-        ]}
       />
-
+      <Divider />
+      <MenuItem
+        title="設定"
+        to="/settings"
+        Icon={Settings}
+        dense
+      />
+      <MenuItem
+        title="ログアウト"
+        to="/settings"
+        Icon={Logout}
+        dense
+      />
     </Menu>
     </>
   )
