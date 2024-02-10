@@ -18,6 +18,7 @@ import PacksShow from "./pages/packs/show/PacksShow"
 import PacksNew from "./pages/packs/PacksNew"
 import PacksEdit from "./pages/packs/PacksEdit"
 import TemplatesIndex from "./pages/templates/TemplatesIndex"
+import Top from "./pages/Top"
 
 export default function App() {
 
@@ -31,50 +32,49 @@ export default function App() {
       {/* <RouterProvider router={router} /> */}
 
       <Routes>
+        <Route element={<PublicLayout />}>
         {/**
          * Public: ログイン状態によらず表示
          */}
-        <Route element={<PublicLayout />}>
+          {/* Top Page */}
+          <Route path="/" element={<Top />} />
 
-        {/* About Page */}
-        <Route path="/about" element={<About />} />
+          {/* About Page */}
+          <Route path="/about" element={<About />} />
 
-        {/* Sub Contents */}
-        <Route path="/sub-contents/qrcode" element={<QRCode />} />
-        <Route path="/sub-contents/readme" element={<Readme />} />
-        <Route path="/sub-contents/sandbox" element={<Sandbox />} />
+          {/* Sub Contents */}
+          <Route path="/sub-contents/qrcode" element={<QRCode />} />
+          <Route path="/sub-contents/readme" element={<Readme />} />
+          <Route path="/sub-contents/sandbox" element={<Sandbox />} />
 
         </Route>
 
+        <Route element={<GuestLayout />}>
         {/**
         * Guset: ログアウト中のみ表示
         */}
-        <Route element={<GuestLayout />}>
 
-        {/* Signup/Login */}
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
+          {/* Signup/Login */}
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
 
-        {/* Demo Pages*/}
-        <Route path="/demos" element={<DemosIndex />} />
+          {/* Demo Pages*/}
+          <Route path="/demos" element={<DemosIndex />} />
         </Route>
 
+        <Route element={<PrivateLayout />}>
         {/**
         * Private: ログイン中のみ表示
         */}
-        <Route element={<PrivateLayout />}>
 
-        {/* Top Page */}
-        <Route path="/" element={<PacksIndex />} />
+          {/* Packs Pages*/}
+          <Route path="/packs" element={<PacksIndex />} />
+          <Route path="/packs/:id" element={<PacksShow />} />
+          <Route path="/packs/:id/new" element={<PacksNew />} />
+          <Route path="/packs/:id/edit" element={<PacksEdit />} />
 
-        {/* Packs Pages*/}
-        <Route path="/packs" element={<PacksIndex />} />
-        <Route path="/packs/:id" element={<PacksShow />} />
-        <Route path="/packs/:id/new" element={<PacksNew />} />
-        <Route path="/packs/:id/edit" element={<PacksEdit />} />
-
-        {/* Templates Pages*/}
-        <Route path="/templates" element={<TemplatesIndex />} />
+          {/* Templates Pages*/}
+          <Route path="/templates" element={<TemplatesIndex />} />
         </Route>
       </Routes>
     </>
