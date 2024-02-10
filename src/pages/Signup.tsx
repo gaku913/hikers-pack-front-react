@@ -1,5 +1,5 @@
 import AppFrame from "@/components/AppFrame";
-import { ButtonProps } from "@/components/Button";
+import { ButtonProps } from "@/components/common/Button";
 import FormWrapper from "@/components/form/FormWrapper";
 import ModalWindow from "@/components/ModalWindow";
 import TextField from "@/components/form/TextField";

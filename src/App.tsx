@@ -1,6 +1,5 @@
 import { CssBaseline } from "@mui/material"
-import { Route, RouterProvider, Routes } from "react-router-dom"
-import { router } from "./router/routes"
+import { Route, Routes } from "react-router-dom"
 import axiosSetup from "./api/axios"
 import { globalErrorMap } from "./validations/globalErrorMap"
 import { setErrorMap } from "zod"
