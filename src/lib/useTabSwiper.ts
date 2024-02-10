@@ -10,7 +10,7 @@ export default function useTabSwiper() {
     setSwiper(swiperInstance);
   };
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
     swiper?.slideTo(newValue);
   };
