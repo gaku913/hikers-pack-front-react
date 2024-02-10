@@ -39,7 +39,7 @@ export default function NavMenu() {
         Icon={Hiking}
         onClick={handleClose}
       />
-      <AuthGuard permission="private">
+      <AuthGuard permit="private">
         <MenuItem
           title="パック一覧"
           to="/packs"
@@ -53,7 +53,7 @@ export default function NavMenu() {
           onClick={handleClose}
         />
       </AuthGuard>
-      <AuthGuard permission="guest">
+      <AuthGuard permit="guest">
         <MenuItem
           title="Demo"
           to="/demos"

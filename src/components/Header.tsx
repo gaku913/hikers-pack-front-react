@@ -56,8 +56,8 @@ export default function Header({ children }: React.PropsWithChildren) {
           <Toolbar sx={{ justifyContent: "space-between" }}>
             <NavMenu />
             <div>
-              <AuthGuard permission="private"><AccountMenu /></AuthGuard>
-              <AuthGuard permission="guest"><LoginButtons /></AuthGuard>
+              <AuthGuard permit="private"><AccountMenu /></AuthGuard>
+              <AuthGuard permit="guest"><LoginButtons /></AuthGuard>
             </div>
           </Toolbar>
           {children && <Divider />}

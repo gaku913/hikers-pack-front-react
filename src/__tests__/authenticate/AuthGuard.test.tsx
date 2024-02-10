@@ -1,6 +1,6 @@
 import { render, renderHook, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it } from "vitest";
-import wrapper from "./AuthContextProviderWrapper";
+import wrapper from "../helper/AuthContextProviderWrapper";
 import "@testing-library/jest-dom/vitest";
 import { useAuthContext } from "@/authenticate/useAuthContext";
 import AuthGuard from "@/authenticate/AuthGuard";
@@ -22,9 +22,9 @@ describe("AuthGuard: Login", () => {
   it("display private, public, when logged in ", async () => {
     render(
       <>
-        <AuthGuard permission="private"><p>private</p></AuthGuard>
-        <AuthGuard permission="public"><p>public</p></AuthGuard>
-        <AuthGuard permission="guest"><p>guest</p></AuthGuard>
+        <AuthGuard permit="private"><p>private</p></AuthGuard>
+        <AuthGuard permit="public"><p>public</p></AuthGuard>
+        <AuthGuard permit="guest"><p>guest</p></AuthGuard>
       </>
     , { wrapper });
 
@@ -44,9 +44,9 @@ describe("AuthGuard: Logout", () => {
   it("display guest, public, when logged in ", async () => {
     render(
       <>
-        <AuthGuard permission="private"><p>private</p></AuthGuard>
-        <AuthGuard permission="public"><p>public</p></AuthGuard>
-        <AuthGuard permission="guest"><p>guest</p></AuthGuard>
+        <AuthGuard permit="private"><p>private</p></AuthGuard>
+        <AuthGuard permit="public"><p>public</p></AuthGuard>
+        <AuthGuard permit="guest"><p>guest</p></AuthGuard>
       </>
     , { wrapper });
 

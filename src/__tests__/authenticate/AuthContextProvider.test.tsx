@@ -2,7 +2,7 @@ import { authInfoInitial } from "@/authenticate/authInfoInitial";
 import { useAuthContext } from "@/authenticate/useAuthContext";
 import { act, renderHook } from "@testing-library/react";
 import { beforeEach, describe, expect, it } from "vitest";
-import wrapper from "./AuthContextProviderWrapper";
+import wrapper from "../helper/AuthContextProviderWrapper";
 
 describe("AuthContextProvider", () => {
   beforeEach(() => {
