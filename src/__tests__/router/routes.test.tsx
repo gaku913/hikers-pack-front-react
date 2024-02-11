@@ -13,9 +13,9 @@ vi.mock("@/pages/Login", () => ({
 vi.mock("@/pages/About", () => ({
   default: () => {return <p>About page</p>}
 }));
-// private: PacksIndex page (top page)
+// private: PacksIndex page
 vi.mock("@/pages/packs/PacksIndex", () => ({
-  default: () => {return <p>Top page</p>}
+  default: () => {return <p>Packs page</p>}
 }));
 
 describe("Routing: Login", () => {
@@ -33,14 +33,14 @@ describe("Routing: Login", () => {
   });
 
   it("show private page", () => {
-    renderWithRouter(<App />, { route: "/" });
-    expect(screen.queryByText("Top page")).not.toBeNull();
+    renderWithRouter(<App />, { route: "/packs" });
+    expect(screen.queryByText("Packs page")).not.toBeNull();
   });
 
-  it("does not show guest page. redirect to top.", () => {
+  it("does not show guest page. redirect to Packs.", () => {
     renderWithRouter(<App />, { route: "/login" });
     expect(screen.queryByText("Login page")).toBeNull();
-    expect(screen.queryByText("Top page")).not.toBeNull();
+    expect(screen.queryByText("Packs page")).not.toBeNull();
   });
 });
 
@@ -55,8 +55,8 @@ describe("Routing: Logout", () => {
   });
 
   it("does not show private page. redirect to login page.", () => {
-    renderWithRouter(<App />, { route: "/" });
-    expect(screen.queryByText("Top page")).toBeNull();
+    renderWithRouter(<App />, { route: "/packs" });
+    expect(screen.queryByText("Packs page")).toBeNull();
     expect(screen.queryByText("Login page")).not.toBeNull();
   });
 
