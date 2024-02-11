@@ -21,6 +21,7 @@ export default function MenuItem({ title, Icon, to, ...rest }: MenuItemProps) {
   return (
     <MuiMenuItem
       component={Link}
+      to={to}
       selected={pathname === to}
       {...rest}
     >
