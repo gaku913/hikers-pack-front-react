@@ -11,6 +11,7 @@ export default function Login() {
   const {
     handleSubmit,
     control,
+    reset,
     formState: {
       isSubmitting,
       isValid,
@@ -21,6 +22,7 @@ export default function Login() {
   const { login } = useUser();
   const onSubmit = (data: loginType) => {
     isValid && login.mutate(data);
+    reset();
   };
 
   return (

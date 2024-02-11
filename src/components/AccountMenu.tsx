@@ -40,7 +40,7 @@ export default function AccountMenu() {
       <Divider />
       <MenuItem
         title="設定"
-        to="/settings"
+        to="/profile/settings"
         Icon={Settings}
         dense
       />

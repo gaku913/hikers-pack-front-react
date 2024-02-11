@@ -9,8 +9,8 @@ import QRCode from "./pages/sub/QRCode"
 import Readme from "./pages/sub/Readme"
 import Sandbox from "./pages/sub/Sandbox"
 import GuestLayout from "./router/GuestLayout"
-import Signup from "./pages/Signup"
-import Login from "./pages/Login"
+import Signup from "./pages/user/Signup"
+import Login from "./pages/user/Login"
 import DemosIndex from "./pages/demos/DemosIndex"
 import PrivateLayout from "./router/PrivateLayout"
 import PacksIndex from "./pages/packs/PacksIndex"
@@ -19,6 +19,10 @@ import PacksNew from "./pages/packs/PacksNew"
 import PacksEdit from "./pages/packs/PacksEdit"
 import TemplatesIndex from "./pages/templates/TemplatesIndex"
 import Top from "./pages/Top"
+import UserShow from "./pages/user/UserShow"
+import UserEdit from "./pages/user/UserEdit"
+import UserPassword from "./pages/user/UserPassword"
+import UserSettings from "./pages/user/UserSettings"
 
 export default function App() {
 
@@ -66,6 +70,13 @@ export default function App() {
         {/**
         * Private: ログイン中のみ表示
         */}
+
+          {/* User Pages*/}
+          <Route path="/profile" element={<UserShow />} />
+          <Route path="/profile/edit" element={<UserEdit />} />
+          <Route path="/profile/edit/pw" element={<UserPassword />} />
+          <Route path="/profile/settings" element={<UserSettings />} />
+
 
           {/* Packs Pages*/}
           <Route path="/packs" element={<PacksIndex />} />
