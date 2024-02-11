@@ -2,8 +2,10 @@ import { AccountCircle, Logout, Person, Settings } from "@mui/icons-material";
 import { Divider, IconButton, Menu } from "@mui/material";
 import { useState } from "react";
 import MenuItem from "./common/MenuItem";
+import useUser from "@/api/useUser";
 
 export default function AccountMenu() {
+  const { logout } = useUser();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -44,8 +46,8 @@ export default function AccountMenu() {
       />
       <MenuItem
         title="ログアウト"
-        to="/settings"
         Icon={Logout}
+        onClick={() => logout.mutate()}
         dense
       />
     </Menu>

@@ -1,3 +1,4 @@
+import { AuthInfo } from "@/authenticate/authInfoInitial";
 import { useAuthContext } from "@/authenticate/useAuthContext";
 import { userSchemaType } from "@/validations/userSchema";
 import axios from "axios";
@@ -6,7 +7,7 @@ import { useMutation } from "react-query";
 /** ユーザーの操作 */
 export default function useUser() {
   // Auth Hook
-  const { setAuth } = useAuthContext();
+  const { authInfo, setAuth, clearAuth } = useAuthContext();
 
   /** Create: ユーザー登録 */
   const create = useMutation({
@@ -17,7 +18,20 @@ export default function useUser() {
     onError: (error) => console.log("error",error),
   });
 
-  return { create };
+  /** Login */
+
+  /** Logout */
+  const logout = useMutation({
+    mutationFn: () => {
+      return axios.delete("auth/sign_out", {
+        data: authInfoApi(authInfo)
+      })
+    },
+    onSuccess: () => clearAuth(),
+    onError: (error) => console.log("error",error),
+  })
+
+  return { create, logout };
 }
 
 /** Data Conversion */
@@ -46,5 +60,14 @@ function createUserData(user: createUserDataProps) {
   else {
     // userApiType
     return user
+  }
+}
+
+// AuthInfo
+function authInfoApi(authInfo: AuthInfo) {
+  return {
+    uid: authInfo.uid,
+    client: authInfo.client,
+    "access-token": authInfo.accessToken,
   }
 }

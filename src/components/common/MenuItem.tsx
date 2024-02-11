@@ -8,19 +8,19 @@ import { Link, LinkProps, useLocation } from "react-router-dom";
 
 type MenuItemProps = (
   MuiMenuItemProps
-  & LinkProps
+  & Omit<LinkProps, "to">
   & {
     title: string
     Icon: React.ElementType
+    to?: string
   }
 );
 
-export default function MenuItem({ title, to, Icon, ...rest }: MenuItemProps) {
+export default function MenuItem({ title, Icon, to, ...rest }: MenuItemProps) {
   const pathname = useLocation().pathname;
   return (
     <MuiMenuItem
       component={Link}
-      to={to}
       selected={pathname === to}
       {...rest}
     >

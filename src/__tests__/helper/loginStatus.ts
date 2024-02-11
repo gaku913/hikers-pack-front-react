@@ -1,5 +1,5 @@
 import { renderHook } from "@testing-library/react";
-import wrapper from "@/__tests__/helper/AuthContextProviderWrapper";
+import wrapper from "@/__tests__/helper/TestWrapper";
 import { useAuthContext } from "@/authenticate/useAuthContext";
 import { act } from "react-dom/test-utils";
 import { AuthInfo } from "@/authenticate/authInfoInitial";

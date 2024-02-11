@@ -6,7 +6,7 @@ import { AxiosResponse } from "axios";
 import { useContext } from "react";
 import { AuthInfo, authInfoInitial } from "./authInfoInitial";
 
-export type setAuthProps = AxiosResponse | AuthInfo;
+type setAuthProps = AxiosResponse | AuthInfo;
 
 export function useAuthContext() {
   const isLoggedIn = useContext(LoggedInContext);

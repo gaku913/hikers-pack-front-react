@@ -3,12 +3,12 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 import "@testing-library/jest-dom/vitest";
-import { BrowserRouter } from "react-router-dom";
+import wrapper from "../helper/TestWrapper";
 
 describe("AccountMenu", () => {
 
   it("Open/Close menu", async () => {
-    render(<AccountMenu/>, {wrapper: BrowserRouter});
+    render(<AccountMenu/>, { wrapper });
     const user = userEvent.setup();
 
     // does not show menu at first

@@ -1,6 +1,6 @@
 import { render, renderHook, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it } from "vitest";
-import wrapper from "../helper/AuthContextProviderWrapper";
+import wrapper from "../helper/TestWrapper";
 import "@testing-library/jest-dom/vitest";
 import { useAuthContext } from "@/authenticate/useAuthContext";
 import AuthGuard from "@/authenticate/AuthGuard";
