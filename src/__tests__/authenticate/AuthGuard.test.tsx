@@ -16,7 +16,7 @@ describe("AuthGuard: Login", () => {
       client: "client-xxx",
       accessToken: "token-xxx",
     };
-    act(() => result.current.setAuthInfo(authInfo));
+    act(() => result.current.setAuth(authInfo));
   });
 
   it("display private, public, when logged in ", async () => {
@@ -38,7 +38,7 @@ describe("AuthGuard: Logout", () => {
   beforeEach(() => {
     // logout
     const { result } = renderHook(() => useAuthContext(), { wrapper });
-    act(() => result.current.setAuthInfo(authInfoInitial));
+    act(() => result.current.setAuth(authInfoInitial));
   });
 
   it("display guest, public, when logged in ", async () => {

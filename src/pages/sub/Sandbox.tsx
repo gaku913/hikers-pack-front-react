@@ -1,9 +1,7 @@
 import { useQuery } from "react-query";
 import AppFrame from "@/components/AppFrame";
 import { getHello } from "@/api/hello";
-import { useContext } from "react";
-import { AuthInfoContext, LoggedInContext } from "@/authenticate/AuthContextProvider";
-import { authInfoInitial } from "@/authenticate/authInfoInitial";
+import { useAuthContext } from "@/authenticate/useAuthContext";
 
 function Hello() {
   const {
@@ -17,26 +15,30 @@ function Hello() {
   );
 }
 
+
 function LoginSample() {
-  const isLoggedIn = useContext(LoggedInContext);
-  const [authInfo, setAuthInfo] = useContext(AuthInfoContext);
+  const { isLoggedIn, authInfo, setAuth, clearAuth} = useAuthContext();
+
+  const onClick = () => {
+    setAuth({
+      uid: "sample@gmail.com",
+      client: "client-xxx",
+      accessToken: "token-xxx",
+    });
+  }
+
   return (
     <div>
-      {isLoggedIn ? `ID: ${authInfo?.uid}` : "ログインされていません"}
+      <p>{isLoggedIn ? "ログイン中です" : "ログインされていません"}</p>
+      <p>{JSON.stringify(authInfo)}</p>
       <button
-        onClick={() => {
-          setAuthInfo({
-            uid: "sample@gmail.com",
-            client: "client-xxx",
-            accessToken: "token-xxx",
-          });
-        }}
+        onClick={onClick}
       >
         ログイン
       </button>
       <button
         onClick={() => {
-          setAuthInfo(authInfoInitial);
+          clearAuth();
         }}
       >
         ログアウト

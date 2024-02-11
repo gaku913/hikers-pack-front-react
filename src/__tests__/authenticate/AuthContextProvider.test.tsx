@@ -38,7 +38,7 @@ describe("AuthContextProvider", () => {
       client: "client-xxx",
       accessToken: "token-xxx",
     };
-    act(() => result.current.setAuthInfo(authInfo));
+    act(() => result.current.setAuth(authInfo));
     const strageItem = window.localStorage.getItem("authInfo") || "";
 
     expect(result.current.isLoggedIn).toBe(true);
@@ -59,8 +59,8 @@ describe("AuthContextProvider", () => {
       client: "client-yyy",
       accessToken: "token-yyy",
     };
-    act(() => result.current.setAuthInfo(authInfo1));
-    act(() => result.current.setAuthInfo(authInfo2));
+    act(() => result.current.setAuth(authInfo1));
+    act(() => result.current.setAuth(authInfo2));
     const strageItem = window.localStorage.getItem("authInfo") || "";
 
     expect(result.current.isLoggedIn).toBe(true);
@@ -76,8 +76,8 @@ describe("AuthContextProvider", () => {
       client: "client-xxx",
       accessToken: "token-xxx",
     };
-    act(() => result.current.setAuthInfo(authInfo));
-    act(() => result.current.setAuthInfo(authInfoInitial));
+    act(() => result.current.setAuth(authInfo));
+    act(() => result.current.setAuth(authInfoInitial));
 
     expect(result.current.isLoggedIn).toBe(false);
     expect(result.current.authInfo).toEqual(authInfoInitial);
