@@ -1,91 +1,16 @@
 import AppFrame from "@/components/AppFrame";
-import { ButtonProps } from "@/components/common/Button";
-import FormWrapper from "@/components/form/FormWrapper";
 import ModalWindow from "@/components/ModalWindow";
-import TextField from "@/components/form/TextField";
 import { useState } from "react";
-import { Divider } from "@mui/material";
-import FormButtonBar from "@/components/form/FormButtonBar";
 import { userSchema, userSchemaType } from "@/validations/userSchema";
 import useForm from "@/hooks/useForm";
-import { Control } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-
-type SignupFormProps = {
-  control: Control<userSchemaType>
-  onSubmit?: () => void
-  disabled?: boolean
-  leftButton: ButtonProps
-  rightButton: ButtonProps
-};
-
-function SignupForm({
-  control,
-  onSubmit,
-  disabled,
-  leftButton,
-  rightButton,
-}: SignupFormProps) {
-
-  return (
-    <FormWrapper
-      onSubmit={onSubmit || (() => {})}
-    >
-
-      <TextField
-        label="名前"
-        name="name"
-        control={control}
-        required
-        disabled={disabled}
-      />
-
-      <TextField
-        label="メールアドレス"
-        name="email"
-        control={control}
-        required
-        disabled={disabled}
-      />
-
-      <TextField
-        label="パスワード"
-        name="password"
-        control={control}
-        type="password"
-        required
-        disabled={disabled}
-      />
-
-      <TextField
-        label="パスワード（確認）"
-        name="passwordConfirm"
-        control={control}
-        type="password"
-        required
-        disabled={disabled}
-      />
-
-      <Divider />
-
-      <FormButtonBar
-        left={leftButton}
-        right={rightButton}
-      />
-
-    </FormWrapper>
-  );
-}
+import SignupForm from "@/components/form/SignupForm";
+import useUser from "@/api/useUser";
 
 export default function Signup() {
-  // Router
-  const navigate = useNavigate();
-
   // Form State
   const {
     handleSubmit,
     control,
-    reset,
     trigger,
     formState: {
       isSubmitting,
@@ -93,21 +18,19 @@ export default function Signup() {
     }
   } = useForm(userSchema);
 
-  const onSubmit = (data: userSchemaType) => {
-    console.log("submit", data)
-    reset();
-    navigate("/");
-  };
-
-  // Modal State
+  // Modal Control
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
-    trigger();
-    if (isValid) {
-      setOpen(true);
-    }
+    trigger();                // validation
+    isValid && setOpen(true); // validation成功時にモーダルを開く
   };
   const handleClose = () => setOpen(false);
+
+  // フォームの送信
+  const { create } = useUser();
+  const onSubmit = (data: userSchemaType) => {
+    create.mutate(data);
+  };
 
   return (
     <>
