@@ -1,10 +1,11 @@
 import AppFrame from "@/components/AppFrame";
 import ModalWindow from "@/components/ModalWindow";
 import { useState } from "react";
-import { userSchema, userSchemaType } from "@/validations/userSchema";
-import useForm from "@/hooks/useForm";
+import { userSchema } from "@/validations/userSchema";
 import SignupForm from "@/components/form/SignupForm";
 import useUser from "@/api/useUser";
+import useForm from "@/validations/useForm";
+import { userFrontType } from "@/types/user";
 
 export default function Signup() {
   // Form State
@@ -28,8 +29,8 @@ export default function Signup() {
 
   // フォームの送信
   const { create } = useUser();
-  const onSubmit = (data: userSchemaType) => {
-    create.mutate(data);
+  const onSubmit = (data: userFrontType) => {
+    isValid && create.mutate(data);
   };
 
   return (

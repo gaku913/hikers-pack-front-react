@@ -1,6 +1,6 @@
 import { AuthInfo } from "@/authenticate/authInfoInitial";
 import { useAuthContext } from "@/authenticate/useAuthContext";
-import { userSchemaType } from "@/validations/userSchema";
+import { loginType, userApiType, userFrontType } from "@/types/user";
 import axios from "axios";
 import { useMutation } from "react-query";
 
@@ -19,6 +19,13 @@ export default function useUser() {
   });
 
   /** Login */
+  const login = useMutation({
+    mutationFn: (data: loginType) => {
+      return axios.post("auth/sign_in", data)
+    },
+    onSuccess: (data) => setAuth(data),
+    onError: (error) => console.log("error",error),
+  })
 
   /** Logout */
   const logout = useMutation({
@@ -31,25 +38,20 @@ export default function useUser() {
     onError: (error) => console.log("error",error),
   })
 
-  return { create, logout };
+  return { create, logout, login };
 }
 
 /** Data Conversion */
-type userApiType = {
-  name: string
-  email: string
-  password: string
-  password_confirm: string
-}
+// クラスで実装したい
 
 // Create
-type createUserDataProps = userSchemaType | userApiType
-function createUserData(user: userSchemaType): userApiType;
+type createUserDataProps = userFrontType | userApiType
+function createUserData(user: userFrontType): userApiType;
 function createUserData(user: userApiType): userApiType;
 function createUserData(user: createUserDataProps): userApiType;
 function createUserData(user: createUserDataProps) {
   if ("passwordConfirm" in user) {
-    // userSchemaType
+    // userFrontType
     return {
       name: user.name,
       email: user.email,

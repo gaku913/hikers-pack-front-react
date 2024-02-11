@@ -1,63 +1,44 @@
+import useUser from "@/api/useUser";
 import AppFrame from "@/components/AppFrame";
-import AuthForm from "@/components/AuthForm";
-import Link from "@/components/common/Link";
-import { TextField, Typography } from "@mui/material";
-import { useState } from "react";
-
-type formData = {
-  email: string
-  password: string
-};
+import LoginForm from "@/components/form/LoginForm";
+import useForm from "@/validations/useForm";
+import { loginSchema } from "@/validations/loginSchema";
+import { loginType } from "@/types/user";
 
 
 export default function Login() {
-  const [form, setForm] = useState<formData>({
-    email: "",
-    password: "",
-  });
-  const handleForm = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({
-      ...form,
-      [e.currentTarget.name]: e.currentTarget.value
-    });
-  }
-  const handelSubmit = () => {
-    console.log(form);
-  }
-  const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
-    e.currentTarget.select();
-  }
+  // Form State
+  const {
+    handleSubmit,
+    control,
+    formState: {
+      isSubmitting,
+      isValid,
+    }
+  } = useForm(loginSchema);
+
+  // フォームの送信
+  const { login } = useUser();
+  const onSubmit = (data: loginType) => {
+    isValid && login.mutate(data);
+  };
 
   return (
     <AppFrame>
       <h1>ログイン</h1>
-      <AuthForm
-        leftButton={{ label: "キャンセル", to: "/" }}
-        rightButton={{ label: "送信", onClick: handelSubmit }}
-      >
-        <TextField
-          value={form.email}
-          onChange={handleForm}
-          onFocus={handleFocus}
-          required
-          label="メールアドレス"
-          name="email"
-        />
-        <TextField
-          value={form.password}
-          onChange={handleForm}
-          onFocus={handleFocus}
-          required
-          label="パスワード"
-          name="password"
-          type="password"
-        />
-      </AuthForm>
-      <Typography align="right">
-        <Link to="/signup">
-          新しくアカウントを作成する
-        </Link>
-      </Typography>
+      <LoginForm
+        control={control}
+        onSubmit={handleSubmit(onSubmit)}
+        leftButton={{
+          label: "キャンセル",
+          to: "/",
+        }}
+        rightButton={{
+          label: "送信",
+          type: "submit",
+          disabled: isSubmitting || !isValid,
+        }}
+      />
     </AppFrame>
   );
 }

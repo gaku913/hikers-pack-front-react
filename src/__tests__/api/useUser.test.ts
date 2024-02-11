@@ -1,4 +1,4 @@
-import { afterAll, afterEach, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it } from "vitest";
 import "@testing-library/jest-dom/vitest";
 import { HttpResponse, http } from "msw";
 import { setupServer } from "msw/node";
@@ -17,15 +17,11 @@ const user = {
   password: "password",
   password_confirm: "password",
 };
-const auth = {
-  uid: "test@email.com",
-  client: "client-xxx",
-  accessToken: "token-xxxx",
-}
 
 // Mock Server
 const handlers = [
   http.post(`${baseUrl}/auth`, () => HttpResponse.json({ res: "OK" })),
+  http.post(`${baseUrl}/auth/sign_in`, () => HttpResponse.json({ res: "OK" })),
   http.delete(`${baseUrl}/auth/sign_out`, () => HttpResponse.json({ res: "OK" })),
 ];
 
@@ -36,11 +32,16 @@ beforeAll(async () => {
   import.meta.env.VITE_API_BASE_URL = baseUrl;
   axiosSetup();
   server.listen();
-
+});
+beforeEach(async () => {
   // set AuthInfo
   const { result } = renderHook(() => useAuthContext(), { wrapper });
-  await act(() => result.current.setAuth(auth))
-});
+  await act(() => result.current.setAuth({
+    uid: "test@email.com",
+    client: "client-xxx",
+    accessToken: "token-xxxx",
+  }))
+})
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
@@ -60,6 +61,25 @@ describe("useUser", () => {
     expect(JSON.parse(data?.config.data)).toEqual(user);
   });
 
+  /** Login */
+  it("should send login request", async () => {
+    const { result } = renderHook(() => useUser(), { wrapper });
+    await act(async () => {
+      result.current.login.mutate({
+        email: "test@example.com",
+        password: "password",
+      });
+    });
+    const { data } = result.current.login;
+
+    expect(data?.config.method).toBe("post");
+    expect(data?.config.url).toBe("auth/sign_in");
+    expect(JSON.parse(data?.config.data)).toEqual({
+      email: "test@example.com",
+      password: "password",
+    });
+  });
+
   /** Logout */
   it("should send logout request", async () => {
     const { result } = renderHook(() => useUser(), { wrapper });
@@ -68,7 +88,6 @@ describe("useUser", () => {
     });
     const { data } = result.current.logout;
 
-    console.log(data)
     expect(data?.config.method).toBe("delete");
     expect(data?.config.url).toBe("auth/sign_out");
     expect(JSON.parse(data?.config.data)).toEqual({

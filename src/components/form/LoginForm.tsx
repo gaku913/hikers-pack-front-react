@@ -4,36 +4,28 @@ import TextField from "@/components/form/TextField";
 import { Divider } from "@mui/material";
 import FormButtonBar from "@/components/form/FormButtonBar";
 import { Control } from "react-hook-form";
-import { userFrontType } from "@/types/user";
+import { loginType } from "@/types/user";
 
-type SignupFormProps = {
-  control: Control<userFrontType>
+type LoginFormProps = {
+  control: Control<loginType>
   onSubmit?: () => void
   disabled?: boolean
   leftButton: ButtonProps
   rightButton: ButtonProps
 };
 
-export default function SignupForm({
+export default function LoginForm({
   control,
   onSubmit,
   disabled,
   leftButton,
   rightButton,
-}: SignupFormProps) {
+}: LoginFormProps) {
 
   return (
     <FormWrapper
       onSubmit={onSubmit || (() => {})}
     >
-
-      <TextField
-        label="名前"
-        name="name"
-        control={control}
-        required
-        disabled={disabled}
-      />
 
       <TextField
         label="メールアドレス"
@@ -46,16 +38,6 @@ export default function SignupForm({
       <TextField
         label="パスワード"
         name="password"
-        control={control}
-        type="password"
-        required
-        disabled={disabled}
-        autoComplete="newpassword"
-        />
-
-      <TextField
-        label="パスワード（確認）"
-        name="passwordConfirm"
         control={control}
         type="password"
         required

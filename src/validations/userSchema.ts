@@ -20,7 +20,4 @@ const userSchema = z.object({
   message: "パスワードが一致しません。"
 });
 
-
-export type userSchemaType = z.infer<typeof userSchema>
-
 export { userSchema }
