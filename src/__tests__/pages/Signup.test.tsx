@@ -3,10 +3,11 @@ import userEvent from "@testing-library/user-event";
 import { beforeAll, describe, expect, it, vi } from "vitest";
 import "@testing-library/jest-dom/vitest";
 import Signup from "@/pages/Signup";
-import { BrowserRouter } from "react-router-dom";
 import { PropsWithChildren } from "react";
 import { setErrorMap } from "zod";
 import { globalErrorMap } from "@/validations/globalErrorMap";
+import QueryClientProvider from "@/api/QueryClientProvider";
+import { BrowserRouter } from "react-router-dom";
 
 vi.mock("@/components/AppFrame", () => ({
   default: ({ children }: PropsWithChildren) => {
@@ -20,6 +21,16 @@ vi.mock("@/components/ModalWindow", () => ({
   }
 }));
 
+function wrapper({ children }: PropsWithChildren) {
+  return (
+      <QueryClientProvider>
+        <BrowserRouter>
+          {children}
+        </BrowserRouter>
+      </QueryClientProvider>
+  )
+}
+
 describe("Sign up form validation", () => {
   beforeAll(() => {
     setErrorMap(globalErrorMap);
@@ -27,7 +38,7 @@ describe("Sign up form validation", () => {
 
   /* Name */
   it("validate name", async () => {
-    render(<Signup />, {wrapper: BrowserRouter});
+    render(<Signup />, { wrapper });
     const user = userEvent.setup();
     const elem = document.querySelector("input[name='name']")
     expect(elem).not.toBeNull();
@@ -41,7 +52,7 @@ describe("Sign up form validation", () => {
 
   /* Email */
   it("validate email: required", async () => {
-    render(<Signup />, {wrapper: BrowserRouter});
+    render(<Signup />, { wrapper });
     const user = userEvent.setup();
     const elem = document.querySelector("input[name='email']")
     expect(elem).not.toBeNull();
@@ -55,7 +66,7 @@ describe("Sign up form validation", () => {
   });
 
   it("validate email", async () => {
-    render(<Signup />, {wrapper: BrowserRouter});
+    render(<Signup />, { wrapper });
     const user = userEvent.setup();
     const elem = document.querySelector("input[name='email']")
     expect(elem).not.toBeNull();
@@ -96,7 +107,7 @@ describe("Sign up form validation", () => {
 
   /* Password */
   it("validate password: required", async () => {
-    render(<Signup />, {wrapper: BrowserRouter});
+    render(<Signup />, { wrapper });
     const user = userEvent.setup();
     const elem = document.querySelector("input[name='password']")
     expect(elem).not.toBeNull();
@@ -109,7 +120,7 @@ describe("Sign up form validation", () => {
   });
 
   it("validate password", async () => {
-    render(<Signup />, {wrapper: BrowserRouter});
+    render(<Signup />, { wrapper });
     const user = userEvent.setup();
     const elem = document.querySelector("input[name='password']")
     expect(elem).not.toBeNull();
@@ -141,7 +152,7 @@ describe("Sign up form validation", () => {
 
   /* Password Confirm */
   it("validate password confirmation: required", async () => {
-    render(<Signup />, {wrapper: BrowserRouter});
+    render(<Signup />, { wrapper });
     const user = userEvent.setup();
     const ePwConfirm = document.querySelector("input[name='passwordConfirm']")
     expect(ePwConfirm).not.toBeNull();
@@ -154,7 +165,7 @@ describe("Sign up form validation", () => {
   });
 
   it("validate password confirmation", async () => {
-    render(<Signup />, {wrapper: BrowserRouter});
+    render(<Signup />, { wrapper });
     const user = userEvent.setup();
     const name = document.querySelector("input[name='name']")
     const email = document.querySelector("input[name='email']")
