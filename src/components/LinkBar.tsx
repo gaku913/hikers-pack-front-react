@@ -1,12 +1,12 @@
-import { Box, Button, ButtonGroup, Divider, Paper } from "@mui/material"
+import { Box, ButtonGroup, Divider, Paper } from "@mui/material"
+import Button, { ButtonProps } from "./common/Button";
 
 type LinkBarProps = {
-  links: {
-    label: string
-  }[]
+  leftButtons?: ButtonProps[]
+  rightButtons?: ButtonProps[]
 };
 
-export default function LinkBar({ links }: LinkBarProps) {
+export default function LinkBar({ leftButtons, rightButtons }: LinkBarProps) {
   return (
     <Paper
       elevation={0}
@@ -23,12 +23,14 @@ export default function LinkBar({ links }: LinkBarProps) {
         justifyContent="space-between"
         display="flex"
       >
-        <ButtonGroup variant="text" size="large">
-          <Button>一覧に戻る</Button>
+        <ButtonGroup>
+          {leftButtons?.map((btnProps, id) => {
+            return <Button key={id} {...btnProps} />
+          })}
         </ButtonGroup>
-        <ButtonGroup variant="text" size="large">
-          {links.map((link, id) => {
-            return <Button key={id}>{link.label}</Button>
+        <ButtonGroup>
+          {rightButtons?.map((btnProps, id) => {
+            return <Button key={id} {...btnProps} />
           })}
         </ButtonGroup>
       </Box>

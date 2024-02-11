@@ -2,7 +2,7 @@ import { AuthInfo } from "@/authenticate/authInfoInitial";
 import { useAuthContext } from "@/authenticate/useAuthContext";
 import { loginType, userApiType, userFrontType } from "@/types/user";
 import axios from "axios";
-import { useMutation } from "react-query";
+import { useMutation, useQuery } from "react-query";
 
 /** ユーザーの操作 */
 export default function useUser() {
@@ -16,6 +16,18 @@ export default function useUser() {
     },
     onSuccess: (data) => setAuth(data),
     onError: (error) => console.log("error",error),
+  });
+
+  /** Show: ユーザーの詳細 */
+  const { data: user } = useQuery({
+    queryKey: "auth/sessions",
+    queryFn: () => axios.get("auth/sessions", {
+      headers: {
+        uid: authInfo.uid,
+        client: authInfo.client,
+        "access-token": authInfo.accessToken,
+      }
+    })
   });
 
   /** Login */
@@ -38,7 +50,12 @@ export default function useUser() {
     onError: (error) => console.log("error",error),
   })
 
-  return { create, logout, login };
+  return {
+    user,
+    create,
+    logout,
+    login
+  };
 }
 
 /** Data Conversion */

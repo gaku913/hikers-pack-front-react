@@ -1,15 +1,26 @@
 import LinkBar from "@/components/LinkBar";
+import { useParams } from "react-router-dom";
 
 export default function PackSummary() {
+  const params = useParams();
+
   return (
     <>
       <LinkBar
-        links={[
+        leftButtons={[
           {
-            label: "編集"
+            label: "戻る",
+            to: "/packs",
+          },
+        ]}
+        rightButtons={[
+          {
+            label: "編集",
+            to: `/packs/${params.id}/edit`,
           },
           {
-            label: "削除"
+            label: "削除",
+            to: "/",
           },
         ]}
       />

@@ -3,9 +3,8 @@ import "@testing-library/jest-dom/vitest";
 import { HttpResponse, http } from "msw";
 import { setupServer } from "msw/node";
 import useUser from "@/api/useUser";
-import { renderHook } from "@testing-library/react";
+import { renderHook, waitFor } from "@testing-library/react";
 import { act } from "react-dom/test-utils";
-import QueryClientProvider from "@/api/QueryClientProvider";
 import axiosSetup from "@/api/axios";
 import { useAuthContext } from "@/authenticate/useAuthContext";
 import wrapper from "../helper/TestWrapper";
@@ -21,6 +20,7 @@ const user = {
 // Mock Server
 const handlers = [
   http.post(`${baseUrl}/auth`, () => HttpResponse.json({ res: "OK" })),
+  http.get(`${baseUrl}/auth/sessions`, () => HttpResponse.json({ res: "OK" })),
   http.post(`${baseUrl}/auth/sign_in`, () => HttpResponse.json({ res: "OK" })),
   http.delete(`${baseUrl}/auth/sign_out`, () => HttpResponse.json({ res: "OK" })),
 ];
@@ -49,8 +49,7 @@ describe("useUser", () => {
 
   /** Create User */
   it("should send create request", async () => {
-    const { result } = renderHook(() => useUser(),
-      { wrapper: QueryClientProvider });
+    const { result } = renderHook(() => useUser(),{ wrapper });
     await act(async () => {
       result.current.create.mutate(user);
     });
@@ -59,6 +58,19 @@ describe("useUser", () => {
     expect(data?.config.method).toBe("post");
     expect(data?.config.url).toBe("auth");
     expect(JSON.parse(data?.config.data)).toEqual(user);
+  });
+
+  /** Show User */
+  it("should send show request", async () => {
+    const { result } = renderHook(() => useUser(),{ wrapper });
+    await waitFor(() => {
+      if (!result.current.user) { throw Error("wait"); }
+    });
+    const data = result.current.user;
+
+    expect(data?.config.method).toBe("get");
+    expect(data?.config.url).toBe("auth/sessions");
+    expect(data?.config.headers.uid).toBe("test@email.com");
   });
 
   /** Login */

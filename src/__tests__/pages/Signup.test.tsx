@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeAll, describe, expect, it, vi } from "vitest";
 import "@testing-library/jest-dom/vitest";
-import Signup from "@/pages/Signup";
+import Signup from "@/pages/user/Signup";
 import { PropsWithChildren } from "react";
 import { setErrorMap } from "zod";
 import { globalErrorMap } from "@/validations/globalErrorMap";

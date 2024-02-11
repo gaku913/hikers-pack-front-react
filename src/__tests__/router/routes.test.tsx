@@ -6,7 +6,7 @@ import { renderWithRouter } from "../helper/renderWithRouter";
 import { login, logout } from "../helper/loginStatus";
 
 // guest: Login page
-vi.mock("@/pages/Login", () => ({
+vi.mock("@/pages/user/Login", () => ({
   default: () => {return <p>Login page</p>}
 }));
 // public: About page
