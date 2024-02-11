@@ -27,7 +27,19 @@ export default function useUser() {
         client: authInfo.client,
         "access-token": authInfo.accessToken,
       }
-    })
+    }),
+    onError: (error) => console.log("error",error),
+  });
+
+  /** Destroy: ユーザーの削除 */
+  const destroy = useMutation({
+    mutationFn: () => {
+      return axios.delete("auth", {
+        data: authInfoApi(authInfo)
+      });
+    },
+    onSuccess: () => clearAuth(),
+    onError: (error) => console.log("error",error),
   });
 
   /** Login */
@@ -53,6 +65,7 @@ export default function useUser() {
   return {
     user,
     create,
+    destroy,
     logout,
     login
   };

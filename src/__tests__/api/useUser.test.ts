@@ -21,6 +21,7 @@ const user = {
 const handlers = [
   http.post(`${baseUrl}/auth`, () => HttpResponse.json({ res: "OK" })),
   http.get(`${baseUrl}/auth/sessions`, () => HttpResponse.json({ res: "OK" })),
+  http.delete(`${baseUrl}/auth`, () => HttpResponse.json({ res: "OK" })),
   http.post(`${baseUrl}/auth/sign_in`, () => HttpResponse.json({ res: "OK" })),
   http.delete(`${baseUrl}/auth/sign_out`, () => HttpResponse.json({ res: "OK" })),
 ];
@@ -71,6 +72,23 @@ describe("useUser", () => {
     expect(data?.config.method).toBe("get");
     expect(data?.config.url).toBe("auth/sessions");
     expect(data?.config.headers.uid).toBe("test@email.com");
+  });
+
+  /** Destroy: ユーザーの削除 */
+  it("should send destroy request", async () => {
+    const { result } = renderHook(() => useUser(), { wrapper });
+    await act(async () => {
+      result.current.destroy.mutate();
+    });
+    const { data } = result.current.destroy;
+
+    expect(data?.config.method).toBe("delete");
+    expect(data?.config.url).toBe("auth");
+    expect(JSON.parse(data?.config.data)).toEqual({
+      uid: "test@email.com",
+      client: "client-xxx",
+      "access-token": "token-xxxx",
+    });
   });
 
   /** Login */

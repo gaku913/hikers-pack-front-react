@@ -2,15 +2,26 @@ import {
   Button as MuiButton,
   ButtonProps as MuiButtonProps,
 } from "@mui/material";
+import { PropsWithChildren } from "react";
 import { Link as RouterLink } from "react-router-dom";
 
-export type ButtonProps = MuiButtonProps & {
-  label?: string
-  to?: string
-  type?: string
-};
+export type ButtonProps = (
+  PropsWithChildren &
+  MuiButtonProps &
+  {
+    label?: string
+    to?: string
+    type?: string
+  }
+);
 
-export default function Button({ label, to, type, ...rest }: ButtonProps) {
+export default function Button({
+  children,
+  label,
+  to,
+  type,
+  ...rest
+}: ButtonProps) {
 
   if (type === "submit") return (
     <MuiButton
@@ -20,6 +31,7 @@ export default function Button({ label, to, type, ...rest }: ButtonProps) {
       {...rest}
     >
       {label}
+      {children}
     </MuiButton>
   );
 
@@ -34,6 +46,7 @@ export default function Button({ label, to, type, ...rest }: ButtonProps) {
       {...rest}
     >
       {label}
+      {children}
     </MuiButton>
   );
 }
