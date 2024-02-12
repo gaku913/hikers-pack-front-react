@@ -1,5 +1,6 @@
 import AppFrame from "@/components/AppFrame";
 import { useAuthContext } from "@/authenticate/useAuthContext";
+import Snackbar from "@/components/common/Snackbar";
 
 function LoginSample() {
   const { isLoggedIn, authInfo, setAuth, clearAuth} = useAuthContext();
@@ -42,6 +43,9 @@ export default function Sandbox() {
 
       <h2>Login Sample</h2>
       <LoginSample />
+
+      <h2>SnackBar</h2>
+      <Snackbar severity="success" message="Snackbar" />
     </AppFrame>
   );
 }
