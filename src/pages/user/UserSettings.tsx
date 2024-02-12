@@ -1,5 +1,6 @@
 import useUser from "@/api/useUser";
 import AppFrame from "@/components/AppFrame";
+import LinkBar from "@/components/LinkBar";
 import ModalWindow from "@/components/ModalWindow";
 import Button from "@/components/common/Button";
 import FormButtonBar from "@/components/form/FormButtonBar";
@@ -17,6 +18,14 @@ export default function UserSettings() {
 
   return (
     <AppFrame>
+      <LinkBar
+        leftButtons={[
+          {
+            label: "Topに戻る",
+            to: "/",
+          },
+        ]}
+      />
       <h1>設定</h1>
       <h2>メールアドレス</h2>
       <p>{user?.data.email}</p>

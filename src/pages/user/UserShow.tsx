@@ -7,6 +7,12 @@ export default function UserShow() {
   return (
     <AppFrame>
       <LinkBar
+        leftButtons={[
+          {
+            label: "Topに戻る",
+            to: "/",
+          },
+        ]}
         rightButtons={[
           {
             label: "編集",
