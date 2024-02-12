@@ -8,14 +8,9 @@ import { act } from "react-dom/test-utils";
 import axiosSetup from "@/api/axios";
 import { useAuthContext } from "@/authenticate/useAuthContext";
 import wrapper from "../helper/TestWrapper";
+import { UserApiIF } from "@/types/user";
 
 const baseUrl = "http://myapp/api/v1";
-const user = {
-  name: "Test Name",
-  email: "test@test.com",
-  password: "password",
-  password_confirm: "password",
-};
 
 // Mock Server
 const handlers = [
@@ -23,6 +18,7 @@ const handlers = [
   http.get(`${baseUrl}/auth/sessions`, () => HttpResponse.json({ res: "OK" })),
   http.patch(`${baseUrl}/auth`, () => HttpResponse.json({ res: "OK" })),
   http.delete(`${baseUrl}/auth`, () => HttpResponse.json({ res: "OK" })),
+  http.patch(`${baseUrl}/auth/password`, () => HttpResponse.json({ res: "OK" })),
   http.post(`${baseUrl}/auth/sign_in`, () => HttpResponse.json({ res: "OK" })),
   http.delete(`${baseUrl}/auth/sign_out`, () => HttpResponse.json({ res: "OK" })),
 ];
@@ -51,15 +47,19 @@ describe("useUser", () => {
 
   /** Create User */
   it("should send create request", async () => {
+    const user = {
+      name: "Test Name",
+      email: "test@test.com",
+      password: "password",
+      passwordConfirm: "password",
+    };
     const { result } = renderHook(() => useUser(),{ wrapper });
-    await act(async () => {
-      result.current.create.mutate(user);
-    });
+    await act(async () => result.current.create.mutate(user));
     const { data } = result.current.create;
 
     expect(data?.config.method).toBe("post");
     expect(data?.config.url).toBe("auth");
-    expect(JSON.parse(data?.config.data)).toEqual(user);
+    expect(JSON.parse(data?.config.data)).toEqual(new UserApiIF(user).toApi());
   });
 
   /** Show User */
@@ -103,6 +103,25 @@ describe("useUser", () => {
       uid: "test@email.com",
       client: "client-xxx",
       "access-token": "token-xxxx",
+    });
+  });
+
+  /** Update: パスワードの変更 */
+  it("should send update password request", async () => {
+    const { result } = renderHook(() => useUser(),{ wrapper });
+    await act(async () => {
+      result.current.updatePW.mutate({
+        password: "PASSWORD",
+        passwordConfirm: "PASSWORD",
+      });
+    });
+    const { data } = result.current.updatePW;
+
+    expect(data?.config.method).toBe("patch");
+    expect(data?.config.url).toBe("auth/password");
+    expect(JSON.parse(data?.config.data)).toEqual({
+      password: "PASSWORD",
+      password_confirmation: "PASSWORD",
     });
   });
 

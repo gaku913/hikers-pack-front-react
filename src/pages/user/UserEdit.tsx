@@ -33,7 +33,7 @@ export default function UserEdit() {
           onSubmit={handleSubmit(onSubmit)}
           leftButton={{
             label: "キャンセル",
-            to: "/",
+            to: "/profile",
           }}
           rightButton={{
             label: "更新",

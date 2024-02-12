@@ -14,7 +14,7 @@ export type UserApiType = {
   name: string
   email: string
   password: string
-  password_confirm: string
+  password_confirmation: string
 };
 
 /**
@@ -36,8 +36,8 @@ export class UserApiIF {
     let { passwordConfirm } = arg;
 
     // API用パラメータ
-    if ("password_confirm" in arg) {
-      passwordConfirm = arg["password_confirm"];
+    if ("password_confirmation" in arg) {
+      passwordConfirm = arg["password_confirmation"];
     }
 
     this.user = { name, email, password, passwordConfirm };
@@ -54,13 +54,13 @@ export class UserApiIF {
       name,
       email,
       password,
-      passwordConfirm: password_confirm,
+      passwordConfirm: password_confirmation,
     } = this.user;
     const obj = {
       name,
       email,
       password,
-      password_confirm,
+      password_confirmation,
     };
     return filterUndefinedProperties(obj)
   }

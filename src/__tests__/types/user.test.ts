@@ -13,8 +13,8 @@ describe("UserApiIF", () => {
     });
 
     expect(userApiIF.data()).toHaveProperty("passwordConfirm");
-    expect(userApiIF.data()).not.toHaveProperty("password_confirm");
-    expect(userApiIF.toApi()).toHaveProperty("password_confirm");
+    expect(userApiIF.data()).not.toHaveProperty("password_confirmation");
+    expect(userApiIF.toApi()).toHaveProperty("password_confirmation");
     expect(userApiIF.toApi()).not.toHaveProperty("passwordConfirm");
   });
 
@@ -23,12 +23,12 @@ describe("UserApiIF", () => {
       name: "Taro",
       email: "taro@email.com",
       password: "password",
-      password_confirm: "password",
+      password_confirmation: "password",
     });
 
     expect(userApiIF.data()).toHaveProperty("passwordConfirm");
-    expect(userApiIF.data()).not.toHaveProperty("password_confirm");
-    expect(userApiIF.toApi()).toHaveProperty("password_confirm");
+    expect(userApiIF.data()).not.toHaveProperty("password_confirmation");
+    expect(userApiIF.toApi()).toHaveProperty("password_confirmation");
     expect(userApiIF.toApi()).not.toHaveProperty("passwordConfirm");
   });
 
@@ -39,8 +39,8 @@ describe("UserApiIF", () => {
     });
 
     expect(userApiIF.data()).toHaveProperty("passwordConfirm");
-    expect(userApiIF.data()).not.toHaveProperty("password_confirm");
-    expect(userApiIF.toApi()).toHaveProperty("password_confirm");
+    expect(userApiIF.data()).not.toHaveProperty("password_confirmation");
+    expect(userApiIF.toApi()).toHaveProperty("password_confirmation");
     expect(userApiIF.toApi()).not.toHaveProperty("passwordConfirm");
     expect(userApiIF.toApi()).not.toHaveProperty("name");
   });

@@ -1,6 +1,6 @@
 import { AuthInfo } from "@/authenticate/authInfoInitial";
 import { useAuthContext } from "@/authenticate/useAuthContext";
-import { EditType, loginType, UserApiType, UserType } from "@/types/user";
+import { EditPWType, EditType, loginType, UserApiIF, UserType } from "@/types/user";
 import axios from "axios";
 import { useMutation, useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
@@ -19,8 +19,8 @@ export default function useUser() {
 
   /** Create: ユーザー登録 */
   const create = useMutation({
-    mutationFn: (user: createUserDataProps) => {
-      return axios.post("auth", createUserData(user));
+    mutationFn: (user: UserType) => {
+      return axios.post("auth", new UserApiIF(user).toApi());
     },
     onSuccess: (data) => setAuth(data),
     onError: (error) => console.log("error",error),
@@ -51,6 +51,16 @@ export default function useUser() {
     onError: (error) => console.log("error",error),
   });
 
+  /** Update: パスワードの変更 */
+  const updatePW = useMutation({
+    mutationFn: (data: EditPWType) => {
+      return axios.patch("auth/password",
+        new UserApiIF(data).toApi(), { headers });
+    },
+    onSuccess: () => navigate("/profile"),
+    onError: (error) => console.log("error",error),
+  });
+
   /** Login */
   const login = useMutation({
     mutationFn: (data: loginType) => {
@@ -76,34 +86,13 @@ export default function useUser() {
     create,
     update,
     destroy,
+    updatePW,
     logout,
     login
   };
 }
 
 /** Data Conversion */
-// クラスで実装したい
-
-// Create
-type createUserDataProps = UserType | UserApiType
-function createUserData(user: UserType): UserApiType;
-function createUserData(user: UserApiType): UserApiType;
-function createUserData(user: createUserDataProps): UserApiType;
-function createUserData(user: createUserDataProps) {
-  if ("passwordConfirm" in user) {
-    // UserType
-    return {
-      name: user.name,
-      email: user.email,
-      password: user.password,
-      password_confirm: user.passwordConfirm,
-    };
-  }
-  else {
-    // UserApiType
-    return user
-  }
-}
 
 // AuthInfo
 function authInfoApi(authInfo: AuthInfo) {
