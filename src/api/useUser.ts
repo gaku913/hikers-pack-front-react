@@ -57,7 +57,7 @@ export default function useUser() {
       return axios.patch("auth/password",
         new UserApiIF(data).toApi(), { headers });
     },
-    onSuccess: () => navigate("/profile"),
+    onSuccess: () => navigate("/profile/settingsp"),
     onError: (error) => console.log("error",error),
   });
 
@@ -77,8 +77,8 @@ export default function useUser() {
         data: authInfoApi(authInfo)
       })
     },
-    onSuccess: () => clearAuth(),
     onError: (error) => console.log("error",error),
+    onSettled: () => clearAuth(),
   })
 
   return {
