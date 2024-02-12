@@ -2,7 +2,7 @@ import { RE_EMAIL, RE_PASSWORD } from "@/validations/regex";
 import { castToValOrNull } from "@/validations/zodUtil";
 import { z } from "zod";
 
-const userSchema = z.object({
+export const userSchema = z.object({
   name: castToValOrNull(z.string()),
   email: castToValOrNull(
     z.string()
@@ -19,5 +19,3 @@ const userSchema = z.object({
   path: ["passwordConfirm"],
   message: "パスワードが一致しません。"
 });
-
-export { userSchema }

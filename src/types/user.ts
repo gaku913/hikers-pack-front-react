@@ -1,13 +1,13 @@
 /**
  * User Type
  */
-export type userFrontType = {
+export type UserType = {
   name: string
   email: string
   password: string
   passwordConfirm: string
 };
-export type userApiType = {
+export type UserApiType = {
   name: string
   email: string
   password: string
@@ -17,9 +17,7 @@ export type userApiType = {
 /** Data Conversion */
 
 /**
- * Login Type
+ * 派生 Type
  */
-export type loginType = {
-  email: string
-  password: string
-}
+export type loginType = Pick<UserType, "email" | "password">;
+export type EditType = Pick<UserType, "name">;

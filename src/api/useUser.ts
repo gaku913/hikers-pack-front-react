@@ -1,13 +1,21 @@
 import { AuthInfo } from "@/authenticate/authInfoInitial";
 import { useAuthContext } from "@/authenticate/useAuthContext";
-import { loginType, userApiType, userFrontType } from "@/types/user";
+import { EditType, loginType, UserApiType, UserType } from "@/types/user";
 import axios from "axios";
 import { useMutation, useQuery } from "react-query";
+import { useNavigate } from "react-router-dom";
 
 /** ユーザーの操作 */
 export default function useUser() {
+  // Router
+  const navigate = useNavigate();
   // Auth Hook
   const { authInfo, setAuth, clearAuth } = useAuthContext();
+  const headers = {
+    uid: authInfo.uid,
+    client: authInfo.client,
+    "access-token": authInfo.accessToken,
+  };
 
   /** Create: ユーザー登録 */
   const create = useMutation({
@@ -20,14 +28,15 @@ export default function useUser() {
 
   /** Show: ユーザーの詳細 */
   const { data: user } = useQuery({
-    queryKey: "auth/sessions",
-    queryFn: () => axios.get("auth/sessions", {
-      headers: {
-        uid: authInfo.uid,
-        client: authInfo.client,
-        "access-token": authInfo.accessToken,
-      }
-    }),
+    queryKey: ["user"],
+    queryFn: () => axios.get("auth/sessions", { headers }),
+    onError: (error) => console.log("error",error),
+  });
+
+  /** Update: ユーザー情報の更新 */
+  const update = useMutation({
+    mutationFn: (data: EditType) => axios.patch("auth", data, { headers }),
+    onSuccess: () => navigate("/profile"),
     onError: (error) => console.log("error",error),
   });
 
@@ -65,6 +74,7 @@ export default function useUser() {
   return {
     user,
     create,
+    update,
     destroy,
     logout,
     login
@@ -75,13 +85,13 @@ export default function useUser() {
 // クラスで実装したい
 
 // Create
-type createUserDataProps = userFrontType | userApiType
-function createUserData(user: userFrontType): userApiType;
-function createUserData(user: userApiType): userApiType;
-function createUserData(user: createUserDataProps): userApiType;
+type createUserDataProps = UserType | UserApiType
+function createUserData(user: UserType): UserApiType;
+function createUserData(user: UserApiType): UserApiType;
+function createUserData(user: createUserDataProps): UserApiType;
 function createUserData(user: createUserDataProps) {
   if ("passwordConfirm" in user) {
-    // userFrontType
+    // UserType
     return {
       name: user.name,
       email: user.email,
@@ -90,7 +100,7 @@ function createUserData(user: createUserDataProps) {
     };
   }
   else {
-    // userApiType
+    // UserApiType
     return user
   }
 }

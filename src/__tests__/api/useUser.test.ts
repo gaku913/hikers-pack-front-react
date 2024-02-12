@@ -21,6 +21,7 @@ const user = {
 const handlers = [
   http.post(`${baseUrl}/auth`, () => HttpResponse.json({ res: "OK" })),
   http.get(`${baseUrl}/auth/sessions`, () => HttpResponse.json({ res: "OK" })),
+  http.patch(`${baseUrl}/auth`, () => HttpResponse.json({ res: "OK" })),
   http.delete(`${baseUrl}/auth`, () => HttpResponse.json({ res: "OK" })),
   http.post(`${baseUrl}/auth/sign_in`, () => HttpResponse.json({ res: "OK" })),
   http.delete(`${baseUrl}/auth/sign_out`, () => HttpResponse.json({ res: "OK" })),
@@ -73,6 +74,20 @@ describe("useUser", () => {
     expect(data?.config.url).toBe("auth/sessions");
     expect(data?.config.headers.uid).toBe("test@email.com");
   });
+
+  /** Update: ユーザー情報の更新 */
+  it("should send update request", async () => {
+    const { result } = renderHook(() => useUser(),{ wrapper });
+    await act(async () => {
+      result.current.update.mutate({ name: "Taro"});
+    });
+    const { data } = result.current.update;
+
+    expect(data?.config.method).toBe("patch");
+    expect(data?.config.url).toBe("auth");
+    expect(JSON.parse(data?.config.data)).toEqual({ name: "Taro"});
+  });
+
 
   /** Destroy: ユーザーの削除 */
   it("should send destroy request", async () => {
