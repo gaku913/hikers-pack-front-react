@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import "@testing-library/jest-dom/vitest";
-import { filterUndefinedProperties } from "@/lib/utils";
+import { filterUndefinedProperties } from "@/lib/objectFilter";
 
 describe("filterUndefinedProperties", () => {
   it("remove undefined propeties", () => {

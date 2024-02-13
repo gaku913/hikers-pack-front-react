@@ -1,5 +1,5 @@
 import { Merge } from "@/lib/mergeTypes";
-import { filterUndefinedProperties } from "@/lib/utils";
+import { filterUndefinedProperties } from "@/lib/objectFilter";
 
 /**
  * User Type
