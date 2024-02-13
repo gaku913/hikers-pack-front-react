@@ -1,4 +1,4 @@
-import AccountMenu from "@/components/AccountMenu";
+import AccountMenu from "@/components/frame/AccountMenu";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
