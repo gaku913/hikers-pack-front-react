@@ -4,7 +4,7 @@ import TextField from "@/components/form/TextField";
 import { Divider } from "@mui/material";
 import FormButtonBar from "@/components/form/FormButtonBar";
 import { Control } from "react-hook-form";
-import { EditType } from "@/types/user";
+import { EditType } from "@/api/types/user";
 
 type UserEditFormProps = {
   control: Control<EditType>

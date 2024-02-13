@@ -3,7 +3,7 @@ import AppFrame from "@/components/frame/AppFrame";
 import LoginForm from "@/components/form/LoginForm";
 import useForm from "@/validations/useForm";
 import { loginSchema } from "@/validations/loginSchema";
-import { loginType } from "@/types/user";
+import { loginType } from "@/api/types/user";
 
 
 export default function Login() {

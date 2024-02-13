@@ -5,7 +5,7 @@ import { userSchema } from "@/validations/userSchema";
 import SignupForm from "@/components/form/SignupForm";
 import useUser from "@/api/useUser";
 import useForm from "@/validations/useForm";
-import { UserType } from "@/types/user";
+import { UserType } from "@/api/types/user";
 
 export default function Signup() {
   // Form State

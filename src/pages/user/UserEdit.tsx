@@ -1,7 +1,7 @@
 import useUser from "@/api/useUser";
 import AppFrame from "@/components/frame/AppFrame";
 import UserEditForm from "@/components/form/UserEditForm";
-import { EditType } from "@/types/user";
+import { EditType } from "@/api/types/user";
 import useForm from "@/validations/useForm";
 import { userEditSchema } from "@/validations/userEditSchema";
 

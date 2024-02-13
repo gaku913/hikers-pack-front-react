@@ -1,7 +1,7 @@
 import useUser from "@/api/useUser";
 import AppFrame from "@/components/frame/AppFrame";
 import UserEditPWForm from "@/components/form/UserEditPWForm";
-import { EditPWType } from "@/types/user";
+import { EditPWType } from "@/api/types/user";
 import useForm from "@/validations/useForm";
 import { userEditPWSchema } from "@/validations/userEditPWSchema";
 

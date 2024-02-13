@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import "@testing-library/jest-dom/vitest";
-import { UserApiIF } from "@/types/user";
+import { UserApiIF } from "@/api/types/user";
 
 describe("UserApiIF", () => {
 

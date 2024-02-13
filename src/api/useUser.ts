@@ -1,6 +1,6 @@
 import { AuthInfo } from "@/authenticate/authInfoInitial";
 import { useAuthContext } from "@/authenticate/useAuthContext";
-import { EditPWType, EditType, loginType, UserApiIF, UserType } from "@/types/user";
+import { EditPWType, EditType, loginType, UserApiIF, UserType } from "@/api/types/user";
 import axios from "axios";
 import { useMutation, useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";

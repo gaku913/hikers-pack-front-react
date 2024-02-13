@@ -4,7 +4,7 @@ import TextField from "@/components/form/TextField";
 import { Divider } from "@mui/material";
 import FormButtonBar from "@/components/form/FormButtonBar";
 import { Control } from "react-hook-form";
-import { loginType } from "@/types/user";
+import { loginType } from "@/api/types/user";
 
 type LoginFormProps = {
   control: Control<loginType>

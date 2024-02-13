@@ -1,5 +1,5 @@
 import { useAuthContext } from "@/authenticate/useAuthContext";
-import { PacksApiIF } from "@/types/packs";
+import { PacksApiIF } from "@/api/types/packs";
 import axios from "axios";
 import { useQuery } from "react-query";
 

@@ -8,7 +8,7 @@ import { act } from "react-dom/test-utils";
 import axiosSetup from "@/api/axios";
 import { useAuthContext } from "@/authenticate/useAuthContext";
 import wrapper from "../helper/TestWrapper";
-import { UserApiIF } from "@/types/user";
+import { UserApiIF } from "@/api/types/user";
 
 const baseUrl = "http://myapp/api/v1";
 

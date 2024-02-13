@@ -4,7 +4,7 @@ import TextField from "@/components/form/TextField";
 import { Divider } from "@mui/material";
 import FormButtonBar from "@/components/form/FormButtonBar";
 import { Control } from "react-hook-form";
-import { EditPWType } from "@/types/user";
+import { EditPWType } from "@/api/types/user";
 
 type UserEditPWFormProps = {
   control: Control<EditPWType>
