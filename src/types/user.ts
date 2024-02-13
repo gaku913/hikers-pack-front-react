@@ -35,7 +35,7 @@ export class UserApiIF {
     const { name, email, password } = arg;
     let { passwordConfirm } = arg;
 
-    // API用パラメータ
+    // API用パラメータの読み取り
     if ("password_confirmation" in arg) {
       passwordConfirm = arg["password_confirmation"];
     }

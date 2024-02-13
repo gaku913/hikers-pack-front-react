@@ -1,49 +1,32 @@
-import { Button, List, ListItemButton, ListItemText } from "@mui/material";
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { Link } from "react-router-dom";
-import AppFrame from "@/components/AppFrame";
-import Footer from "@/components/Footer";
+import { List } from "@mui/material";
+import AppFrame from "@/components/frame/AppFrame";
+import usePacksIndex from "@/api/usePacks";
+import FooterButton from "@/components/frame/FooterButton";
+import ListItemButton from "@/components/common/ListItemButton";
+import { dateFormatter } from "@/lib/dateFormatter";
 
 export default function PacksIndex() {
+  const { packs } = usePacksIndex();
 
   return (
     <AppFrame
       footer={
-        <Footer>
-          <Button
-            variant="outlined"
-            size="medium"
-          >
-            新しい持ち物リストを追加する
-          </Button>
-        </Footer>
+        <FooterButton>
+          新しい持ち物リストを追加する
+        </FooterButton>
       }
     >
       <List>
-        <ListItemButton
-          component={Link}
-          to="/packs/1"
-          divider
-        >
-          <ListItemText primary="南八ヶ岳縦走" secondary="2023年8月14日 重量6.5kg" />
-          <ArrowForwardIosIcon/>
-        </ListItemButton>
-        <ListItemButton
-          component={Link}
-          to="/packs/2"
-          divider
-        >
-          <ListItemText primary="南八ヶ岳縦走" secondary="2023年8月14日 重量6.5kg" />
-          <ArrowForwardIosIcon/>
-        </ListItemButton>
-        <ListItemButton
-          component={Link}
-          to="/packs/3"
-          divider
-        >
-          <ListItemText primary="南八ヶ岳縦走" secondary="2023年8月14日 重量6.5kg" />
-          <ArrowForwardIosIcon/>
-        </ListItemButton>
+        {packs?.map(pack => {
+          return (
+            <ListItemButton
+              key={pack.id}
+              primary={pack.title}
+              secondary={dateFormatter(pack.startDate)}
+              to={`/packs/${pack.id}`}
+            />
+          )
+        })}
       </List>
 
     </AppFrame>

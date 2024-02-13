@@ -8,8 +8,8 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 type ListItemButtonProps = (
   LinkProps &
   {
-    primary: string
-    secondary: string
+    primary?: string
+    secondary?: string
   }
 );
 
