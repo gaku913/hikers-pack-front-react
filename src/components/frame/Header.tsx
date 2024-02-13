@@ -1,9 +1,9 @@
 import { AppBar, Divider, Slide, Toolbar, createTheme, useScrollTrigger
 } from "@mui/material";
-import NavMenu from "@/components/NavMenu";
-import AccountMenu from "@/components/AccountMenu";
+import NavMenu from "@/components/frame/NavMenu";
+import AccountMenu from "@/components/frame/AccountMenu";
 import React from "react";
-import Button from "./common/Button";
+import Button from "../common/Button";
 import AuthGuard from "@/authenticate/AuthGuard";
 
 type HideOnScrollProps = {

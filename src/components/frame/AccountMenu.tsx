@@ -1,7 +1,7 @@
 import { AccountCircle, Logout, Person, Settings } from "@mui/icons-material";
 import { Divider, IconButton, Menu } from "@mui/material";
 import { useState } from "react";
-import MenuItem from "./common/MenuItem";
+import MenuItem from "../common/MenuItem";
 import useUser from "@/api/useUser";
 
 export default function AccountMenu() {

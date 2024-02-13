@@ -1,5 +1,5 @@
 import useUser from "@/api/useUser";
-import AppFrame from "@/components/AppFrame";
+import AppFrame from "@/components/frame/AppFrame";
 import LinkBar from "@/components/LinkBar";
 
 export default function UserShow() {

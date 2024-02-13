@@ -1,4 +1,4 @@
-import AppFrame from "@/components/AppFrame";
+import AppFrame from "@/components/frame/AppFrame";
 import { Paper } from "@mui/material";
 import { QRCodeSVG } from "qrcode.react";
 

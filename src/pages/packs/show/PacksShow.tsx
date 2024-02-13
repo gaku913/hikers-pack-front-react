@@ -5,9 +5,9 @@ import PackSummary from "./PackSummary";
 import PackCheck from "./PackCheck";
 import PackItems from "./PackItems";
 import { ReactNode } from "react";
-import AppFrame from "@/components/AppFrame";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import AppFrame from "@/components/frame/AppFrame";
+import Header from "@/components/frame/Header";
+import Footer from "@/components/frame/Footer";
 import { Button } from "@mui/material";
 
 export type tabItems = {

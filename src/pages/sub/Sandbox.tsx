@@ -1,4 +1,4 @@
-import AppFrame from "@/components/AppFrame";
+import AppFrame from "@/components/frame/AppFrame";
 import { useAuthContext } from "@/authenticate/useAuthContext";
 import Snackbar from "@/components/common/Snackbar";
 

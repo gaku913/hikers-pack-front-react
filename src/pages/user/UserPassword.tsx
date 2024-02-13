@@ -1,5 +1,5 @@
 import useUser from "@/api/useUser";
-import AppFrame from "@/components/AppFrame";
+import AppFrame from "@/components/frame/AppFrame";
 import UserEditPWForm from "@/components/form/UserEditPWForm";
 import { EditPWType } from "@/types/user";
 import useForm from "@/validations/useForm";

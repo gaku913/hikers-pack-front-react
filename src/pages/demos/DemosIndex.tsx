@@ -1,4 +1,4 @@
-import AppFrame from "@/components/AppFrame";
+import AppFrame from "@/components/frame/AppFrame";
 
 export default function DemosIndex() {
   return (

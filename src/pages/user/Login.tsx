@@ -1,5 +1,5 @@
 import useUser from "@/api/useUser";
-import AppFrame from "@/components/AppFrame";
+import AppFrame from "@/components/frame/AppFrame";
 import LoginForm from "@/components/form/LoginForm";
 import useForm from "@/validations/useForm";
 import { loginSchema } from "@/validations/loginSchema";
