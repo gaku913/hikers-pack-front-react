@@ -40,5 +40,13 @@ export function useAuthContext() {
   function clearAuth() {
     setAuthInfo(authInfoInitial);
   }
-  return { isLoggedIn, authInfo, setAuth, clearAuth };
+
+  /** Header認証情報 */
+  const authHeaders = {
+    uid: authInfo.uid,
+    client: authInfo.client,
+    "access-token": authInfo.accessToken,
+  };
+
+  return { isLoggedIn, authInfo, setAuth, clearAuth, authHeaders };
 }

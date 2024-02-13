@@ -10,12 +10,9 @@ export default function useUser() {
   // Router
   const navigate = useNavigate();
   // Auth Hook
-  const { authInfo, setAuth, clearAuth } = useAuthContext();
-  const headers = {
-    uid: authInfo.uid,
-    client: authInfo.client,
-    "access-token": authInfo.accessToken,
-  };
+  const {
+    authInfo, setAuth, clearAuth, authHeaders: headers
+  } = useAuthContext();
 
   /** Create: ユーザー登録 */
   const create = useMutation({
