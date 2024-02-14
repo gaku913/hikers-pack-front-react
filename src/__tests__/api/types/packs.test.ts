@@ -30,27 +30,30 @@ const packPartialApi = {
 };
 
 describe("PackApiIF", () => {
-  it("read Api form data", async () => {
+  it("read Api form data", () => {
     expect(new PackApiIF(packApi).pack).toStrictEqual(pack);
   });
-  it("read ReactApp form data", async () => {
+  it("read ReactApp form data", () => {
     expect(new PackApiIF(pack).pack).toStrictEqual(pack);
   });
-  it("read partial data", async () => {
+  it("read partial data", () => {
     expect(new PackApiIF(packPartialApi).pack).toStrictEqual(packPartial);
   });
-  it("return Api form data", async () => {
+  it("return Api form data", () => {
     expect(new PackApiIF(pack).toApi()).toStrictEqual(packApi);
   });
-  it("return partial data", async () => {
+  it("return partial data", () => {
     expect(new PackApiIF(packPartial).pack).toStrictEqual(packPartial);
   });
 });
 
 describe("PacksApiIF", () => {
-  it.todo("return ReactApp form data", async () => {
+  it("return ReactApp form data", () => {
     const packs = [packApi, packPartial];
     const convertedPacks = [pack, packPartial];
     expect(new PacksApiIF(packs).packs).toStrictEqual(convertedPacks);
+  });
+  it("returns [], if passed []", () => {
+    expect(new PacksApiIF([]).packs).toStrictEqual([]);
   });
 });

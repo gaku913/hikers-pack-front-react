@@ -37,5 +37,4 @@ describe("NavMenu", () => {
 
   });
 
-  it.todo("close menu when swipe down", async () => {});
 });

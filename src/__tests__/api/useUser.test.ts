@@ -1,36 +1,38 @@
-import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it } from "vitest";
 import "@testing-library/jest-dom/vitest";
-import { HttpResponse, http } from "msw";
-import { setupServer } from "msw/node";
 import useUser from "@/api/useUser";
 import { renderHook, waitFor } from "@testing-library/react";
 import { act } from "react-dom/test-utils";
-import axiosSetup from "@/api/axios";
 import { useAuthContext } from "@/authenticate/useAuthContext";
 import wrapper from "../helper/TestWrapper";
 import { UserApiIF } from "@/api/types/user";
+import { useTestServer } from "../helper/useTestServer";
 
-const baseUrl = "http://myapp/api/v1";
+/** Mock Server */
+renderHook(() => useTestServer([
+  { // ユーザー登録
+    method: "post", path: "auth", resJson: { res: "OK" },
+  },
+  { // ユーザー詳細
+    method: "get", path: "auth/sessions", resJson: { res: "OK" },
+  },
+  { // ユーザー情報の変更
+    method: "patch", path: "auth", resJson: { res: "OK" },
+  },
+  { // ユーザーの削除
+    method: "delete", path: "auth", resJson: { res: "OK" },
+  },
+  { // パスワードの変更
+    method: "patch", path: "auth/password", resJson: { res: "OK" },
+  },
+  { // サインイン
+    method: "post", path: "auth/sign_in", resJson: { res: "OK" },
+  },
+  { // サインアウト
+    method: "delete", path: "auth/sign_out", resJson: { res: "OK" },
+  },
+]));
 
-// Mock Server
-const handlers = [
-  http.post(`${baseUrl}/auth`, () => HttpResponse.json({ res: "OK" })),
-  http.get(`${baseUrl}/auth/sessions`, () => HttpResponse.json({ res: "OK" })),
-  http.patch(`${baseUrl}/auth`, () => HttpResponse.json({ res: "OK" })),
-  http.delete(`${baseUrl}/auth`, () => HttpResponse.json({ res: "OK" })),
-  http.patch(`${baseUrl}/auth/password`, () => HttpResponse.json({ res: "OK" })),
-  http.post(`${baseUrl}/auth/sign_in`, () => HttpResponse.json({ res: "OK" })),
-  http.delete(`${baseUrl}/auth/sign_out`, () => HttpResponse.json({ res: "OK" })),
-];
-
-const server = setupServer(...handlers);
-
-beforeAll(async () => {
-  // server setup
-  import.meta.env.VITE_API_BASE_URL = baseUrl;
-  axiosSetup();
-  server.listen();
-});
 beforeEach(async () => {
   // set AuthInfo
   const { result } = renderHook(() => useAuthContext(), { wrapper });
@@ -40,8 +42,6 @@ beforeEach(async () => {
     accessToken: "token-xxxx",
   }))
 })
-afterEach(() => server.resetHandlers());
-afterAll(() => server.close());
 
 describe("useUser", () => {
 

@@ -18,7 +18,7 @@ describe("UserApiIF", () => {
     expect(userApiIF.toApi()).not.toHaveProperty("passwordConfirm");
   });
 
-  it.todo("read Api data type", async () => {
+  it("read Api data type", async () => {
     const userApiIF = new UserApiIF({
       name: "Taro",
       email: "taro@email.com",
@@ -32,7 +32,7 @@ describe("UserApiIF", () => {
     expect(userApiIF.toApi()).not.toHaveProperty("passwordConfirm");
   });
 
-  it.todo("read partial data", async () => {
+  it("read partial data", async () => {
     const userApiIF = new UserApiIF({
       password: "password",
       passwordConfirm: "password",
