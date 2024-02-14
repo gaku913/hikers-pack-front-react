@@ -28,7 +28,13 @@ export type PacksApiType = PackApiType[];
 export class PackApiIF {
   // ReactApp用のパラメータを保持する
   pack: Partial<PackType>
-  constructor(arg: Partial<Merge<PackType, PackApiType>>) {
+  constructor(arg: Partial<Merge<PackType, PackApiType>> | undefined) {
+    // arg = undefinedの処理
+    if (!arg) {
+      this.pack = {};
+      return;
+    }
+
     const {
       id,
       title,

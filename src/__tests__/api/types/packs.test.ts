@@ -45,6 +45,9 @@ describe("PackApiIF", () => {
   it("return partial data", () => {
     expect(new PackApiIF(packPartial).pack).toStrictEqual(packPartial);
   });
+  it("return {}, if passed undefined", () => {
+    expect(new PackApiIF(undefined).pack).toStrictEqual({});
+  });
 });
 
 describe("PacksApiIF", () => {

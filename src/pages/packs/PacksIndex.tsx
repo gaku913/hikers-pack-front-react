@@ -1,6 +1,6 @@
 import { List } from "@mui/material";
 import AppFrame from "@/components/frame/AppFrame";
-import usePacksIndex from "@/api/usePacks";
+import { usePacksIndex } from "@/api/usePacks";
 import FooterButton from "@/components/frame/FooterButton";
 import ListItemButton from "@/components/common/ListItemButton";
 import { dateFormatter } from "@/lib/dateFormatter";
