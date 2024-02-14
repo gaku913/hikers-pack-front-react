@@ -1,9 +1,9 @@
-import { usePacksShow } from "@/api/usePacks";
+import { usePacksDestroy, usePacksShow } from "@/api/usePacks";
 import LinkBar from "@/components/LinkBar";
 import ModalConfirm from "@/components/modal/ModalConfirm";
 import { useOpen } from "@/hooks/useOpen";
 import { dateFormatter } from "@/lib/dateFormatter";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function PackSummary() {
   const params = useParams();
@@ -17,6 +17,12 @@ export default function PackSummary() {
 
   // モーダル制御
   const { open, handleOpen, handleClose } = useOpen(false);
+
+  // Packs Hook
+  const { destroy } = usePacksDestroy(packId);
+
+  // Router Hook
+  const navigate = useNavigate();
 
   return (
     <>
@@ -48,7 +54,11 @@ export default function PackSummary() {
         }}
         right={{
           label: "削除",
-          // onClick: () => destroy.mutate(),
+          onClick: (event) => {
+            event.preventDefault();
+            destroy.mutate();
+            navigate("/packs");
+          },
         }}
       >
         <span>持ち物リストを削除します。この操作は取り消せません。</span>

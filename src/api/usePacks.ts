@@ -80,4 +80,24 @@ export function usePacksUpdate(id: number) {
   return { update };
 }
 
-/** Packs#Destroy: 削除 */
+/**
+ * Packs#Destroy: 削除
+ */
+export function usePacksDestroy(id: number) {
+  // クライアント
+  const queryClient = useQueryClient();
+  // 認証情報
+  const { authHeaders: headers } = useAuthContext();
+  // Request
+  const destroy = useMutation({
+    mutationFn: () => {
+      return axios.delete(`packs/${id}`, { headers });
+    },
+    onError: (error) => console.log("error",error),
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["packs", id] });
+      queryClient.invalidateQueries({ queryKey: "packs" });
+    },
+  });
+  return { destroy };
+}

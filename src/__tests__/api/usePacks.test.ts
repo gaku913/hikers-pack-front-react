@@ -4,7 +4,7 @@ import { useTestServer } from "../helper/useTestServer";
 import { act } from "react-dom/test-utils";
 import { useAuthContext } from "@/authenticate/useAuthContext";
 import wrapper from "../helper/TestWrapper";
-import { usePacksCreate, usePacksIndex, usePacksShow, usePacksUpdate } from "@/api/usePacks";
+import { usePacksCreate, usePacksDestroy, usePacksIndex, usePacksShow, usePacksUpdate } from "@/api/usePacks";
 import { PackApiIF } from "@/api/types/packs";
 
 /** Mock Server */
@@ -20,6 +20,9 @@ renderHook(() => useTestServer([
   },
   { // Packs#Update
     method: "patch", path: "packs/1", resJson: [{ res: "OK" }],
+  },
+  { // Packs#Destroy
+    method: "delete", path: "packs/1", resJson: [{ res: "OK" }],
   },
 ]));
 
@@ -106,5 +109,19 @@ describe("usePacksUpdate", () => {
     expect(data?.config.url).toBe("packs/1");
     expect(JSON.parse(data?.config.data))
       .toStrictEqual(new PackApiIF(newPack).toApi());
+  });
+});
+
+/**
+ * Packs#Destroy: 削除
+ */
+describe("usePacksDestroy", () => {
+  it("request destroy action", async () => {
+    const { result } = renderHook(() => usePacksDestroy(1),{ wrapper });
+    await act(async () => result.current.destroy.mutate());
+    const { data } = result.current.destroy;
+
+    expect(data?.config.method).toBe("delete");
+    expect(data?.config.url).toBe("packs/1");
   });
 });

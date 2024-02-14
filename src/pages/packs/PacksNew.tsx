@@ -31,7 +31,7 @@ export default function PacksNew() {
   const { create } = usePacksCreate();
   const onSubmit = (data: PacksFormType) => {
     isValid && create.mutate(data);
-    navigate("/packs")
+    navigate("/packs");
   };
 
   return (
