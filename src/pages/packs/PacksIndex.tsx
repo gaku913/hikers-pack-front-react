@@ -11,7 +11,7 @@ export default function PacksIndex() {
   return (
     <AppFrame
       footer={
-        <FooterButton>
+        <FooterButton to="packs/new">
           新しい持ち物リストを追加する
         </FooterButton>
       }

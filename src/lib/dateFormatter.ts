@@ -1,7 +1,8 @@
 /**
  * 日付データにフォーマットを適用する
- * @param dateString 例："2000-01-01"
- * @returns          例："2000/01/01", "2000年1月1日"
+ * 例：
+ * slash: "2000/01/01"
+ * kanji: "2000年1月1日"
  */
 type options = {
     format?: "kanji" | "slash"

@@ -7,19 +7,25 @@ import { filterUndefinedProperties } from "@/lib/objectFilter";
 export type PackType = {
   id: number
   title: string
-  memo: string
+  memo: string | null
   startDate: string
   endDate: string
 };
 export type PackApiType = {
   id: number,
   title: string
-  memo: string
+  memo: string | null
   start_date: string
   end_date: string
 };
 export type PacksType = PackType[];
 export type PacksApiType = PackApiType[];
+
+/**
+ * 派生 Type
+ */
+export type PacksNewType = Pick<PackType,
+  "title" | "memo" | "startDate" | "endDate">;
 
 /**
  * Data Conversion
@@ -55,7 +61,7 @@ export class PackApiIF {
 
   // API用のパラメータを返す
   toApi() {
-    const {
+const {
       id,
       title,
       memo,
