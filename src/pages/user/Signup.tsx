@@ -1,5 +1,5 @@
 import AppFrame from "@/components/frame/AppFrame";
-import ModalWindow from "@/components/ModalWindow";
+import ModalWindow from "@/components/modal/ModalWindow";
 import { useState } from "react";
 import { userSchema } from "@/validations/userSchema";
 import SignupForm from "@/components/form/SignupForm";

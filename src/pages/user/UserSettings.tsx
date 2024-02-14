@@ -1,20 +1,16 @@
 import useUser from "@/api/useUser";
 import AppFrame from "@/components/frame/AppFrame";
 import LinkBar from "@/components/LinkBar";
-import ModalWindow from "@/components/ModalWindow";
 import Button from "@/components/common/Button";
-import FormButtonBar from "@/components/form/FormButtonBar";
-import { Divider } from "@mui/material";
-import { useState } from "react";
+import ModalConfirm from "@/components/modal/ModalConfirm";
+import { useOpen } from "@/hooks/useOpen";
 
 export default function UserSettings() {
   // ユーザーの取得
   const { user, destroy } = useUser();
 
   // モーダル制御
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const { open, handleOpen, handleClose } = useOpen(false);
 
   return (
     <AppFrame>
@@ -43,23 +39,19 @@ export default function UserSettings() {
       />
 
       {/* 確認用モーダル */}
-      <ModalWindow open={open}>
-        <p>
-          このアカウントを削除します。<br />
-          この操作は取り消せません。
-        </p>
-        <Divider />
-        <FormButtonBar
-          left={{
-            label: "キャンセル",
-            onClick: handleClose,
-          }}
-          right={{
-            label: "削除",
-            onClick: () => destroy.mutate(),
-          }}
-        />
-      </ModalWindow>
+      <ModalConfirm
+        open={open}
+        left={{
+          label: "キャンセル",
+          onClick: handleClose,
+        }}
+        right={{
+          label: "削除",
+          onClick: () => destroy.mutate(),
+        }}
+      >
+        <span>このアカウントを削除します。この操作は取り消せません。</span>
+      </ModalConfirm>
     </AppFrame>
   )
 }

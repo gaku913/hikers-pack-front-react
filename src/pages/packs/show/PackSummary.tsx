@@ -1,5 +1,7 @@
 import { usePacksShow } from "@/api/usePacks";
 import LinkBar from "@/components/LinkBar";
+import ModalConfirm from "@/components/modal/ModalConfirm";
+import { useOpen } from "@/hooks/useOpen";
 import { dateFormatter } from "@/lib/dateFormatter";
 import { useParams } from "react-router-dom";
 
@@ -12,6 +14,9 @@ export default function PackSummary() {
   const isDayHike = (pack.startDate === pack.endDate);
   const startDateText = dateFormatter(pack.startDate, { format: "kanji" });
   const endDateText = dateFormatter(pack.endDate, { format: "kanji" });
+
+  // モーダル制御
+  const { open, handleOpen, handleClose } = useOpen(false);
 
   return (
     <>
@@ -29,10 +34,26 @@ export default function PackSummary() {
           },
           {
             label: "削除",
-            to: "/",
+            onClick: handleOpen,
           },
         ]}
       />
+
+      {/* 削除確認用モーダル */}
+      <ModalConfirm
+        open={open}
+        left={{
+          label: "キャンセル",
+          onClick: handleClose,
+        }}
+        right={{
+          label: "削除",
+          // onClick: () => destroy.mutate(),
+        }}
+      >
+        <span>持ち物リストを削除します。この操作は取り消せません。</span>
+      </ModalConfirm>
+
       <h1>{pack.title}</h1>
       <h2>日程</h2>
       <p>{isDayHike ? startDateText : startDateText + " ~ " + endDateText}</p>
