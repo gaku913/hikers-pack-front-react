@@ -1,5 +1,5 @@
 import { useAuthContext } from "@/authenticate/useAuthContext";
-import { PackApiIF, PacksApiIF, PacksNewType } from "@/api/types/packs";
+import { PackApiIF, PacksApiIF, PacksFormType } from "@/api/types/packs";
 import axios from "axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
@@ -45,17 +45,39 @@ export function usePacksCreate() {
   const { authHeaders: headers } = useAuthContext();
   // Request
   const create = useMutation({
-    mutationFn: (pack: PacksNewType) => {
+    mutationFn: (pack: PacksFormType) => {
       const data = new PackApiIF(pack).toApi();
       return axios.post("packs", data, { headers });
     },
     onError: (error) => console.log("error",error),
     onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: ["packs"] });
+      queryClient.invalidateQueries({ queryKey: "packs" });
     },
   });
   return { create };
 }
 
-/** Packs#Update: 更新 */
+/**
+ * Packs#Update: 更新
+ */
+export function usePacksUpdate(id: number) {
+  // クライアント
+  const queryClient = useQueryClient();
+  // 認証情報
+  const { authHeaders: headers } = useAuthContext();
+  // Request
+  const update = useMutation({
+    mutationFn: (pack: PacksFormType) => {
+      const data = new PackApiIF(pack).toApi();
+      return axios.patch(`packs/${id}`, data, { headers });
+    },
+    onError: (error) => console.log("error",error),
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["packs", id] });
+      queryClient.invalidateQueries({ queryKey: "packs" });
+    },
+  });
+  return { update };
+}
+
 /** Packs#Destroy: 削除 */

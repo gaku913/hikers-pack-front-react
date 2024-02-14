@@ -24,7 +24,7 @@ export type PacksApiType = PackApiType[];
 /**
  * 派生 Type
  */
-export type PacksNewType = Pick<PackType,
+export type PacksFormType = Pick<PackType,
   "title" | "memo" | "startDate" | "endDate">;
 
 /**

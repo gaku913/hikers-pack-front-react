@@ -13,14 +13,16 @@ type options = {
  * Overload
  */
 // 文字列(例："2000-01-01")から文字列を生成するオーバーロード
-export function dateFormatter(input: string, options: options): string;
+export function dateFormatter(
+  input: string | undefined, options?: options): string;
 // Date型から文字列を生成するオーバーロード
-export function dateFormatter(input: Date, options: options): string;
+export function dateFormatter(
+  input: Date | undefined, options?: options): string;
 
 // 実装
 export function dateFormatter(
-  input: string | Date,
-  options: options,
+  input: string | Date | undefined,
+  options?: options,
 ) {
   if (!input) return ""; // undefined対策
   const date = typeof input === "string" ? new Date(input) : input;
@@ -30,7 +32,7 @@ export function dateFormatter(
 /**
  * Date型からオプションで指定した形式の文字列を生成する
  */
-function dateFormatterFromDate( date: Date, options: options) {
+function dateFormatterFromDate( date: Date, options?: options) {
   // 年、月、日を取得
   const year = date.getFullYear();
   const month = date.getMonth() + 1; // 月は0から始まるため、1を加える

@@ -4,7 +4,7 @@ import { useTestServer } from "../helper/useTestServer";
 import { act } from "react-dom/test-utils";
 import { useAuthContext } from "@/authenticate/useAuthContext";
 import wrapper from "../helper/TestWrapper";
-import { usePacksCreate, usePacksIndex, usePacksShow } from "@/api/usePacks";
+import { usePacksCreate, usePacksIndex, usePacksShow, usePacksUpdate } from "@/api/usePacks";
 import { PackApiIF } from "@/api/types/packs";
 
 /** Mock Server */
@@ -17,6 +17,9 @@ renderHook(() => useTestServer([
   },
   { // Packs#Create
     method: "post", path: "packs", resJson: [{ res: "OK" }],
+  },
+  { // Packs#Update
+    method: "patch", path: "packs/1", resJson: [{ res: "OK" }],
   },
 ]));
 
@@ -79,6 +82,28 @@ describe("usePacksCreate", () => {
 
     expect(data?.config.method).toBe("post");
     expect(data?.config.url).toBe("packs");
+    expect(JSON.parse(data?.config.data))
+      .toStrictEqual(new PackApiIF(newPack).toApi());
+  });
+});
+
+/**
+ * Packs#Update: 更新
+ */
+describe("usePacksUpdate", () => {
+  it("request Update action", async () => {
+    const newPack = {
+      title: "Title",
+      memo: "Memo",
+      startDate: "2000-01-01",
+      endDate: "2000-01-02",
+    }
+    const { result } = renderHook(() => usePacksUpdate(1),{ wrapper });
+    await act(async () => result.current.update.mutate(newPack));
+    const { data } = result.current.update;
+
+    expect(data?.config.method).toBe("patch");
+    expect(data?.config.url).toBe("packs/1");
     expect(JSON.parse(data?.config.data))
       .toStrictEqual(new PackApiIF(newPack).toApi());
   });
