@@ -4,21 +4,21 @@ import TextField from "@/components/form/TextField";
 import { Divider } from "@mui/material";
 import FormButtonBar from "@/components/form/FormButtonBar";
 import { Control } from "react-hook-form";
-import { PacksNewType } from "@/api/types/packs";
+import { PacksFormType } from "@/api/types/packs";
 
-type PacksNewFormProps = {
-  control: Control<PacksNewType>
+type PacksFormProps = {
+  control: Control<PacksFormType>
   onSubmit?: () => void
   leftButton: ButtonProps
   rightButton: ButtonProps
 };
 
-export default function PacksNewForm({
+export default function PacksForm({
   control,
   onSubmit,
   leftButton,
   rightButton,
-}: PacksNewFormProps) {
+}: PacksFormProps) {
 
   return (
     <FormWrapper

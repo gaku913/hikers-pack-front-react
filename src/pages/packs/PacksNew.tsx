@@ -1,6 +1,6 @@
-import { PacksNewType } from "@/api/types/packs";
+import { PacksFormType } from "@/api/types/packs";
 import { usePacksCreate } from "@/api/usePacks";
-import PacksNewForm from "@/components/form/PacksNewForm";
+import PacksForm from "@/components/form/PacksForm";
 import AppFrame from "@/components/frame/AppFrame"
 import { dateFormatter } from "@/lib/dateFormatter";
 import { packSchema } from "@/validations/packSchema";
@@ -29,15 +29,15 @@ export default function PacksNew() {
 
   // フォームの送信
   const { create } = usePacksCreate();
-  const onSubmit = (data: PacksNewType) => {
+  const onSubmit = (data: PacksFormType) => {
     isValid && create.mutate(data);
     navigate("/packs")
   };
 
   return (
     <AppFrame>
-      <h1>New</h1>
-      <PacksNewForm
+      <h1>持ち物リストの作成</h1>
+      <PacksForm
         control={control}
         onSubmit={handleSubmit(onSubmit)}
         leftButton={{
@@ -45,7 +45,7 @@ export default function PacksNew() {
           to: "/packs",
         }}
         rightButton={{
-          label: "送信",
+          label: "作成",
           type: "submit",
           disabled: isSubmitting || !isValid,
         }}
