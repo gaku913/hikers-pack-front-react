@@ -33,12 +33,6 @@ export default function PacksForm({
       />
 
       <TextField
-        label="メモ"
-        name="memo"
-        control={control}
-      />
-
-      <TextField
         label="開始日"
         name="startDate"
         control={control}
@@ -54,6 +48,14 @@ export default function PacksForm({
         type="date"
       />
 
+      <TextField
+        label="メモ"
+        name="memo"
+        control={control}
+        multiline
+        minRows={4}
+        maxRows={10}
+      />
 
       <Divider />
 
