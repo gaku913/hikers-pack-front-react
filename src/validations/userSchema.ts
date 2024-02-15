@@ -15,7 +15,7 @@ export const userSchema = z.object({
     ),
   passwordConfirm: castToValOrNull(z.string()),
 })
-.refine(({ password, passwordConfirm }) => password === passwordConfirm, {
+.refine(({ password, passwordConfirm }) => (password === passwordConfirm), {
   path: ["passwordConfirm"],
   message: "パスワードが一致しません。"
 });

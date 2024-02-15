@@ -10,10 +10,10 @@ export const packEditSchema = z.object({
   startDate: dateSchema,
   endDate: dateSchema,
 })
-// .refine((args) => {
-//   const { endDate, startDate} = args;
-//   new Date(endDate) >= new Date(startDate)
-// }, {
-//   path: ["endDate"],
-//   message: "終了日は開始日以降に設定してください。"
-// });
+.refine((args) => {
+  const { endDate, startDate} = args;
+  return new Date(endDate) >= new Date(startDate);
+}, {
+  path: ["endDate"],
+  message: "終了日は開始日以降に設定してください。"
+});
