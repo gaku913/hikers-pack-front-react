@@ -28,6 +28,9 @@ export default function useUser() {
     queryKey: ["user"],
     queryFn: () => axios.get("auth/sessions", { headers }),
     onError: (error) => console.log("error",error),
+    refetchOnWindowFocus: false,
+    staleTime: 1000 * 60 * 5,
+    cacheTime: Infinity,
   });
 
   /** Update: ユーザー情報の更新 */

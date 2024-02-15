@@ -14,6 +14,9 @@ export function usePacksIndex() {
     queryKey: ["packs"],
     queryFn: () => axios.get("packs", { headers }),
     onError: (error) => console.log("error",error),
+    refetchOnWindowFocus: false,
+    staleTime: 1000 * 60 * 5,
+    cacheTime: Infinity,
   });
   const packs = new PacksApiIF(data?.data).packs;
   return { packs, data, ...rest };
@@ -30,6 +33,9 @@ export function usePacksShow(id: number) {
     queryKey: ["packs", id],
     queryFn: () => axios.get(`packs/${id}`, { headers }),
     onError: (error) => console.log("error",error),
+    refetchOnWindowFocus: false,
+    staleTime: 1000 * 60 * 5,
+    cacheTime: Infinity,
   });
   const pack = new PackApiIF(data?.data).pack;
   return { pack, data, ...rest };
@@ -73,7 +79,6 @@ export function usePacksUpdate(id: number) {
     },
     onError: (error) => console.log("error",error),
     onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: ["packs", id] });
       queryClient.invalidateQueries({ queryKey: "packs" });
     },
   });
@@ -95,7 +100,6 @@ export function usePacksDestroy(id: number) {
     },
     onError: (error) => console.log("error",error),
     onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: ["packs", id] });
       queryClient.invalidateQueries({ queryKey: "packs" });
     },
   });
