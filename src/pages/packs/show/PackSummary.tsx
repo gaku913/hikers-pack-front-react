@@ -3,6 +3,7 @@ import LinkBar from "@/components/LinkBar";
 import ModalConfirm from "@/components/modal/ModalConfirm";
 import { useOpen } from "@/hooks/useOpen";
 import { dateFormatter } from "@/lib/dateFormatter";
+import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 export default function PackSummary() {
@@ -70,7 +71,14 @@ export default function PackSummary() {
       <h2>重量</h2>
       <p>-kg</p>
       <h2>メモ</h2>
-      <p>{pack.memo}</p>
+      <p>
+        {pack.memo?.split("\n").map((line, index) => (
+          <React.Fragment key={index}>
+            {line}
+            <br />
+          </React.Fragment>
+        ))}
+      </p>
     </>
   );
 }
