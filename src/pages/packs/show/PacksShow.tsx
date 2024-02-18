@@ -8,7 +8,8 @@ import { ReactNode } from "react";
 import AppFrame from "@/components/frame/AppFrame";
 import Header from "@/components/frame/Header";
 import Footer from "@/components/frame/Footer";
-import { Button } from "@mui/material";
+import Button from "@/components/common/Button";
+import { useParams, useSearchParams } from "react-router-dom";
 
 export type tabItems = {
   label: string,
@@ -31,7 +32,16 @@ const tabItems = [
 ];
 
 export default function PacksShow() {
-  const {value, onSwiper, onSlideChange, handleChange} = useTabSwiper();
+
+  const { id } = useParams();
+  const packId = Number(id);
+  const [searchParams] = useSearchParams({ tab: "0" });
+  const defaultTabValue = Number(searchParams.get("tab"));
+
+  const {
+    value, onSwiper, onSlideChange, handleChange
+  } = useTabSwiper(defaultTabValue);
+
 
   return (
     <AppFrame
@@ -50,6 +60,7 @@ export default function PacksShow() {
           <Button
             variant="outlined"
             size="medium"
+            to={`/packs/${packId}/items/new`}
           >
             新しい持ち物を追加する
           </Button>
@@ -61,6 +72,7 @@ export default function PacksShow() {
         tabItems={tabItems}
         onSwiper={onSwiper}
         onSlideChange={onSlideChange}
+        initialSlide={defaultTabValue}
       />
     </AppFrame>
   )

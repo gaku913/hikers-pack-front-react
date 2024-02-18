@@ -1,5 +1,4 @@
-import { Swiper, SwiperSlide } from "swiper/react";
-import type { Swiper as SwiperCore } from 'swiper';
+import { Swiper, SwiperProps, SwiperSlide } from "swiper/react";
 import 'swiper/css';
 import { tabItems } from "@/pages/packs/show/PacksShow";
 
@@ -22,22 +21,19 @@ function TabPanel({ children, value, index }: TabPanelProps) {
   );
 }
 
-type TabSwiperProps = {
+type TabSwiperProps = SwiperProps & {
   value: number
   tabItems: tabItems
-  onSwiper: (currentSwiper: SwiperCore) => void
-  onSlideChange: (currentSwiper: SwiperCore) => void
 };
 
 export default function TabSwiper(
-  { onSwiper, onSlideChange, value, tabItems }: TabSwiperProps) {
+  { value, tabItems, ...rest }: TabSwiperProps) {
   return (
     <>
     <Swiper
       simulateTouch={false}
-      onSwiper={onSwiper}
-      onSlideChange={onSlideChange}
       style={{ overflow: "clip" }}
+      {...rest}
     >
       {tabItems.map((tabItem, id) => {
         return (

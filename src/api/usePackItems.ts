@@ -1,7 +1,7 @@
 import { useAuthContext } from "@/authenticate/useAuthContext";
 import axios from "axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { PackItemFormType, PackItemsType } from "./types/packItems";
+import { PackItemApiIF, PackItemFormType, PackItemsType } from "./types/packItems";
 
 /**
  * Items#Index: Packs一覧の取得
@@ -52,7 +52,8 @@ export function usePackItemsCreate(pack_id: number) {
   // Request
   const create = useMutation({
     mutationFn: (packItem: PackItemFormType) => {
-      return axios.post(`packs/${pack_id}/items`, packItem, { headers });
+      const data = PackItemApiIF.toApi(packItem)
+      return axios.post(`packs/${pack_id}/items`, data, { headers });
     },
     onError: (error) => console.log("error",error),
     onSettled: () => {
@@ -73,7 +74,8 @@ export function usePackItemsUpdate(pack_id: number, id: number) {
   // Request
   const update = useMutation({
     mutationFn: (packItem: PackItemFormType) => {
-      return axios.patch(`packs/${pack_id}/items/${id}`, packItem, { headers });
+      const data = PackItemApiIF.toApi(packItem)
+      return axios.patch(`packs/${pack_id}/items/${id}`, data, { headers });
     },
     onError: (error) => console.log("error",error),
     onSettled: () => {

@@ -8,15 +8,13 @@ export default function useForm<T extends z.ZodTypeAny>(
 ) {
 
   const {
-    handleSubmit,
     control,
-    reset,
-    trigger,
     formState: {
       errors,
       isSubmitting,
       isValid
-    }
+    },
+    ...rest
   } = useRHFForm<z.infer<typeof schema>>({
     defaultValues: defaultValues,
     mode: "onChange",
@@ -36,14 +34,12 @@ export default function useForm<T extends z.ZodTypeAny>(
   }
 
   return {
-    handleSubmit,
     control,
-    reset,
-    trigger,
     formState: {
       errors,
       isSubmitting,
       isValid
-    }
+    },
+    ...rest
   };
 }

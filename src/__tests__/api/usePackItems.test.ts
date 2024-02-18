@@ -114,15 +114,22 @@ describe("usePackItemsShow", () => {
  */
 describe("usePackItemsCreate", () => {
   it("request Create action", async () => {
-    const newPackItem = {
+    const packItemFormData = {
       quantity: 1,
-      item: {
-        name: "Item Name",
-        weight: 100,
+      name: "Item Name",
+      weight: 100,
+    }
+    const newPackItem = {
+      pack_item: {
+        quantity: 1,
+        item: {
+          name: "Item Name",
+          weight: 100,
+        }
       }
     }
     const { result } = renderHook(() => usePackItemsCreate(1),{ wrapper });
-    await act(async () => result.current.create.mutate(newPackItem));
+    await act(async () => result.current.create.mutate(packItemFormData));
     const { data } = result.current.create;
 
     expect(data?.config.method).toBe("post");
@@ -136,15 +143,22 @@ describe("usePackItemsCreate", () => {
  */
 describe("usePackItemsUpdate", () => {
   it("request Update action", async () => {
-    const newPackItem = {
+    const packItemFormData = {
       quantity: 1,
-      item: {
-        name: "Item Name",
-        weight: 100,
+      name: "Item Name",
+      weight: 100,
+    }
+    const newPackItem = {
+      pack_item: {
+        quantity: 1,
+        item: {
+          name: "Item Name",
+          weight: 100,
+        }
       }
     }
     const { result } = renderHook(() => usePackItemsUpdate(1, 1),{ wrapper });
-    await act(async () => result.current.update.mutate(newPackItem));
+    await act(async () => result.current.update.mutate(packItemFormData));
     const { data } = result.current.update;
 
     expect(data?.config.method).toBe("patch");

@@ -23,6 +23,7 @@ import UserShow from "./pages/user/UserShow"
 import UserEdit from "./pages/user/UserEdit"
 import UserPassword from "./pages/user/UserPassword"
 import UserSettings from "./pages/user/UserSettings"
+import PackItemNew from "./pages/packs/show/PackItemNew"
 
 export default function App() {
 
@@ -83,6 +84,9 @@ export default function App() {
           <Route path="/packs/:id" element={<PacksShow />} />
           <Route path="/packs/:id/new" element={<PacksNew />} />
           <Route path="/packs/:id/edit" element={<PacksEdit />} />
+
+          {/* PackItems Pages*/}
+          <Route path="/packs/:pack_id/items/new" element={<PackItemNew />} />
 
           {/* Templates Pages*/}
           <Route path="/templates" element={<TemplatesIndex />} />
