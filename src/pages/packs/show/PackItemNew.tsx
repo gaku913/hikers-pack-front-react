@@ -43,7 +43,7 @@ export default function PackItemNew() {
         onSubmit={handleSubmit(onSubmit)}
         leftButton={{
           label: "キャンセル",
-          to: `/packs/${packId}`,
+          to: `/packs/${packId}?tab=1`,
         }}
         rightButton={{
           label: "作成",
