@@ -10,6 +10,7 @@ export type PackItemType = {
     weight: number
   }
 };
+export type PackItemsType = PackItemType[];
 
 /**
  * 派生 Type

@@ -1,7 +1,7 @@
 import { useAuthContext } from "@/authenticate/useAuthContext";
 import axios from "axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { PackItemFormType } from "./types/packItems";
+import { PackItemFormType, PackItemsType } from "./types/packItems";
 
 /**
  * Items#Index: Packs一覧の取得
@@ -18,7 +18,7 @@ export function usePackItemsIndex(pack_id: number) {
     staleTime: 1000 * 60 * 5,
     cacheTime: Infinity,
   });
-  const packItems = data?.data;
+  const packItems = data?.data as PackItemsType;
   return { data, packItems, ...rest };
 }
 
