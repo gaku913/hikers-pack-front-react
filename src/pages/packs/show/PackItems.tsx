@@ -1,12 +1,20 @@
 import { Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { usePackItemsIndex } from "@/api/usePackItems";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { PackItemType } from "@/api/types/packItems";
 
 export default function PackItems() {
+  // Router
   const params = useParams();
   const packId = Number(params.id);
   const { packItems } = usePackItemsIndex(packId);
+  const navigate = useNavigate();
+  // Handler
+  const handleClick = (packItem: PackItemType) => {
+    navigate(`/packs/${packId}/items/${packItem.id}/edit`);
+  };
+
   return (
     <>
       <Table stickyHeader>
@@ -20,7 +28,11 @@ export default function PackItems() {
         </TableHead>
         <TableBody>
           {packItems?.map((packItem) => (
-            <TableRow key={packItem.id} hover>
+            <TableRow
+              key={packItem.id}
+              hover
+              onClick={() => handleClick(packItem)}
+            >
               <TableCell>{packItem.item.name}</TableCell>
               <TableCell>{packItem.item.weight || "-"}</TableCell>
               <TableCell>{"x " + packItem.quantity}</TableCell>
