@@ -4,8 +4,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import PackItemForm from "@/components/form/PackItemForm";
 import { PackItemFormType } from "@/api/types/packItems";
 import { packItemSchema } from "@/validations/packItemSchema";
-import { usePackItemsIndex, usePackItemsUpdate } from "@/api/usePackItems";
+import { usePackItemsDestroy, usePackItemsIndex, usePackItemsUpdate } from "@/api/usePackItems";
 import LinkBar from "@/components/LinkBar";
+import { useOpen } from "@/hooks/useOpen";
+import ModalConfirm from "@/components/modal/ModalConfirm";
 
 
 export default function PackItemEdit() {
@@ -42,13 +44,19 @@ export default function PackItemEdit() {
     navigate(`/packs/${packId}?tab=1`);
   };
 
+  // モーダル制御
+  const { open, handleOpen, handleClose } = useOpen(false);
+
+  // 削除リクエスト
+  const { destroy } = usePackItemsDestroy(packId, packItemId);
+
   return (
     <AppFrame>
       <LinkBar
         rightButtons={[
           {
             label: "削除",
-            // onClick: handleOpen,
+            onClick: handleOpen,
           },
         ]}
       />
@@ -66,6 +74,24 @@ export default function PackItemEdit() {
           disabled: isSubmitting || !isValid,
         }}
       />
+
+      {/* 確認用モーダル */}
+      <ModalConfirm
+        open={open}
+        left={{
+          label: "キャンセル",
+          onClick: handleClose,
+        }}
+        right={{
+          label: "削除",
+          onClick: async () => {
+            await destroy.mutate();
+            navigate(`/packs/${packId}?tab=1`);
+          },
+        }}
+      >
+        <span>このアイテムを削除します。この操作は取り消せません。</span>
+      </ModalConfirm>
     </AppFrame>
   );
 }
