@@ -1,5 +1,5 @@
 import { PacksFormType } from "@/api/types/packs";
-import { usePacksUpdate, usePacksShow } from "@/api/usePacks";
+import { usePacksUpdate, usePacksIndex } from "@/api/usePacks";
 import PacksForm from "@/components/form/PacksForm";
 import AppFrame from "@/components/frame/AppFrame"
 import { packEditSchema } from "@/validations/packEditSchema";
@@ -12,15 +12,15 @@ export default function PacksEdit() {
   // Packs Hook
   const params = useParams();
   const packId = Number(params.id);
-  const { pack } = usePacksShow(packId);
-  const { title, memo, startDate, endDate } = pack;
+  const { packs } = usePacksIndex();
+  const pack = packs.find(pack => pack.id === packId);
 
   // Form State
   const defaultValue = {
-    title: title || "",
-    memo: memo || "",
-    startDate: startDate || "",
-    endDate: endDate || "",
+    title: pack?.title || "",
+    memo: pack?.memo || "",
+    startDate: pack?.startDate || "",
+    endDate: pack?.endDate || "",
   };
   const {
     handleSubmit,
