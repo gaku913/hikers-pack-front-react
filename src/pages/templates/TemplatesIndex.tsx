@@ -4,7 +4,7 @@ export default function TemplatesIndex() {
   return (
     <AppFrame>
       <h1>持ち物テンプレート</h1>
-      <p>開発中...</p>
+      <p>開発中です。</p>
     </AppFrame>
   )
 }
