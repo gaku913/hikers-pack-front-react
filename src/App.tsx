@@ -25,6 +25,7 @@ import UserPassword from "./pages/user/UserPassword"
 import UserSettings from "./pages/user/UserSettings"
 import PackItemNew from "./pages/packs/show/PackItemNew"
 import PackItemEdit from "./pages/packs/show/PackItemEdit"
+import DemosShow from "./pages/demos/DemosShow"
 
 export default function App() {
 
@@ -66,6 +67,7 @@ export default function App() {
 
           {/* Demo Pages*/}
           <Route path="/demos" element={<DemosIndex />} />
+          <Route path="/demos/:id" element={<DemosShow />} />
         </Route>
 
         <Route element={<PrivateLayout />}>

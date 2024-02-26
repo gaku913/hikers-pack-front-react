@@ -1,8 +1,7 @@
-import { Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { usePackItemsIndex } from "@/api/usePackItems";
 import { useNavigate, useParams } from "react-router-dom";
 import { PackItemType } from "@/api/types/packItems";
+import Items from "@/components/pack/Items";
 
 export default function PackItems() {
   // Router
@@ -16,31 +15,9 @@ export default function PackItems() {
   };
 
   return (
-    <>
-      <Table stickyHeader>
-        <TableHead>
-          <TableRow>
-            <TableCell>名前</TableCell>
-            <TableCell>重量(g)</TableCell>
-            <TableCell>個数</TableCell>
-            <TableCell />
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {packItems?.map((packItem) => (
-            <TableRow
-              key={packItem.id}
-              hover
-              onClick={() => handleClick(packItem)}
-            >
-              <TableCell>{packItem.item.name}</TableCell>
-              <TableCell>{packItem.item.weight || "-"}</TableCell>
-              <TableCell>{"x " + packItem.quantity}</TableCell>
-              <TableCell align="right"><ChevronRightIcon /></TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </>
+    <Items
+      packItems={packItems}
+      onClickEach={handleClick}
+    />
   );
 }

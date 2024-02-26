@@ -1,9 +1,8 @@
 import { usePacksDestroy, usePacksIndex } from "@/api/usePacks";
 import LinkBar from "@/components/LinkBar";
 import ModalConfirm from "@/components/modal/ModalConfirm";
+import Summary from "@/components/pack/Summary";
 import { useOpen } from "@/hooks/useOpen";
-import { dateFormatter } from "@/lib/dateFormatter";
-import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 export default function PackSummary() {
@@ -11,11 +10,6 @@ export default function PackSummary() {
   const packId = Number(params.id);
   const { packs } = usePacksIndex();
   const pack = packs.find(pack => pack.id === packId);
-
-  // 日付
-  const isDayHike = (pack?.startDate === pack?.endDate);
-  const startDateText = dateFormatter(pack?.startDate, { format: "kanji" });
-  const endDateText = dateFormatter(pack?.endDate, { format: "kanji" });
 
   // モーダル制御
   const { open, handleOpen, handleClose } = useOpen(false);
@@ -47,6 +41,9 @@ export default function PackSummary() {
         ]}
       />
 
+      {/* Pack概要 */}
+      <Summary pack={pack} />
+
       {/* 削除確認用モーダル */}
       <ModalConfirm
         open={open}
@@ -65,21 +62,6 @@ export default function PackSummary() {
       >
         <span>持ち物リストを削除します。この操作は取り消せません。</span>
       </ModalConfirm>
-
-      <h1>{pack?.title}</h1>
-      <h2>日程</h2>
-      <p>{isDayHike ? startDateText : startDateText + " ~ " + endDateText}</p>
-      <h2>重量</h2>
-      <p>-kg</p>
-      <h2>メモ</h2>
-      <p>
-        {pack?.memo?.split("\n").map((line, index) => (
-          <React.Fragment key={index}>
-            {line}
-            <br />
-          </React.Fragment>
-        ))}
-      </p>
     </>
   );
 }
