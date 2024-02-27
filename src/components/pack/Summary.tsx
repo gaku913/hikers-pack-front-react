@@ -3,10 +3,11 @@ import { dateFormatter } from "@/lib/dateFormatter";
 import React from "react";
 
 type SummaryProps = {
-  pack: Partial<PackType> | undefined
+  pack?: Partial<PackType>
+  totalWeightKg?: number
 }
 
-export default function Summary({ pack }: SummaryProps) {
+export default function Summary({ pack, totalWeightKg }: SummaryProps) {
   // 日付
   const isDayHike = (pack?.startDate === pack?.endDate);
   const startDateText = dateFormatter(pack?.startDate, { format: "kanji" });
@@ -18,7 +19,7 @@ export default function Summary({ pack }: SummaryProps) {
       <h2>日程</h2>
       <p>{isDayHike ? startDateText : startDateText + " ~ " + endDateText}</p>
       <h2>重量</h2>
-      <p>-kg</p>
+      <p>{totalWeightKg ? totalWeightKg : "-"} kg</p>
       <h2>メモ</h2>
       <p>
         {pack?.memo?.split("\n").map((line, index) => (
