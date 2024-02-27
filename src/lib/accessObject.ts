@@ -1,4 +1,4 @@
-type AnyObject = Partial<{
+export type AnyObject = Partial<{
   [key: string]: unknown;
 }>;
 
