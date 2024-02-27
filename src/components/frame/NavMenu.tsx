@@ -1,7 +1,6 @@
 import { SwipeableDrawer, IconButton, Divider } from "@mui/material";
 import {
   Backpack,
-  Build,
   Description,
   GitHub,
   Hiking,
@@ -78,12 +77,6 @@ export default function NavMenu() {
         title="README"
         to="/sub-contents/readme"
         Icon={Description}
-        onClick={handleClose}
-      />
-      <MenuItem
-        title="Sand Box"
-        to="/sub-contents/sandbox"
-        Icon={Build}
         onClick={handleClose}
       />
     </SwipeableDrawer>
