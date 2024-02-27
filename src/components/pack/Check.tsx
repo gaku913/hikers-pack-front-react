@@ -58,6 +58,7 @@ export default function Check({
         {sortedPackItems.map((packItem, index) => (
           <TableRow
             key={packItem.id}
+            hover
             onClick={onClick && (() => onClick(index))}
           >
             <TableCell padding="checkbox">
