@@ -5,25 +5,37 @@ import { PackItemsType } from "@/api/types/packItems"
 
 type CheckProps = {
   packItems: PackItemsType
+  onSelectAllClick?: (event: React.ChangeEvent<HTMLInputElement>) => void
+  onClick?: (index: number) => void
 }
 
-export default function Check({ packItems }: CheckProps) {
+export default function Check({
+  packItems,
+  onSelectAllClick,
+  onClick,
+}: CheckProps) {
   return (
     <Table stickyHeader>
       <TableHead>
         <TableRow>
           <TableCell padding="checkbox">
-            <Checkbox />
+            <Checkbox
+              onChange={onSelectAllClick}
+            />
           </TableCell>
           <TableCell>名前</TableCell>
           <TableCell>個数</TableCell>
         </TableRow>
       </TableHead>
       <TableBody>
-        {packItems.map((packItem) => (
-          <TableRow key={packItem.id} hover>
+        {packItems.map((packItem, index) => (
+          <TableRow
+            key={packItem.id}
+            hover
+            onClick={onClick && (() => onClick(index))}
+          >
             <TableCell padding="checkbox">
-              <Checkbox />
+              <Checkbox checked={packItem?.checked} />
             </TableCell>
             <TableCell>{packItem.item.name}</TableCell>
             <TableCell>{packItem.quantity}</TableCell>
