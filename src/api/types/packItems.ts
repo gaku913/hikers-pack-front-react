@@ -43,3 +43,25 @@ export const PackItemApiIF = {
     };
   }
 }
+
+/**
+ * PackItemsUpdateChecked型のデータを生成
+ * toggle: 指定のpackItemのcheckedを反転して設定する
+ * setAll: 配列で与えられたpackItemについて、checkedを同じ値に設定する
+ */
+export const PackItemsUpdateChecked = {
+  toggle: (packItem: PackItemType) => {
+    return {
+      pack_items:[
+        { id: packItem.id, checked: !packItem.checked},
+      ]
+    }
+  },
+  setAll: (packItems: PackItemsType, checked: boolean) => {
+    return {
+      pack_items: packItems.map(packItem => (
+        { id: packItem.id, checked: checked}
+      )),
+    }
+  },
+}

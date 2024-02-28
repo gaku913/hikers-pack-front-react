@@ -1,14 +1,14 @@
 import {
   Checkbox, Table, TableBody, TableCell, TableHead, TableRow
 } from "@mui/material";
-import { PackItemsType } from "@/api/types/packItems"
+import { PackItemType, PackItemsType } from "@/api/types/packItems"
 import { useTableSort } from "@/hooks/useTableSort";
 import TableCellWithSortLabel from "../common/TableCellWithSortLabel";
 
 type CheckProps = {
   packItems: PackItemsType
   onSelectAllClick?: (event: React.ChangeEvent<HTMLInputElement>) => void
-  onClick?: (index: number) => void
+  onClick?: (packItem: PackItemType) => void
 }
 
 export default function Check({
@@ -55,17 +55,17 @@ export default function Check({
         </TableRow>
       </TableHead>
       <TableBody>
-        {sortedPackItems.map((packItem, index) => (
+        {sortedPackItems?.map((packItem) => (
           <TableRow
             key={packItem.id}
             hover
-            onClick={onClick && (() => onClick(index))}
+            onClick={onClick && (() => onClick(packItem))}
           >
             <TableCell padding="checkbox">
               <Checkbox checked={packItem?.checked} />
             </TableCell>
             <TableCell>{packItem.item.name}</TableCell>
-            <TableCell>{packItem.quantity}</TableCell>
+            <TableCell>{"x " + packItem.quantity}</TableCell>
           </TableRow>
         ))}
       </TableBody>

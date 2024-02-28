@@ -7,8 +7,13 @@ export default function axiosSetup(): void {
 
   // Limit response to JSON
   axios.interceptors.response.use(response => {
-    return response.headers['content-type'].includes('application/json') ?
-      response : Promise.reject(response);
+    if (response.status === 204 || //No Content
+      response.headers['content-type'].includes('application/json')) {
+      return response
+    }
+    else {
+      return Promise.reject(response)
+    }
   }, error => Promise.reject(error));
 
   // Development Only

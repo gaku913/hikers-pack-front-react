@@ -1,59 +1,33 @@
-import { Checkbox, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
+import { PackItemType, PackItemsUpdateChecked } from "@/api/types/packItems";
+import { usePackItemsIndex, usePackItemsUpdateChecked } from "@/api/usePackItems";
+import Check from "@/components/pack/Check";
+import { useParams } from "react-router-dom";
 
 export default function PackCheck() {
-  function createData(
-    name: string,
-    weight: number,
-  ) {
-    return { name, weight };
-  }
+  const params = useParams();
+  const packId = Number(params.id);
+  const { packItems } = usePackItemsIndex(packId);
 
-  const rows = [
-    createData("バックパック20L", 427),
-    createData("ウィンドブレーカー", 135),
-    createData("レインウェア上", 208),
-    createData("レインウェア下", 222),
-    createData("レインウェア下", 222),
-    createData("レインウェア下", 222),
-    createData("レインウェア下", 222),
-    createData("レインウェア下", 222),
-    createData("レインウェア下", 222),
-    createData("レインウェア下", 222),
-    createData("レインウェア下", 222),
-    createData("レインウェア下", 222),
-    createData("レインウェア下", 222),
-    createData("レインウェア下", 222),
-    createData("レインウェア下", 222),
-    createData("レインウェア下", 222),
-    createData("レインウェア下", 222),
-    createData("レインウェア下", 222),
-    createData("レインウェア下", 222),
-    createData("レインウェア下", 222),
-    createData("レインウェア下", 222),
-  ];
+  const { updateChecked } = usePackItemsUpdateChecked(packId);
+
+  const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const checked = event.target.checked;
+    // 全選択/解除
+    const data = PackItemsUpdateChecked.setAll(packItems, checked);
+    updateChecked.mutate(data);
+  };
+
+  const handleClick = (packItem: PackItemType) => {
+    // 指定のpackItemのcheckedを反転
+    const data = PackItemsUpdateChecked.toggle(packItem);
+    updateChecked.mutate(data);
+  };
 
   return (
-    <>
-      <Table stickyHeader>
-        <TableHead>
-          <TableRow>
-            <TableCell padding="checkbox">
-              <Checkbox />
-            </TableCell>
-            <TableCell>名前</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row, id) => (
-            <TableRow key={id} hover>
-              <TableCell padding="checkbox">
-                <Checkbox />
-              </TableCell>
-              <TableCell>{row.name}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </>
+    <Check
+      packItems={packItems}
+      onSelectAllClick={handleSelectAllClick}
+      onClick={handleClick}
+    />
   );
 }

@@ -1,6 +1,7 @@
 import Check from "@/components/pack/Check";
 import { demoItems } from "./demoData";
 import { useState } from "react";
+import { PackItemType } from "@/api/types/packItems";
 
 export default function DemoCheck() {
   const [packItems, setPackItems] = useState(demoItems);
@@ -17,11 +18,11 @@ export default function DemoCheck() {
     });
   };
 
-  const handleClick = (index: number) => {
+  const handleClick = (packItem: PackItemType) => {
     setPackItems((prevPackItems) => {
-      const newPackItems = prevPackItems.map((item, i: number) => ({
+      const newPackItems = prevPackItems.map((item) => ({
         ...item,
-        checked: i === index ? !item.checked : item.checked
+        checked: item.id === packItem.id ? !item.checked : item.checked
       }));
       return newPackItems;
     });
