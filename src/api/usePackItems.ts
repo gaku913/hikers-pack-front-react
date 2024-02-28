@@ -1,7 +1,7 @@
 import { useAuthContext } from "@/authenticate/useAuthContext";
 import axios from "axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { PackItemApiIF, PackItemFormType, PackItemsType } from "./types/packItems";
+import { PackItemApiIF, PackItemFormType, PackItemsType, PackItemsUpdateChecked } from "./types/packItems";
 
 /**
  * Items#Index: Packs一覧の取得
@@ -107,4 +107,26 @@ export function usePackItemsDestroy(pack_id: number, id: number) {
     },
   });
   return { destroy };
+}
+
+/**
+ * PackItems#Update_Checked: checkedを更新
+ */
+export function usePackItemsUpdateChecked(pack_id: number) {
+  // クライアント
+  const queryClient = useQueryClient();
+  // 認証情報
+  const { authHeaders: headers } = useAuthContext();
+  // Request
+  const updateChecked = useMutation({
+    mutationFn: (data: PackItemsUpdateChecked) => {
+      return axios.patch(`packs/${pack_id}/items/update_checked`,
+        data, { headers });
+    },
+    onError: (error) => console.log("error",error),
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["packs", pack_id, "items"] });
+    },
+  });
+  return { updateChecked };
 }

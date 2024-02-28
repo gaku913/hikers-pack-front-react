@@ -21,6 +21,13 @@ export type PackItemFormType = {
   quantity: number
 };
 
+export type PackItemsUpdateChecked = {
+  pack_items: {
+    id: number
+    checked: boolean
+  }[]
+}
+
 /**
  * Data Conversion
  * パラメータ名の変換（ReactApp ⇔ API）を行う

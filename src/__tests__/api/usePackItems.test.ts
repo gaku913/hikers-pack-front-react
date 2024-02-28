@@ -4,7 +4,7 @@ import { beforeEach, describe, expect, it } from "vitest";
 import { act } from "react-dom/test-utils";
 import { useAuthContext } from "@/authenticate/useAuthContext";
 import wrapper from "../helper/TestWrapper";
-import { usePackItemsCreate, usePackItemsDestroy, usePackItemsIndex, usePackItemsShow, usePackItemsUpdate } from "@/api/usePackItems";
+import { usePackItemsCreate, usePackItemsDestroy, usePackItemsIndex, usePackItemsShow, usePackItemsUpdate, usePackItemsUpdateChecked } from "@/api/usePackItems";
 
 /** Mock Server */
 renderHook(() => useTestServer([
@@ -58,6 +58,11 @@ renderHook(() => useTestServer([
   },
   { // PackItems#Destroy
     method: "delete", path: "packs/1/items/1", resJson: [{ res: "OK" }],
+  },
+  { // PackItems#UpdateChecked
+    method: "patch",
+    path: "packs/1/items/update_checked",
+    resJson: [{ res: "OK" }],
   },
 ]));
 
@@ -178,5 +183,27 @@ describe("usePackItemsDestroy", () => {
 
     expect(data?.config.method).toBe("delete");
     expect(data?.config.url).toBe("packs/1/items/1");
+  });
+});
+
+/**
+ * PackItems#Update_Checked: checkedを更新
+ */
+describe("usePackItemsUpdateChecked", () => {
+  it("request update_checked action", async () => {
+    const packItems = {
+      pack_items: [
+        { id: 1, checked: true},
+        { id: 1, checked: false},
+      ]
+    }
+    const { result } = renderHook(
+      () => usePackItemsUpdateChecked(1),{ wrapper });
+    await act(async () => result.current.updateChecked.mutate(packItems));
+    const { data } = result.current.updateChecked;
+
+    expect(data?.config.method).toBe("patch");
+    expect(data?.config.url).toBe("packs/1/items/update_checked");
+    expect(JSON.parse(data?.config.data)).toStrictEqual(packItems);
   });
 });
