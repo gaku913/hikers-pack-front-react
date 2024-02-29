@@ -1,10 +1,13 @@
 import Check from "@/components/pack/Check";
-import { demoItems } from "./demoData";
+import { DemoPackItems } from "./demoData";
 import { useState } from "react";
 import { PackItemType } from "@/api/types/packItems";
+import { useParams } from "react-router-dom";
 
 export default function DemoCheck() {
-  const [packItems, setPackItems] = useState(demoItems);
+  const params = useParams();
+  const packId = Number(params.id);
+  const [packItems, setPackItems] = useState(DemoPackItems.get(packId));
 
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     const checked = event.target.checked;

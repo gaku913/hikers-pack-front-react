@@ -7,7 +7,7 @@ export type PackItemType = {
   checked: boolean
   item: {
     name: string
-    weight: number
+    weight?: number
   }
 };
 export type PackItemsType = PackItemType[];
@@ -64,4 +64,18 @@ export const PackItemsUpdateChecked = {
       )),
     }
   },
+}
+
+/**
+ * PackItemsに含まれるItemの合計重量を計算する
+ */
+export const TotalWeightKg = {
+  get: (packItems: PackItemsType) => {
+    const totalWeight = packItems.reduce((total, currentItem) => {
+      const weight = currentItem.item.weight || 0;
+      const quantity = currentItem.quantity;
+      return total + weight * quantity;
+    }, 0);
+    return totalWeight / 1000; // 単位変換 g -> kg
+  }
 }

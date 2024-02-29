@@ -1,7 +1,8 @@
 import LinkBar from "@/components/LinkBar";
 import { useParams } from "react-router-dom";
-import { demoItems, demoPacks } from "./demoData";
+import { DemoPackItems, demoPacks } from "./demoData";
 import Summary from "@/components/pack/Summary";
+import { TotalWeightKg } from "@/api/types/packItems";
 
 export default function DemoSummary() {
   const params = useParams();
@@ -9,10 +10,8 @@ export default function DemoSummary() {
   const pack = demoPacks.find(pack => pack.id === packId);
 
   // 重量の計算
-  const packItems = demoItems;
-  const totalWeightKg = packItems.reduce((total, currentItem) => {
-    return total + currentItem.item.weight / 1000; // 単位変換 g -> kg
-  }, 0);
+  const packItems = DemoPackItems.get(packId);
+  const totalWeightKg = TotalWeightKg.get(packItems)
 
   return (
     <>

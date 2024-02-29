@@ -1,71 +1,41 @@
+import { demoPackItemsData } from "./demoPackItemsData";
+
 export const demoPacks = [
   {
-      "id": 1,
-      "title": "【サンプル】白馬乗鞍",
-      "memo": "栂池山荘から白馬大池を往復。雪田に階段状に踏み跡がついていたので、チェンスパがなくても平気だった。",
-      "startDate": "2023-07-30",
-      "endDate": "2023-07-30",
+    "id": 1,
+    "title": "【サンプル】南八ヶ岳テント１泊",
+    "memo": "赤岳鉱泉でテント泊。翌朝赤岳から硫黄岳まで歩いた。初日に土砂降りに遭い、寝袋が濡れてしまった。",
+    "startDate": "2023-06-16",
+    "endDate": "2023-06-17",
   },
   {
-      "id": 2,
-      "title": "【サンプル】甲斐駒＆鳳凰三山",
-      "memo": "黒戸尾根から入り、早川尾根を伝って夜叉神に降りた。ハイマツをかき分けるので長袖、長ズボンがいい。",
-      "startDate": "2023-07-24",
-      "endDate": "2023-07-25",
+    "id": 2,
+    "title": "【サンプル】日帰り丹沢・蛭ヶ岳",
+    "memo": "下山するころには日が山陰に入ってしまい、林の中はかなり暗かった。\nヘッドライトが活躍した。",
+    "startDate": "2023-12-21",
+    "endDate": "2023-12-21",
   },
   {
-      "id": 3,
-      "title": "【サンプル】南八ヶ岳一周",
-      "memo": "赤岳鉱泉でテント泊して、翌朝赤岳から硫黄岳まで歩いた。土砂降りに遭い、寝袋が濡れてしまった。",
-      "startDate": "2023-06-16",
-      "endDate": "2023-06-17",
-  }
+    "id": 3,
+    "title": "【サンプル】日帰り奥多摩・大岳山",
+    "memo": "山頂付近は雪が残っていてチェーンスパイクが必要だった。\n\n予報では午後から天気が崩れる模様。雨具を持って行ったが、降りだす前に下山できた。\n\n下山後温泉に寄るため、着替えとタオルを持っていった。 ",
+    "startDate": "2024-02-29",
+    "endDate": "2024-02-29",
+  },
 ];
 
-export const demoItems = [
-  {
-    id: 1,
-    quantity: 1,
-    checked: false,
-    item: {
-      name: "リュック20L",
-      weight: 427,
-    }
-  },
-  {
-    id: 2,
-    quantity: 1,
-    checked: false,
-    item: {
-      name: "ダウンジャケット",
-      weight: 187,
-    }
-  },
-  {
-    id: 3,
-    quantity: 1,
-    checked: false,
-    item: {
-      name: "トレッキングポール",
-      weight: 144,
-    }
-  },
-  {
-    id: 4,
-    quantity: 1,
-    checked: false,
-    item: {
-      name: "レインウェア上",
-      weight: 208,
-    }
-  },
-  {
-    id: 5,
-    quantity: 1,
-    checked: false,
-    item: {
-      name: "レインウェア下",
-      weight: 222,
-    }
-  },
-];
+export const DemoPackItems = {
+  get: (packId: number) => {
+    const packItemsData = demoPackItemsData.filter(row => row[0] === packId);
+    return packItemsData?.map((row, index) => {
+        const [, name, weight, quantity] = row;
+        const id = index;
+        const checked = false;
+        return {
+        ...{ id, quantity, checked},
+        item: { name, weight },
+        };
+    });
+  }
+}
+

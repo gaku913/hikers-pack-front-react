@@ -10,8 +10,11 @@ function descendingComparator<T extends AnyObject>(
 ) {
   const elemA = accessObject(a, orderBy);
   const elemB = accessObject(b, orderBy);
-  if (elemA == null || elemB == null) {
-    return 0;
+  if (elemA == null) {
+    return 1;
+  }
+  if (elemB == null) {
+    return -1;
   }
   if (elemB < elemA) {
     return -1;

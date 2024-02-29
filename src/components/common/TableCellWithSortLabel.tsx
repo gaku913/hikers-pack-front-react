@@ -22,6 +22,7 @@ export default function TableCellWithSortLabel({
   return (
     <TableCell
       sortDirection={active ? order : false}
+      sx={{ whiteSpace: "nowrap" }}
     >
       <TableSortLabel
         active={active}

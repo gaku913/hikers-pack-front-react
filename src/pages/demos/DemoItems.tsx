@@ -1,8 +1,11 @@
 import Items from "@/components/pack/Items";
-import { demoItems } from "./demoData";
+import { DemoPackItems } from "./demoData";
+import { useParams } from "react-router-dom";
 
 export default function DemoItems() {
+  const params = useParams();
+  const packId = Number(params.id);
   return (
-    <Items packItems={demoItems} />
+    <Items packItems={DemoPackItems.get(packId)} />
   );
 }
