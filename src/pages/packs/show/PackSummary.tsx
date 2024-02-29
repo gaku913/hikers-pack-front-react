@@ -1,3 +1,5 @@
+import { TotalWeightKg } from "@/api/types/packItems";
+import { usePackItemsIndex } from "@/api/usePackItems";
 import { usePacksDestroy, usePacksIndex } from "@/api/usePacks";
 import LinkBar from "@/components/LinkBar";
 import ModalConfirm from "@/components/modal/ModalConfirm";
@@ -9,7 +11,11 @@ export default function PackSummary() {
   const params = useParams();
   const packId = Number(params.id);
   const { packs } = usePacksIndex();
+  const { packItems } = usePackItemsIndex(packId);
   const pack = packs.find(pack => pack.id === packId);
+
+  // 重量の計算
+  const totalWeightKg = TotalWeightKg.get(packItems);
 
   // モーダル制御
   const { open, handleOpen, handleClose } = useOpen(false);
@@ -42,7 +48,7 @@ export default function PackSummary() {
       />
 
       {/* Pack概要 */}
-      <Summary pack={pack} />
+      <Summary {...{ pack, totalWeightKg }} />
 
       {/* 削除確認用モーダル */}
       <ModalConfirm

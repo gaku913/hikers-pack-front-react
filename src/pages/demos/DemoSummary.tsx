@@ -11,7 +11,7 @@ export default function DemoSummary() {
 
   // 重量の計算
   const packItems = DemoPackItems.get(packId);
-  const totalWeightKg = TotalWeightKg.get(packItems)
+  const totalWeightKg = TotalWeightKg.get(packItems);
 
   return (
     <>

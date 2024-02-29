@@ -71,7 +71,7 @@ export const PackItemsUpdateChecked = {
  */
 export const TotalWeightKg = {
   get: (packItems: PackItemsType) => {
-    const totalWeight = packItems.reduce((total, currentItem) => {
+    const totalWeight = packItems?.reduce((total, currentItem) => {
       const weight = currentItem.item.weight || 0;
       const quantity = currentItem.quantity;
       return total + weight * quantity;
